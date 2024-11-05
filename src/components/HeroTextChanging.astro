@@ -1,0 +1,80 @@
+---
+
+---
+
+<script>
+  const texts: string[] = ["ÁGILES", "FLUIDOS", "EFICIENTES", "AUTOMÁTICOS"];
+  let currentIndex = 0;
+  const delayBetweenLetters = 50;
+  const delayBeforeNextWord = 2000;
+
+  function animateLetters(text: string): void {
+    const textElement = document.getElementById("animated-text");
+    if (!textElement) return;
+
+    textElement.innerHTML = "";
+
+    text.split("").forEach((letter: string, index: number) => {
+      const span = document.createElement("span");
+      span.classList.add("letter");
+      span.textContent = letter;
+
+      setTimeout(() => {
+        textElement.appendChild(span);
+      }, index * delayBetweenLetters);
+    });
+
+    setTimeout(
+      () => {
+        changeText();
+      },
+      text.length * delayBetweenLetters + delayBeforeNextWord
+    );
+  }
+
+  function changeText(): void {
+    currentIndex = (currentIndex + 1) % texts.length;
+    const nextText = texts[currentIndex];
+    animateLetters(nextText);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    animateLetters(texts[currentIndex]);
+  });
+</script>
+
+<div id="animated-text" class="text-container"></div>
+
+<style lang="scss">
+  @keyframes animate-letter {
+    0% {
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(5px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+
+  :global(#animated-text .letter) {
+    display: inline-block;
+    opacity: 1;
+    animation: animate-letter 0.2s ease-out;
+  }
+  .text-container {
+    font-size: 3rem;
+    overflow: hidden;
+  }
+
+  #animated-text {
+    height: 56px;
+    color: #f1f1f1;
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+</style>

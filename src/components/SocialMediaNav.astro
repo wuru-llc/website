@@ -1,0 +1,65 @@
+---
+import { Image } from "astro:assets";
+import LogoX from "../assets/images/svg-x.svg";
+import LogoYT from "../assets/images/svg-yt-fill.svg";
+import LogoLN from "../assets/images/svg-ln.svg";
+import LogoSP from "../assets/images/svg-sp.svg";
+import LogoIG from "../assets/images/svg-ig.svg";
+---
+
+<div class="social-media-container">
+  <a href="http://www.x.com" target="_blank" title="X" rel="noopener noreferrer">
+    <Image src={LogoX} alt="logo X" height={16} class="icon" style="animation-delay: 0.1s;" />
+  </a>
+  <a href="http://www.linkedin.com" target="_blank" title="Linkedin" rel="noopener noreferrer">
+    <Image src={LogoLN} alt="logo LN" height={18} class="icon" style="animation-delay: 0.2s;" />
+  </a>
+  <a href="http://www.spotify.com" target="_blank" title="Spotify" rel="noopener noreferrer">
+    <Image src={LogoSP} alt="logo SP" height={22} class="icon" style="animation-delay: 0.3s;" />
+  </a>
+  <a href="http://www.instagram.com" target="_blank" title="Instagram" rel="noopener noreferrer">
+    <Image src={LogoIG} alt="logo IG" height={20} class="icon" style="animation-delay: 0.4s;" />
+  </a>
+  <a href="http://www.youtube.com" target="_blank" title="Youtube" rel="noopener noreferrer">
+    <Image src={LogoYT} alt="logo YT" height={16} class="icon" style="animation-delay: 0.5s;" />
+  </a>
+</div>
+
+<style lang="scss">
+  @keyframes icons-appears {
+    0% {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    50% {
+      transform: translateX(-10px);
+    }
+    100% {
+      transform: translateX(0px);
+      opacity: 0.7;
+    }
+  }
+
+  .social-media-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    position: absolute;
+    right: 48px;
+    top: 200px;
+
+    .icon {
+      opacity: 0;
+      animation: icons-appears 0.5s ease-out forwards;
+      transition: opacity 0.2s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1 !important;
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.66));
+      }
+    }
+  }
+</style>

@@ -1,3 +1,5 @@
+created with pnpm
+
 # Astro Starter Kit: Basics
 
 ```sh

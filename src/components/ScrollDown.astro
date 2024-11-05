@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import ArrowDown from "../assets/images/arrow.svg";
+import LogoX from "../assets/images/svg-x.svg";
+---
+
+<div class="scroll-down-container">
+  <p>EXPLORAR</p>
+  <span class="arrow">
+    <Image src={ArrowDown} alt="logo" width={24} />
+  </span>
+</div>
+
+<style lang="scss">
+  @keyframes arrow-move {
+    0% {
+      transform: translateY(-3px);
+    }
+    50% {
+      transform: translateY(3px);
+    }
+    100% {
+      transform: translateY(-3px);
+    }
+  }
+
+  @keyframes items-in-slide {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
+
+  .scroll-down-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: items-in-slide 1s ease-out forwards;
+
+    p {
+      color: #f1f1f1;
+      font-size: 12px;
+      margin: 0;
+    }
+    .arrow {
+      animation: arrow-move 1s ease-in-out infinite;
+    }
+  }
+</style>

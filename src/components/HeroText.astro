@@ -1,0 +1,55 @@
+---
+import HeroTextChanging from "./HeroTextChanging.astro";
+---
+
+<div class="hero-text-container">
+  <h1>Flujos de trabajo</h1>
+  <HeroTextChanging />
+  <h3>para equipos de salud</h3>
+  <div class="line"></div>
+</div>
+
+<style lang="scss">
+  @keyframes text-in-slide {
+    0% {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
+  .hero-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
+    margin-left: -50px;
+  }
+  h1 {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 300;
+    color: #f1f1f1;
+    animation: text-in-slide 0.2s ease-out forwards;
+  }
+  h3 {
+    margin: 0;
+    font-size: 28px;
+    color: #c80025;
+    font-weight: 300;
+    animation: text-in-slide 0.2s ease-out forwards;
+    animation-delay: 0.2s;
+  }
+  .line {
+    height: 0.5px;
+    width: 100px;
+    background-color: #c80025;
+    border-radius: 0.5px;
+    margin-top: 16px;
+    opacity: 0.7;
+    animation-delay: 0.4s;
+  }
+</style>
