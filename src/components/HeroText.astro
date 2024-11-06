@@ -21,12 +21,13 @@ import HeroTextChanging from "./HeroTextChanging.astro";
     }
   }
   .hero-text-container {
+    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     gap: 2px;
-    margin-left: -50px;
+    left: 67%;
   }
   h1 {
     margin: 0;
@@ -38,10 +39,11 @@ import HeroTextChanging from "./HeroTextChanging.astro";
   h3 {
     margin: 0;
     font-size: 28px;
-    color: #c80025;
+    color: #ce0d3a;
     font-weight: 300;
     animation: text-in-slide 0.2s ease-out forwards;
     animation-delay: 0.2s;
+    filter: drop-shadow(0 2px 5px rgba(255, 0, 0, 1));
   }
   .line {
     height: 0.5px;
@@ -51,5 +53,6 @@ import HeroTextChanging from "./HeroTextChanging.astro";
     margin-top: 16px;
     opacity: 0.7;
     animation-delay: 0.4s;
+    filter: drop-shadow(0 2px 5px rgba(255, 0, 0, 1));
   }
 </style>
