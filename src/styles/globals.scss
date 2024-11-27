@@ -33,18 +33,22 @@ html {
     #0f0e10,
     #0e0e0e
   );
-  background-color: #0e0e0e;
   height: 100%;
   width: 100%;
   font-family: "Roboto";
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  margin: 0;
+  
 }
 
 body {
   margin: 0;
-  height: 100%;
+  height: max-content;
   width: 100%;
   max-width: 2000px;
+  background-image: radial-gradient(#9320209e 0.7px, rgba(255,0,0,0) 0.7px);
+  background-size: 24px 24px;
+  background-attachment: fixed;
 }

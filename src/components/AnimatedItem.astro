@@ -1,0 +1,64 @@
+---
+interface Props {
+  showPoint?: number;
+  animation?: string;
+  duration?: string;
+  delay?: string;
+}
+
+const { showPoint = 0.5, animation = "translateY(40px)", duration = "1s", delay = "0s" } = Astro.props;
+
+const animationStyle = `
+  opacity: 0;
+  transform: ${animation};
+  transition: all ${duration} ease-out ${delay};
+`;
+---
+
+<div class="animated-item" style={animationStyle} data-show-point={showPoint} data-animation={animation} data-duration={duration} data-delay={delay}>
+  <slot />
+</div>
+
+<script>
+  function initObserver() {
+    const items = document.querySelectorAll(".animated-item");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+          const showPointValue = parseFloat(target.dataset.showPoint || "0.5");
+
+          if (entry.isIntersecting && entry.intersectionRatio >= showPointValue) {
+            const animation = target.dataset.animation || "translateY(20px)";
+            const duration = target.dataset.duration || "0.6s";
+            const delay = target.dataset.delay || "0s";
+
+            target.style.opacity = "1";
+            target.style.transform = "translateY(0)";
+            target.style.transition = `all ${duration} ease-out ${delay}`;
+          }
+        });
+      },
+      {
+        threshold: items.length > 0 ? parseFloat(items[0].getAttribute("data-show-point") || "0.5") : 0.5,
+      }
+    );
+
+    items.forEach((item) => observer.observe(item));
+  }
+
+  // Use client:load to ensure the script runs after DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initObserver);
+  } else {
+    initObserver();
+  }
+</script>
+
+<style lang="scss">
+  .animated-item {
+    margin: 0;
+    padding: 0;
+  }
+</style>

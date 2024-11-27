@@ -1,0 +1,146 @@
+---
+import AnimatedItem from "../AnimatedItem.astro";
+
+const logos = [
+  { src: "../../../public/images/auna-logo.png", alt: "Auna Logo" },
+  { src: "../../../public/images/avidanti-logo.png", alt: "Avidanti Logo" },
+  { src: "../../../public/images/CAA-logo.png", alt: "CAA Logo" },
+  { src: "../../../public/images/CHSF-logo.png", alt: "CHSF Logo" },
+  { src: "../../../public/images/CUN-logo.png", alt: "CUN Logo" },
+  { src: "../../../public/images/FSFB-logo.png", alt: "FSFB Logo" },
+  { src: "../../../public/images/GG-logo.png", alt: "GG Logo" },
+  { src: "../../../public/images/HA-logo.png", alt: "HA Logo" },
+  { src: "../../../public/images/SMG-logo.png", alt: "SMG Logo" },
+];
+---
+
+<div class="social-proof-container">
+  <AnimatedItem animation="translateY(0px)">
+    <div class="infinite-logo-gallery">
+      <div class="logo-track">
+        {
+          logos.map((logo, index) => (
+            <div class="logo-slide">
+              <img class="client-logo" src={logo.src} alt={logo.alt} />
+            </div>
+          ))
+        }
+        {
+          logos.map((logo, index) => (
+            <div class="logo-slide">
+              <img class="client-logo" src={logo.src} alt={logo.alt} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </AnimatedItem>
+  <div class="people-feedback">
+    <AnimatedItem delay=".3s">
+      <div class="card">
+        <h1>Pepe Mujica</h1>
+        <p>"El poder no cambia a las personas, sólo revela quiénes verdaderamente son"</p>
+      </div>
+    </AnimatedItem>
+    <AnimatedItem>
+      <div class="card">
+        <h1>Pepe Mujica</h1>
+        <p>"El poder no cambia a las personas, sólo revela quiénes verdaderamente son"</p>
+      </div>
+    </AnimatedItem>
+    <AnimatedItem delay=".6s">
+      <div class="card">
+        <h1>Pepe Mujica</h1>
+        <p>"El poder no cambia a las personas, sólo revela quiénes verdaderamente son"</p>
+      </div>
+    </AnimatedItem>
+  </div>
+</div>
+<style lang="scss">
+  .social-proof-container {
+    padding-top: 64px;
+    padding-bottom: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 96px;
+  }
+  .infinite-logo-gallery {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    border-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)) 1;
+  }
+
+  .logo-track {
+    display: flex;
+    width: fit-content;
+    animation: scroll 20s linear infinite;
+  }
+
+  .logo-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 32px;
+  }
+
+  .client-logo {
+    height: 50px;
+    width: auto;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .people-feedback {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+    .card {
+      width: 300px;
+      height: 400px;
+      border: solid 0.5px #ffffff97;
+      border-radius: 10px;
+      padding: 16px;
+      color: #f1f1f1;
+      background-color: #f1f1f14b;
+      backdrop-filter: blur(0.5px);
+      box-shadow:
+        2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
+        6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
+        10.4px 8.7px 4.6px rgba(0, 0, 0, 0.038),
+        15.7px 13.1px 6.9px rgba(0, 0, 0, 0.044),
+        22.7px 18.9px 10px rgba(0, 0, 0, 0.05),
+        32.1px 26.8px 14.2px rgba(0, 0, 0, 0.056),
+        45.5px 37.9px 20.1px rgba(0, 0, 0, 0.062),
+        66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
+        101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
+        181px 151px 80px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>
