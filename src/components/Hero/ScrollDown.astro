@@ -1,14 +1,19 @@
 ---
 import { Image } from "astro:assets";
 import ArrowDown from "../../assets/images/arrow.svg";
+
+const goToMissionStatement = () => {
+  console.log("hola");
+  document.getElementById("social-proof-container")!.scrollIntoView({ behavior: "smooth" });
+};
 ---
 
-<div class="scroll-down-container">
+<a class="scroll-down-container" href="#social-proof-container">
   <p>EXPLORAR</p>
   <span class="arrow">
-    <Image src={ArrowDown} alt="logo" width={24} />
+    <Image src={ArrowDown} alt="logo" width={24} loading={"eager"} />
   </span>
-</div>
+</a>
 
 <style lang="scss">
   @keyframes arrow-move {
@@ -40,6 +45,7 @@ import ArrowDown from "../../assets/images/arrow.svg";
     align-items: center;
     gap: 8px;
     animation: items-in-slide 1s ease-out forwards;
+    cursor: pointer;
 
     p {
       color: #f1f1f1;

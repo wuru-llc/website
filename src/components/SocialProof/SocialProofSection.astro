@@ -1,114 +1,44 @@
 ---
 import AnimatedItem from "../AnimatedItem.astro";
-
-const logos = [
-  { src: "../../../public/images/auna-logo.png", alt: "Auna Logo" },
-  { src: "../../../public/images/avidanti-logo.png", alt: "Avidanti Logo" },
-  { src: "../../../public/images/CAA-logo.png", alt: "CAA Logo" },
-  { src: "../../../public/images/CHSF-logo.png", alt: "CHSF Logo" },
-  { src: "../../../public/images/CUN-logo.png", alt: "CUN Logo" },
-  { src: "../../../public/images/FSFB-logo.png", alt: "FSFB Logo" },
-  { src: "../../../public/images/GG-logo.png", alt: "GG Logo" },
-  { src: "../../../public/images/HA-logo.png", alt: "HA Logo" },
-  { src: "../../../public/images/SMG-logo.png", alt: "SMG Logo" },
-];
 ---
 
-<div class="social-proof-container">
-  <AnimatedItem animation="translateY(0px)">
-    <div class="infinite-logo-gallery">
-      <div class="logo-track">
-        {
-          logos.map((logo, index) => (
-            <div class="logo-slide">
-              <img class="client-logo" src={logo.src} alt={logo.alt} />
-            </div>
-          ))
-        }
-        {
-          logos.map((logo, index) => (
-            <div class="logo-slide">
-              <img class="client-logo" src={logo.src} alt={logo.alt} />
-            </div>
-          ))
-        }
-      </div>
+<div class="people-feedback">
+  <AnimatedItem delay=".3s">
+    <div class="card">
+      <h1>Pepe Mujica</h1>
+      <p>"El poder no cambia a las personas, sólo revela quiénes verdaderamente son"</p>
     </div>
   </AnimatedItem>
-  <div class="people-feedback">
-    <AnimatedItem delay=".3s">
-      <div class="card">
-        <h1>Pepe Mujica</h1>
-        <p>"El poder no cambia a las personas, sólo revela quiénes verdaderamente son"</p>
-      </div>
-    </AnimatedItem>
-    <AnimatedItem>
-      <div class="card">
-        <h1>Pepe Mujica</h1>
-        <p>"El poder no cambia a las personas, sólo revela quiénes verdaderamente son"</p>
-      </div>
-    </AnimatedItem>
-    <AnimatedItem delay=".6s">
-      <div class="card">
-        <h1>Pepe Mujica</h1>
-        <p>"El poder no cambia a las personas, sólo revela quiénes verdaderamente son"</p>
-      </div>
-    </AnimatedItem>
-  </div>
+  <AnimatedItem>
+    <div class="card">
+      <h1>Pepe Mujica</h1>
+      <p>"El poder no cambia a las personas, sólo revela quiénes verdaderamente son"</p>
+    </div>
+  </AnimatedItem>
+  <AnimatedItem delay=".6s">
+    <div class="card">
+      <h1>Pepe Mujica</h1>
+      <p>"El poder no cambia a las personas, sólo revela quiénes verdaderamente son"</p>
+    </div>
+  </AnimatedItem>
 </div>
+
 <style lang="scss">
-  .social-proof-container {
-    padding-top: 64px;
-    padding-bottom: 64px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 96px;
-  }
-  .infinite-logo-gallery {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    border-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)) 1;
-  }
-
-  .logo-track {
-    display: flex;
-    width: fit-content;
-    animation: scroll 20s linear infinite;
-  }
-
-  .logo-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 32px;
-  }
-
-  .client-logo {
-    height: 50px;
-    width: auto;
-    opacity: 0.5;
-    transition: opacity 0.5s ease;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
   .people-feedback {
+    height: 60vh;
+    max-height: 900px;
     width: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
     gap: 64px;
     .card {
       width: 300px;
-      height: 400px;
+      height: 450px;
       border: solid 0.5px #ffffff97;
       border-radius: 10px;
       padding: 16px;
       color: #f1f1f1;
-      background-color: #f1f1f14b;
+      background-color: #f1f1f120;
       backdrop-filter: blur(0.5px);
       box-shadow:
         2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
@@ -125,6 +55,10 @@ const logos = [
       flex-direction: column;
       gap: 12px;
 
+      background-image: radial-gradient(#ffffff3f 0.7px, rgba(255, 0, 0, 0) 0.7px);
+      background-size: 14px 14px;
+      background-attachment: fixed;
+
       h1 {
         margin: 0;
         font-size: 24px;
@@ -132,15 +66,6 @@ const logos = [
       p {
         margin: 0;
       }
-    }
-  }
-
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
     }
   }
 </style>

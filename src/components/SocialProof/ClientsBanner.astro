@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+import AnimatedItem from "../AnimatedItem.astro";
+
+// Importa las imágenes directamente para que Astro las gestione
+import AunaLogo from "../../../public/images/auna-logo.png";
+import AvidantiLogo from "../../../public/images/avidanti-logo.png";
+import CAALogo from "../../../public/images/CAA-logo.png";
+import CHSFLogo from "../../../public/images/CHSF-logo.png";
+import CUNLogo from "../../../public/images/CUN-logo.png";
+import FSFBLogo from "../../../public/images/FSFB-logo.png";
+import GGLogo from "../../../public/images/GG-logo.png";
+import HALogo from "../../../public/images/HA-logo.png";
+import SMGLogo from "../../../public/images/SMG-logo.png";
+
+const logos = [
+  { src: AunaLogo, alt: "Auna Logo" },
+  { src: AvidantiLogo, alt: "Avidanti Logo" },
+  { src: CAALogo, alt: "CAA Logo" },
+  { src: CHSFLogo, alt: "CHSF Logo" },
+  { src: CUNLogo, alt: "CUN Logo" },
+  { src: FSFBLogo, alt: "FSFB Logo" },
+  { src: GGLogo, alt: "GG Logo" },
+  { src: HALogo, alt: "HA Logo" },
+  { src: SMGLogo, alt: "SMG Logo" },
+];
+---
+
+<div class="social-proof-container" id="social-proof-container">
+  <AnimatedItem animation="translateY(5px)">
+    <div class="logo-track">
+      {
+        logos.map((logo, index) => (
+          <div class="logo-slide">
+            <Image class="client-logo" src={logo.src} alt={logo.alt} width={500} height={300} format="png" loading="lazy" />
+          </div>
+        ))
+      }
+      {
+        logos.map((logo, index) => (
+          <div class="logo-slide">
+            <Image class="client-logo" src={logo.src} alt={logo.alt} width={500} height={300} format="png" loading="lazy" />
+          </div>
+        ))
+      }
+    </div>
+  </AnimatedItem>
+</div>
+
+<style lang="scss">
+  .social-proof-container {
+    height: 250px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    align-content: center;
+    border-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)) 1;
+  }
+
+  .logo-track {
+    display: flex;
+    width: fit-content;
+    animation: scroll 20s linear infinite;
+  }
+
+  .logo-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 32px;
+  }
+
+  .client-logo {
+    height: 50px;
+    width: auto;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+</style>
