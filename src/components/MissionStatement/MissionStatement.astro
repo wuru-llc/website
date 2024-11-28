@@ -3,13 +3,13 @@ import AnimatedItem from "../AnimatedItem.astro";
 ---
 
 <div class="social-proof-container">
-  <AnimatedItem client:load>
+  <AnimatedItem client:idle>
     <h1 class="text-1">Agilidad para</h1>
   </AnimatedItem>
-  <AnimatedItem client:load delay="0.5s">
-    <h1 class="text-1">los equipos de salud.</h1>
+  <AnimatedItem client:idle delay="0.5s">
+    <h1 class="text-1">equipos de salud.</h1>
   </AnimatedItem>
-  <AnimatedItem client:load delay="1s">
+  <AnimatedItem client:idle delay="1s">
     <h3 class="text-2">Liberamos su tiempo para que puedan dedicarlo a sus pacientes.</h3>
   </AnimatedItem>
 </div>
