@@ -1,49 +1,46 @@
----
-interface Props {
-  parallaxSpeed?: number;
-}
+<script>
+  let ticking = false;
 
-const { parallaxSpeed = 1.5 } = Astro.props;
----
+  function handleScroll() {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const backgrounds = document.querySelectorAll(".parallax");
 
-<div class="parallax-item" data-parallax-speed={parallaxSpeed}>
+        backgrounds.forEach((background) => {
+          if (background instanceof HTMLElement) {
+            const rect = background.getBoundingClientRect();
+            const offsetTop = rect.top;
+
+            // Movimiento más suave y controlado
+            background.style.transform = `translateY(${-offsetTop * 0.2}px)`; // Velocidad más baja
+          }
+        });
+
+        ticking = false; // Resetea el estado para el próximo frame
+      });
+
+      ticking = true;
+    }
+  }
+
+  function initScrollEffect() {
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Aplica el efecto al cargar la página
+  }
+
+  document.addEventListener("astro:page-load", initScrollEffect);
+  initScrollEffect();
+</script>
+
+<div class="parallax">
   <slot />
 </div>
 
-<script>
-  function initParallaxObserver() {
-    const items = document.querySelectorAll(".parallax-item");
-
-    const updateParallax = () => {
-      const scrollY = window.scrollY;
-
-      items.forEach((item) => {
-        if (item instanceof HTMLElement) {
-          // Verificar si es un HTMLElement
-          const parallaxSpeed = parseFloat(item.dataset.parallaxSpeed || "0.8");
-          const offsetTop = item.getBoundingClientRect().top + scrollY; // Posición inicial
-          const distance = scrollY - offsetTop;
-
-          item.style.transform = `translateY(${distance * parallaxSpeed}px)`;
-        }
-      });
-    };
-
-    // Actualiza el efecto al desplazarse
-    window.addEventListener("scroll", updateParallax);
-
-    // Llamada inicial para aplicar la posición al cargar
-    updateParallax();
-  }
-
-  document.addEventListener("astro:page-load", initParallaxObserver);
-  initParallaxObserver();
-</script>
-
 <style>
-  .parallax-item {
+  .parallax {
     width: 100%;
-    will-change: transform;
-    transition: transform 0.1s linear; /* Suavizar el movimiento */
+    position: relative; /* Cambiado a relative */
+    will-change: transform; /* Mejora el rendimiento */
+    transition: transform 0.1s ease-out; /* Suaviza el movimiento */
   }
 </style>
