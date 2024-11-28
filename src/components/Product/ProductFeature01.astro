@@ -1,0 +1,199 @@
+---
+import ImageParallax from "../ImageParallax.astro";
+---
+
+<div class="product-feature-01">
+  <div class="content">
+    <div class="left-side">
+      <div class="text-container n1">
+        <h2>Demanda centralizada.</h2>
+        <p>
+          The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and
+          ambition.
+        </p>
+        <ul class="items">
+          <li>Interactive.</li>
+          <li>Art direction.</li>
+          <li>Copyrighting.</li>
+          <li>Campaign design.</li>
+          <li>Brand positioning.</li>
+          <li>360 campaigns.</li>
+          <li>Concept development.</li>
+        </ul>
+      </div>
+      <div class="text-container n2">
+        <h2>Planificación inteligente.</h2>
+        <p>
+          The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and
+          ambition.
+        </p>
+        <ul class="items">
+          <li>Interactive.</li>
+          <li>Art direction.</li>
+          <li>Copyrighting.</li>
+          <li>Campaign design.</li>
+          <li>Brand positioning.</li>
+          <li>360 campaigns.</li>
+          <li>Concept development.</li>
+        </ul>
+      </div>
+      <div class="text-container n3">
+        <h2>Del dicho al hecho .</h2>
+        <p>
+          The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and
+          ambition.
+        </p>
+        <ul class="items">
+          <li>Interactive.</li>
+          <li>Art direction.</li>
+          <li>Copyrighting.</li>
+          <li>Campaign design.</li>
+          <li>Brand positioning.</li>
+          <li>360 campaigns.</li>
+          <li>Concept development.</li>
+        </ul>
+      </div>
+      <div class="text-container n4">
+        <h2>Comunicación efectiva.</h2>
+        <p>
+          The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and
+          ambition.
+        </p>
+        <ul class="items">
+          <li>Interactive.</li>
+          <li>Art direction.</li>
+          <li>Copyrighting.</li>
+          <li>Campaign design.</li>
+          <li>Brand positioning.</li>
+          <li>360 campaigns.</li>
+          <li>Concept development.</li>
+        </ul>
+      </div>
+      <div class="text-container n4">
+        <h2>Mejora continua .</h2>
+        <p>
+          The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and
+          ambition.
+        </p>
+        <ul class="items">
+          <li>Interactive.</li>
+          <li>Art direction.</li>
+          <li>Copyrighting.</li>
+          <li>Campaign design.</li>
+          <li>Brand positioning.</li>
+          <li>360 campaigns.</li>
+          <li>Concept development.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="right-side">
+      <div class="img-container"><ImageParallax><img src="../../../public/images/1.avif" alt="" /></ImageParallax></div>
+      <div class="img-container"><ImageParallax><img src="../../../public/images/2.avif" alt="" /></ImageParallax></div>
+      <div class="img-container"><ImageParallax><img src="../../../public/images/3.avif" alt="" /></ImageParallax></div>
+      <div class="img-container"><ImageParallax><img src="../../../public/images/4.avif" alt="" /></ImageParallax></div>
+      <div class="img-container"><ImageParallax><img src="../../../public/images/5.avif" alt="" /></ImageParallax></div>
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  .product-feature-01 {
+    margin: 48px;
+
+    .content {
+      border: solid 0.5px #6d1e0cb3;
+      background-color: #593b351c;
+      width: 100%;
+      border-radius: 10px;
+      backdrop-filter: blur(1px);
+      box-shadow:
+        2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
+        6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
+        10.4px 8.7px 4.6px rgba(0, 0, 0, 0.038),
+        15.7px 13.1px 6.9px rgba(0, 0, 0, 0.044),
+        22.7px 18.9px 10px rgba(0, 0, 0, 0.05),
+        32.1px 26.8px 14.2px rgba(0, 0, 0, 0.056),
+        45.5px 37.9px 20.1px rgba(0, 0, 0, 0.062),
+        66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
+        101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
+        181px 151px 80px rgba(0, 0, 0, 0.1);
+
+      background-image: radial-gradient(#9f38383f 0.7px, rgba(255, 0, 0, 0) 0.7px);
+      background-size: 12px 12px;
+      background-attachment: fixed;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 12px;
+
+      .left-side {
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        .text-container {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+          align-content: center;
+          color: #f1f1f1;
+          max-width: 60%;
+          min-width: 300px;
+          margin-left: 15%;
+          gap: min(5%, 16px);
+          h2 {
+            margin: 0;
+            font-size: 48px;
+            white-space: nowrap;
+            font-weight: 700;
+          }
+          p {
+            margin: 0;
+            font-size: 20px;
+            text-wrap: pretty;
+          }
+          ul {
+            margin: 0;
+            padding: 0;
+
+            li {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+              opacity: 0.5;
+              line-height: 20px;
+            }
+          }
+        }
+      }
+      .right-side {
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        border-radius: 5px;
+        overflow: hidden;
+
+        .img-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #f1f1f1;
+          aspect-ratio: 1;
+          overflow: hidden;
+          img {
+            height: 100vh;
+            background-size: contain;
+          }
+        }
+      }
+    }
+  }
+  @keyframes parallax {
+    from {
+      opacity: 0;
+      transform: translateY(400px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(-100px);
+    }
+  }
+</style>

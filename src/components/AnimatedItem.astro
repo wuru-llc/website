@@ -48,7 +48,6 @@ const animationStyle = `
     items.forEach((item) => observer.observe(item));
   }
 
-  // Use client:load to ensure the script runs after DOM is ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initObserver);
   } else {
