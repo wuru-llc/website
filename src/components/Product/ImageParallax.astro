@@ -1,0 +1,37 @@
+<script>
+  const handleScroll = () => {
+    window.requestAnimationFrame(() => {
+      const backgrounds = document.querySelectorAll(".parallax");
+
+      backgrounds.forEach((background) => {
+        if (background instanceof HTMLElement) {
+          const rect = background.getBoundingClientRect();
+          const offsetTop = rect.top;
+
+          background.style.transform = `translate3d(0,${-offsetTop * 0.2}px,0)`;
+        }
+      });
+    });
+  };
+
+  const initScrollEffect = () => {
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Aplica el efecto al cargar la página
+  };
+
+  document.addEventListener("astro:page-load", initScrollEffect);
+  initScrollEffect();
+</script>
+
+<div class="parallax">
+  <slot />
+</div>
+
+<style>
+  .parallax {
+    width: 100%;
+    position: relative;
+    will-change: transform;
+    transition: transform 0.1s linear;
+  }
+</style>

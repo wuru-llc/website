@@ -1,90 +1,55 @@
 ---
-import ImageParallax from "../ImageParallax.astro";
+import ImageParallax from "./ImageParallax.astro";
+import StepInfo from "./StepInfo.astro";
+
+const productHighLights = [
+  {
+    title: "Demanda centralizada",
+    description:
+      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+  },
+  {
+    title: "Planificación inteligente",
+    description:
+      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+  },
+  {
+    title: "Del dicho al hecho",
+    description:
+      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+  },
+  {
+    title: "Comunicación efectiva",
+    description:
+      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+  },
+  {
+    title: "Mejora continua",
+    description:
+      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+  },
+];
+
+console.log(productHighLights[0].items);
 ---
 
 <div class="product-feature-01">
   <div class="content">
     <div class="left-side">
-      <div class="text-container n1">
-        <h2>Demanda centralizada.</h2>
-        <p>
-          The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and
-          ambition.
-        </p>
-        <ul class="items">
-          <li>Interactive.</li>
-          <li>Art direction.</li>
-          <li>Copyrighting.</li>
-          <li>Campaign design.</li>
-          <li>Brand positioning.</li>
-          <li>360 campaigns.</li>
-          <li>Concept development.</li>
-        </ul>
-      </div>
-      <div class="text-container n2">
-        <h2>Planificación inteligente.</h2>
-        <p>
-          The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and
-          ambition.
-        </p>
-        <ul class="items">
-          <li>Interactive.</li>
-          <li>Art direction.</li>
-          <li>Copyrighting.</li>
-          <li>Campaign design.</li>
-          <li>Brand positioning.</li>
-          <li>360 campaigns.</li>
-          <li>Concept development.</li>
-        </ul>
-      </div>
-      <div class="text-container n3">
-        <h2>Del dicho al hecho .</h2>
-        <p>
-          The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and
-          ambition.
-        </p>
-        <ul class="items">
-          <li>Interactive.</li>
-          <li>Art direction.</li>
-          <li>Copyrighting.</li>
-          <li>Campaign design.</li>
-          <li>Brand positioning.</li>
-          <li>360 campaigns.</li>
-          <li>Concept development.</li>
-        </ul>
-      </div>
-      <div class="text-container n4">
-        <h2>Comunicación efectiva.</h2>
-        <p>
-          The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and
-          ambition.
-        </p>
-        <ul class="items">
-          <li>Interactive.</li>
-          <li>Art direction.</li>
-          <li>Copyrighting.</li>
-          <li>Campaign design.</li>
-          <li>Brand positioning.</li>
-          <li>360 campaigns.</li>
-          <li>Concept development.</li>
-        </ul>
-      </div>
-      <div class="text-container n4">
-        <h2>Mejora continua .</h2>
-        <p>
-          The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and
-          ambition.
-        </p>
-        <ul class="items">
-          <li>Interactive.</li>
-          <li>Art direction.</li>
-          <li>Copyrighting.</li>
-          <li>Campaign design.</li>
-          <li>Brand positioning.</li>
-          <li>360 campaigns.</li>
-          <li>Concept development.</li>
-        </ul>
-      </div>
+      <StepInfo title={productHighLights[0].title} description={productHighLights[0].description} items={productHighLights[0].items} />
+
+      <StepInfo title={productHighLights[1].title} description={productHighLights[1].description} items={productHighLights[1].items} />
+
+      <StepInfo title={productHighLights[2].title} description={productHighLights[2].description} items={productHighLights[2].items} />
+
+      <StepInfo title={productHighLights[3].title} description={productHighLights[3].description} items={productHighLights[3].items} />
+
+      <StepInfo title={productHighLights[4].title} description={productHighLights[4].description} items={productHighLights[4].items} />
     </div>
     <div class="right-side">
       <div class="img-container"><ImageParallax><img src="../../../public/images/1.avif" alt="" /></ImageParallax></div>
@@ -101,33 +66,36 @@ import ImageParallax from "../ImageParallax.astro";
     margin: 48px;
 
     .content {
-      border: solid 0.5px #6d1e0cb3;
-      background-color: #593b3557;
       width: 100%;
-      border-radius: 10px;
-      backdrop-filter: blur(1px);
-      box-shadow:
-        2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
-        6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
-        10.4px 8.7px 4.6px rgba(0, 0, 0, 0.038),
-        15.7px 13.1px 6.9px rgba(0, 0, 0, 0.044),
-        22.7px 18.9px 10px rgba(0, 0, 0, 0.05),
-        32.1px 26.8px 14.2px rgba(0, 0, 0, 0.056),
-        45.5px 37.9px 20.1px rgba(0, 0, 0, 0.062),
-        66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
-        101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
-        181px 151px 80px rgba(0, 0, 0, 0.1);
-
-      background-image: radial-gradient(#9f38383f 0.7px, rgba(255, 0, 0, 0) 0.7px);
-      background-size: 12px 12px;
-      background-attachment: fixed;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      padding: 12px;
+      gap: 12px;
 
       .left-side {
         display: grid;
         grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        border-radius: 10px;
+        background-image: linear-gradient(
+          to right top,
+          rgba(50, 50, 50, 0.8),
+          rgba(44, 44, 44, 0.8),
+          rgba(39, 39, 39, 0.8),
+          rgba(33, 33, 33, 0.8),
+          rgba(28, 28, 28, 0.8)
+        );
+        border: solid 1px #3a3a3a;
+        box-shadow:
+          2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
+          6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
+          10.4px 8.7px 4.6px rgba(0, 0, 0, 0.038),
+          15.7px 13.1px 6.9px rgba(0, 0, 0, 0.044),
+          22.7px 18.9px 10px rgba(0, 0, 0, 0.05),
+          32.1px 26.8px 14.2px rgba(0, 0, 0, 0.056),
+          45.5px 37.9px 20.1px rgba(0, 0, 0, 0.062),
+          66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
+          101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
+          181px 151px 80px rgba(0, 0, 0, 0.1);
+
         .text-container {
           height: 100%;
           display: flex;
@@ -168,8 +136,21 @@ import ImageParallax from "../ImageParallax.astro";
       .right-side {
         display: grid;
         grid-template-rows: 1fr 1fr 1fr 1fr;
-        border-radius: 5px;
+        border-radius: 10px;
         overflow: hidden;
+        border: solid 1px #3a3a3a;
+
+        box-shadow:
+          2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
+          6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
+          10.4px 8.7px 4.6px rgba(0, 0, 0, 0.038),
+          15.7px 13.1px 6.9px rgba(0, 0, 0, 0.044),
+          22.7px 18.9px 10px rgba(0, 0, 0, 0.05),
+          32.1px 26.8px 14.2px rgba(0, 0, 0, 0.056),
+          45.5px 37.9px 20.1px rgba(0, 0, 0, 0.062),
+          66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
+          101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
+          181px 151px 80px rgba(0, 0, 0, 0.1);
 
         .img-container {
           display: flex;

@@ -8,7 +8,7 @@
   const delayBetweenLetters = 50;
   const delayBeforeNextWord = 2000;
 
-  function animateLetters(text: string): void {
+  const animateLetters = (text: string): void => {
     const textElement = document.getElementById("animated-text");
     if (!textElement) return;
 
@@ -30,13 +30,13 @@
       },
       text.length * delayBetweenLetters + delayBeforeNextWord
     );
-  }
+  };
 
-  function changeText(): void {
+  const changeText = (): void => {
     currentIndex = (currentIndex + 1) % texts.length;
     const nextText = texts[currentIndex];
     animateLetters(nextText);
-  }
+  };
 
   document.addEventListener("DOMContentLoaded", () => {
     animateLetters(texts[currentIndex]);
