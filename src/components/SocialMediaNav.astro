@@ -8,22 +8,59 @@ import LogoIG from "../assets/images/svg-ig.svg";
 ---
 
 <div class="social-media-container">
-  <a href="http://www.x.com" target="_blank" title="X" rel="noopener noreferrer">
+  <a href="http://www.x.com/somoswuru" target="_blank" title="X" rel="noopener noreferrer">
     <Image src={LogoX} alt="logo X" height={16} class="icon" style="animation-delay: 0.1s;" loading={"eager"} />
   </a>
-  <a href="http://www.linkedin.com" target="_blank" title="Linkedin" rel="noopener noreferrer">
+  <a href="https://www.linkedin.com/company/wuru/" target="_blank" title="Linkedin" rel="noopener noreferrer">
     <Image src={LogoLN} alt="logo LN" height={18} class="icon" style="animation-delay: 0.2s;" loading={"eager"} />
   </a>
-  <a href="http://www.spotify.com" target="_blank" title="Spotify" rel="noopener noreferrer">
+  <a href="https://open.spotify.com/show/4Y9ZWdptkgK77ggLblzG8G?si=f9148e7a834343ab" target="_blank" title="Spotify" rel="noopener noreferrer">
     <Image src={LogoSP} alt="logo SP" height={22} class="icon" style="animation-delay: 0.3s;" loading={"eager"} />
   </a>
-  <a href="http://www.instagram.com" target="_blank" title="Instagram" rel="noopener noreferrer">
+  <a href="http://www.instagram.com/somoswuru" target="_blank" title="Instagram" rel="noopener noreferrer">
     <Image src={LogoIG} alt="logo IG" height={20} class="icon" style="animation-delay: 0.4s;" loading={"eager"} />
   </a>
-  <a href="http://www.youtube.com" target="_blank" title="Youtube" rel="noopener noreferrer">
+  <a href="https://www.youtube.com/channel/UCL2wsaBCQbRUwFgd8S_3mWw" target="_blank" title="Youtube" rel="noopener noreferrer">
     <Image src={LogoYT} alt="logo YT" height={16} class="icon" style="animation-delay: 0.5s;" loading={"eager"} />
   </a>
 </div>
+
+<script>
+  const socialMediaContainer = document.querySelector(".social-media-container") as HTMLElement;
+
+  if (socialMediaContainer) {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.body.scrollHeight;
+
+      const currentScrollY = window.scrollY;
+      const distanceFromBottom = documentHeight - (scrollY + windowHeight);
+
+      if (currentScrollY < 400) {
+        socialMediaContainer.style.backgroundColor = "#1c1c1c00";
+        socialMediaContainer.style.border = "solid 0.5px #3a3a3a00";
+        socialMediaContainer.style.backdropFilter = "blur(0px)";
+      } else {
+        socialMediaContainer.style.backgroundColor = "#1c1c1c63";
+        socialMediaContainer.style.border = "solid 0.5px #3a3a3a8b";
+        socialMediaContainer.style.backdropFilter = "blur(5px)";
+      }
+
+      if (distanceFromBottom <= 400) {
+        socialMediaContainer.style.opacity = "0";
+        socialMediaContainer.style.pointerEvents = "none";
+        socialMediaContainer.style.transform = "translateX(48px)";
+      } else {
+        socialMediaContainer.style.opacity = "1";
+        socialMediaContainer.style.pointerEvents = "all";
+        socialMediaContainer.style.transform = "translateX(0px)";
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+  }
+</script>
 
 <style lang="scss">
   @keyframes icons-appears {
@@ -53,22 +90,14 @@ import LogoIG from "../assets/images/svg-ig.svg";
     padding: 8px;
     border-radius: 10px;
     height: 270px;
-    background-image: linear-gradient(
-      to right top,
-      rgba(50, 50, 50, 0.3),
-      rgba(44, 44, 44, 0.3),
-      rgba(39, 39, 39, 0.3),
-      rgba(33, 33, 33, 0.3),
-      rgba(28, 28, 28, 0.3)
-    );
-    border: solid 0.5px #3a3a3a8b;
-    backdrop-filter: blur(5px);
     overflow: hidden;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
 
     .icon {
-      opacity: 0;
+      opacity: 0.5;
       animation: icons-appears 0.5s ease-out forwards;
-      transition: opacity 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
       cursor: pointer;
 
       &:hover {
