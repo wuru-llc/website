@@ -27,23 +27,23 @@ import HeroTextChanging from "./HeroTextChanging.astro";
     align-items: flex-start;
     justify-content: center;
     gap: 2px;
-    left: 67%;
+    left: 68%;
   }
   h1 {
     margin: 0;
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 300;
     color: #f1f1f1;
     animation: text-in-slide 0.2s ease-out forwards;
   }
   h3 {
     margin: 0;
-    font-size: 28px;
+    font-size: 24px;
     color: #ec5a3d;
     font-weight: 300;
     animation: text-in-slide 0.2s ease-out forwards;
     animation-delay: 0.2s;
-    filter: drop-shadow(0 2px 5px rgba(255, 0, 0, 1));
+    filter: drop-shadow(0 2px 5px rgba(255, 0, 0, 0.5));
   }
   .line {
     height: 0.5px;
@@ -53,6 +53,24 @@ import HeroTextChanging from "./HeroTextChanging.astro";
     margin-top: 16px;
     opacity: 0.7;
     animation-delay: 0.4s;
-    filter: drop-shadow(0 2px 5px rgba(255, 0, 0, 1));
+    filter: drop-shadow(0 2px 5px rgba(255, 0, 0, 0.5));
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .hero-text-container {
+      position: unset !important;
+      align-items: center !important;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .hero-text-container {
+      h1 {
+        font-size: 32px !important;
+      }
+      h3 {
+        font-size: 20px !important;
+      }
+    }
   }
 </style>

@@ -8,72 +8,40 @@ import LogoYT from "../../assets/images/svg-yt-fill.svg";
 import LogoLN from "../../assets/images/svg-ln.svg";
 import LogoSP from "../../assets/images/svg-sp.svg";
 import LogoIG from "../../assets/images/svg-ig.svg";
-import AnimatedItem from "../AnimatedItem.astro";
 ---
-
-<script>
-  document.querySelector(".subscribe-form")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const emailInput = document.querySelector(".subscribe-input") as HTMLInputElement | null;
-
-    if (emailInput) {
-      const emailValue = emailInput.value.trim();
-
-      if (!emailValue) {
-        alert("El campo de correo electrónico no puede estar vacío.");
-      } else if (!isValidEmail(emailValue)) {
-        alert("Por favor, introduce un correo electrónico válido.");
-      } else {
-        alert(`¡Gracias por suscribirte, ${emailValue}!`);
-        emailInput.value = "";
-      }
-    } else {
-      console.error("El campo de entrada no se encontró.");
-    }
-  });
-
-  const isValidEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-</script>
 
 <div class="footer-container">
   <div class="part01">
-    <Image src={WuruLogoFilled} alt="wuru-logo-filled" height={48} class="wuru-logo" loading={"eager"} />
-    <p class="vision">Salud de calidad accesible para todos</p>
+    <Image src={WuruLogoFilled} alt="wuru-logo-filled" height={60} class="wuru-logo" loading={"eager"} />
+    <p class="vision">Salud de calidad accesible para todos.</p>
   </div>
+
   <div class="part02">
-    <div class="address" title="rosario">
+    <div class="address" title="Buenos Aires">
       <span class="title">
         <Image src={PinIcon} alt="pin-icon" height={32} loading={"eager"} />
         <h2>BUENOS AIRES</h2>
       </span>
       <span class="info">
-        <p>Av. Del Libertador 1000</p>
+        <p>Av. Del Libertador 1000.</p>
         <p>Vicente López, B1638 (Bs As, AR)</p>
       </span>
-
       <a href="https://maps.app.goo.gl/aN97DEThFU95kRBs5" target="_blank" rel="noopener noreferrer">ver mapa</a>
     </div>
-  </div>
-
-  <div class="part03">
-    <div class="address" title="rosario">
+    <div class="address" title="Rosario">
       <span class="title">
         <Image src={PinIcon} alt="pin-icon" height={32} loading={"eager"} />
         <h2>ROSARIO</h2>
       </span>
       <span class="info">
-        <p>Mitre 170, Piso 2</p>
+        <p>Mitre 170, Piso 2.</p>
         <p>S2000 (Rosario, AR)</p>
       </span>
       <a href="https://maps.app.goo.gl/db9EqeG7uGanwZ1k7" target="_blank" rel="noopener noreferrer">ver mapa</a>
     </div>
   </div>
 
-  <div class="part04">
+  <div class="part03">
     <span class="top">
       <p>suscribite</p>
       <form class="subscribe-form">
@@ -122,14 +90,16 @@ import AnimatedItem from "../AnimatedItem.astro";
       opacity: 0.7;
     }
   }
+
   .footer-container {
     padding: 48px;
-    height: 250px;
+    padding-top: 64px;
     display: flex;
     justify-content: space-between;
     align-items: start;
-    gap: 12px;
+    gap: 48px;
     opacity: 0.8;
+    overflow: hidden;
 
     .part01 {
       height: 100%;
@@ -137,35 +107,35 @@ import AnimatedItem from "../AnimatedItem.astro";
 
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 16px;
       .vision {
-        width: 350px;
+        max-width: 350px;
         color: #f1f1f1;
-        font-size: 32px;
+        font-size: 28px;
         letter-spacing: 1.1px;
         margin: 0;
         font-weight: 900;
       }
     }
 
-    .part02,
-    .part03 {
+    .part02 {
       display: flex;
       width: 100%;
       height: 100%;
+      gap: 64px;
 
       .address {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
         color: #f1f1f1;
-        height: 100%;
         width: 100%;
+        gap: 8px;
 
         .title {
           display: flex;
           align-items: center;
+
           gap: 8px;
           position: relative;
           img {
@@ -181,9 +151,9 @@ import AnimatedItem from "../AnimatedItem.astro";
         }
         .info {
           display: flex;
-          flex-direction: column;
           align-items: center;
-          gap: 8px;
+          flex-direction: column;
+          gap: 4px;
           p {
             margin: 0;
             font-size: 14px;
@@ -196,6 +166,8 @@ import AnimatedItem from "../AnimatedItem.astro";
           margin: 0;
           transition: all ease-in-out 0.3s;
           color: #f1f1f1;
+          margin-left: 8px;
+          white-space: nowrap;
           &:hover {
             opacity: 0.3;
           }
@@ -203,23 +175,35 @@ import AnimatedItem from "../AnimatedItem.astro";
       }
     }
 
-    .part04 {
+    .part03 {
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       align-items: end;
-      gap: 8px;
+      gap: 24px;
       color: #f1f1f1;
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 1.1px;
       text-align: right;
+      p {
+        margin: 0;
+        margin-bottom: 8px;
+      }
       .top {
-        width: 90%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 4px;
         .subscribe-form {
           display: flex;
-          gap: 8px;
+          flex-direction: column;
+          justify-content: end;
+          align-items: end;
+          gap: 12px;
+          width: 100%;
           .subscribe-input {
             background: none;
             background-color: none;
@@ -227,7 +211,8 @@ import AnimatedItem from "../AnimatedItem.astro";
             outline: none;
             border: solid 0.5px #f1f1f1;
             border-radius: 5px;
-            width: 100%;
+            width: 80%;
+            max-width: 350px;
             padding: 4px 8px;
             background-color: #f1f1f122;
             color: #f1f1f1;
@@ -250,21 +235,25 @@ import AnimatedItem from "../AnimatedItem.astro";
             background-color: none;
             border: none;
             outline: none;
-            background-color: #dd593e;
+            background-color: #dd593ea7;
             color: #f1f1f1;
             border-radius: 5px;
             padding: 4px 12px;
-            opacity: 0.6;
+            opacity: 1;
             transition: all ease-in-out 0.3s;
             cursor: pointer;
 
             &:hover {
-              opacity: 1;
+              background-color: #dd593e;
             }
           }
         }
       }
       .bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 4px;
         .footer-social-media-container {
           display: flex;
           align-items: center;
@@ -299,9 +288,148 @@ import AnimatedItem from "../AnimatedItem.astro";
     text-align: center;
     font-size: 12px;
     margin: 0;
-    margin-top: 16px;
+    margin-top: 24px;
     color: #f1f1f1;
     opacity: 0.5;
     padding-bottom: 48px;
+  }
+  @media only screen and (max-width: 1400px) {
+    .footer-container {
+      .part01 {
+        .vision {
+          max-width: 250px;
+        }
+      }
+      .part02 {
+        flex-direction: column;
+        gap: 12px;
+
+        .address {
+          gap: 4px;
+
+          .title {
+            gap: 4px;
+
+            h2 {
+              font-size: 16px !important;
+            }
+            img {
+              width: 16px !important;
+              position: unset !important;
+              left: unset;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    *input {
+      font-size: 16px;
+    }
+    .footer-container {
+      padding: 24px !important;
+      flex-wrap: wrap;
+
+      .part01 {
+        flex: 1;
+        .vision {
+          max-width: 320px;
+          font-size: 28px !important;
+        }
+      }
+      .part02 {
+        flex: 1;
+        gap: 12px !important;
+        .address {
+          align-items: end !important;
+
+          .info {
+            align-items: end !important;
+            p {
+              font-size: 12px;
+              white-space: nowrap;
+            }
+          }
+          a {
+            margin-top: 4px;
+            margin-left: 0 !important;
+          }
+        }
+      }
+      .part03 {
+        flex-basis: 100%;
+        margin-top: 32px;
+        flex-direction: unset !important;
+        align-items: start;
+        gap: 48px !important;
+        .top {
+          align-items: start !important;
+          .subscribe-form {
+            align-items: start !important;
+            .subscribe-input {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+    .line-container {
+      padding-left: 24px !important;
+      padding-right: 24px !important;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .footer-container {
+      padding-top: 48px !important;
+      .part02 {
+        .address {
+          .info {
+            flex-direction: column !important;
+          }
+        }
+      }
+      .part03 {
+        .bottom {
+          .footer-social-media-container {
+            gap: 16px !important;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .footer-container {
+      flex-direction: column;
+      .part02 {
+        .address {
+          align-items: start !important;
+          .info {
+            align-items: start !important;
+          }
+        }
+      }
+      .part03 {
+        flex-direction: column !important;
+        .top {
+          .subscribe-form {
+            .subscribe-input {
+              width: 100% !important;
+              max-width: unset !important;
+            }
+          }
+        }
+        .bottom {
+          width: 100%;
+          align-items: start !important;
+          .footer-social-media-container {
+            gap: 32px !important;
+          }
+        }
+      }
+    }
   }
 </style>
