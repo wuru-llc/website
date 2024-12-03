@@ -1,0 +1,180 @@
+---
+import ImageParallax from "../ImageParallax.astro";
+import StepInfo from "./StepInfo.astro";
+
+const productHighLights = [
+  {
+    title: "Demanda centralizada",
+    description:
+      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+  },
+  {
+    title: "Planificación inteligente",
+    description:
+      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+  },
+  {
+    title: "Del dicho al hecho",
+    description:
+      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+  },
+  {
+    title: "Comunicación efectiva",
+    description:
+      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+  },
+  {
+    title: "Mejora continua",
+    description:
+      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+  },
+];
+
+console.log(productHighLights[0].items);
+---
+
+<div class="product-feature-01">
+  <div class="content">
+    <div class="left-side">
+      <StepInfo title={productHighLights[0].title} description={productHighLights[0].description} items={productHighLights[0].items} />
+
+      <StepInfo title={productHighLights[1].title} description={productHighLights[1].description} items={productHighLights[1].items} />
+
+      <StepInfo title={productHighLights[2].title} description={productHighLights[2].description} items={productHighLights[2].items} />
+
+      <StepInfo title={productHighLights[3].title} description={productHighLights[3].description} items={productHighLights[3].items} />
+
+      <StepInfo title={productHighLights[4].title} description={productHighLights[4].description} items={productHighLights[4].items} />
+    </div>
+    <div class="right-side">
+      <div class="img-container"><ImageParallax><img src="../../../public/images/1.avif" alt="" /></ImageParallax></div>
+      <div class="img-container"><ImageParallax><img src="../../../public/images/2.avif" alt="" /></ImageParallax></div>
+      <div class="img-container"><ImageParallax><img src="../../../public/images/3.avif" alt="" /></ImageParallax></div>
+      <div class="img-container"><ImageParallax><img src="../../../public/images/4.avif" alt="" /></ImageParallax></div>
+      <div class="img-container"><ImageParallax><img src="../../../public/images/5.avif" alt="" /></ImageParallax></div>
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  .product-feature-01 {
+    margin: 48px;
+
+    .content {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+
+      .left-side {
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        border-radius: 10px;
+        background-image: linear-gradient(
+          to right top,
+          rgba(50, 50, 50, 0.8),
+          rgba(44, 44, 44, 0.8),
+          rgba(39, 39, 39, 0.8),
+          rgba(33, 33, 33, 0.8),
+          rgba(28, 28, 28, 0.8)
+        );
+        border: solid 1px #3a3a3a;
+        box-shadow:
+          2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
+          6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
+          10.4px 8.7px 4.6px rgba(0, 0, 0, 0.038),
+          15.7px 13.1px 6.9px rgba(0, 0, 0, 0.044),
+          22.7px 18.9px 10px rgba(0, 0, 0, 0.05),
+          32.1px 26.8px 14.2px rgba(0, 0, 0, 0.056),
+          45.5px 37.9px 20.1px rgba(0, 0, 0, 0.062),
+          66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
+          101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
+          181px 151px 80px rgba(0, 0, 0, 0.1);
+
+        .text-container {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+          align-content: center;
+          color: #f1f1f1;
+          max-width: 60%;
+          min-width: 300px;
+          margin-left: 15%;
+          gap: min(5%, 16px);
+          h2 {
+            margin: 0;
+            font-size: 48px;
+            white-space: nowrap;
+            font-weight: 700;
+          }
+          p {
+            margin: 0;
+            font-size: 20px;
+            text-wrap: pretty;
+          }
+          ul {
+            margin: 0;
+            padding: 0;
+
+            li {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+              opacity: 0.5;
+              line-height: 20px;
+            }
+          }
+        }
+      }
+      .right-side {
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        border-radius: 10px;
+        overflow: hidden;
+        border: solid 1px #3a3a3a;
+
+        box-shadow:
+          2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
+          6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
+          10.4px 8.7px 4.6px rgba(0, 0, 0, 0.038),
+          15.7px 13.1px 6.9px rgba(0, 0, 0, 0.044),
+          22.7px 18.9px 10px rgba(0, 0, 0, 0.05),
+          32.1px 26.8px 14.2px rgba(0, 0, 0, 0.056),
+          45.5px 37.9px 20.1px rgba(0, 0, 0, 0.062),
+          66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
+          101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
+          181px 151px 80px rgba(0, 0, 0, 0.1);
+
+        .img-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #f1f1f1;
+          aspect-ratio: 1;
+          overflow: hidden;
+          position: relative;
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  @keyframes parallax {
+    from {
+      opacity: 0;
+      transform: translateY(400px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(-100px);
+    }
+  }
+</style>

@@ -1,45 +1,79 @@
 ---
+import { Image } from "astro:assets";
 import AnimatedItem from "../AnimatedItem.astro";
+import LogoLN from "../../assets/images/svg-ln.svg";
+import QuaIcon from "../../assets/images/qua.png";
 ---
 
 <div class="people-feedback">
   <AnimatedItem delay=".3s">
     <div class="card">
-      <h1>Pepe Mujica</h1>
-      <p>"El poder no cambia a las personas, sólo revela quiénes verdaderamente son"</p>
+      <Image src={QuaIcon} alt="quotation mark" height={48} loading={"eager"} class="quotation-marks" />
+      <p class="text">
+        "La incorporación de Wúru en Swiss Medical contribuye al análisis de oportunidades e incrementa la eficiencia en los procesos mediante la
+        analítica de datos, con una metodología ágil de gestión que nos ayuda a mantener nuestro compromiso de brindar un servicio integral de
+        excelencia para nuestros pacientes."
+      </p>
+      <a href="https://www.linkedin.com/in/facundobelocopitt" target="_blank" rel="noopener noreferrer" class="reference">
+        <Image src={LogoLN} alt="logo X" height={14} loading={"eager"} />
+        <p class="role">Facundo Belocopitt</p>
+        <p class="role opacity">Director</p>
+        <p class="role opacity">Swiss Medical Group</p>
+      </a>
     </div>
   </AnimatedItem>
   <AnimatedItem>
     <div class="card">
-      <h1>Pepe Mujica</h1>
-      <p>"El poder no cambia a las personas, sólo revela quiénes verdaderamente son"</p>
+      <Image src={QuaIcon} alt="quotation mark" height={48} loading={"eager"} class="quotation-marks" color="#0e76a8" />
+      <p class="text">
+        “Gracias a Wúru la comunicación con los cirujanos dejó de estar centrada en reclamos esporádicos para dar continuidad a un trabajo
+        colaborativo centrado en la mejora continua.”
+      </p>
+      <a href="https://www.linkedin.com/in/juan-camou-76a98214a" target="_blank" rel="noopener noreferrer" class="reference">
+        <Image src={LogoLN} alt="logo X" height={14} loading={"eager"} />
+        <p class="role">J. Ignacio Camou</p>
+        <p class="role opacity">Jefe de quirófanos</p>
+        <p class="role opacity">Hospital Privado de Rosario</p>
+      </a>
     </div>
   </AnimatedItem>
   <AnimatedItem delay=".6s">
     <div class="card">
-      <h1>Pepe Mujica</h1>
-      <p>"El poder no cambia a las personas, sólo revela quiénes verdaderamente son"</p>
+      <Image src={QuaIcon} alt="quotation mark" height={48} loading={"eager"} class="quotation-marks" color="#0e76a8" />
+      <p class="text">
+        "Elegimos Wúru por su propuesta innovadora y su solvencia en la analítica de datos. La solución nos ha permitido conocer, democratizar y
+        transformar en acciones la información de nuestros procesos."
+      </p>
+      <a href="https://www.linkedin.com/in/german-oshiro" target="_blank" rel="noopener noreferrer" class="reference">
+        <Image src={LogoLN} alt="logo X" height={14} loading={"eager"} />
+        <p class="role">German Oshiro</p>
+        <p class="role opacity">Gerente general</p>
+        <p class="role opacity">Hospital Español</p>
+      </a>
     </div>
   </AnimatedItem>
 </div>
 
 <style lang="scss">
   .people-feedback {
-    height: 60vh;
+    min-height: fit-content;
     max-height: 900px;
     width: 100%;
     display: flex;
     justify-content: center;
     gap: 64px;
     .card {
-      width: 300px;
-      height: 450px;
-      border: solid 0.5px #ffffff97;
+      min-width: 300px;
+      width: 100%;
+      max-width: 350px;
+      min-height: 550px;
+      height: 100%;
       border-radius: 10px;
-      padding: 16px;
+      padding: 24px;
       color: #f1f1f1;
-      background-color: #f1f1f120;
-      backdrop-filter: blur(0.5px);
+      border: solid 0.5px #6d1e0cb3;
+      background-color: #593b3557;
+      backdrop-filter: blur(0.8px);
       box-shadow:
         2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
         6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
@@ -53,18 +87,53 @@ import AnimatedItem from "../AnimatedItem.astro";
         181px 151px 80px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
-      gap: 12px;
 
-      background-image: radial-gradient(#ffffff3f 0.7px, rgba(255, 0, 0, 0) 0.7px);
-      background-size: 14px 14px;
+      background-image: radial-gradient(#9f38383f 0.7px, rgba(255, 0, 0, 0) 0.7px);
+      background-size: 12px 12px;
       background-attachment: fixed;
-
-      h1 {
-        margin: 0;
-        font-size: 24px;
+      .quotation-marks {
+        filter: invert(0.5);
+        margin-bottom: 20px;
+        opacity: 0.6;
       }
-      p {
+      .text {
         margin: 0;
+        margin-bottom: 16px;
+        font-size: 20px;
+        line-height: 25px;
+        letter-spacing: 1.1px;
+        text-wrap: pretty;
+        flex-grow: 1;
+      }
+      a {
+        text-decoration: none;
+      }
+      .reference {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        cursor: pointer;
+        transition: all ease-in-out 0.3s;
+        color: #f1f1f1;
+        gap: 4px;
+        img {
+          filter: invert(29%) sepia(63%) saturate(4347%) hue-rotate(181deg) brightness(88%) contrast(89%);
+        }
+        .role {
+          font-size: 12px;
+          margin: 0;
+          &:nth-child(2) {
+            font-size: 16px;
+            font-weight: 700;
+          }
+        }
+        .opacity {
+          opacity: 0.4;
+        }
+
+        &:hover {
+          opacity: 0.7;
+        }
       }
     }
   }

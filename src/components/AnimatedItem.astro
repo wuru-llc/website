@@ -20,7 +20,7 @@ const animationStyle = `
 </div>
 
 <script>
-  function initObserver() {
+  const initObserver = () => {
     const items = document.querySelectorAll(".animated-item");
 
     const observer = new IntersectionObserver(
@@ -46,9 +46,8 @@ const animationStyle = `
     );
 
     items.forEach((item) => observer.observe(item));
-  }
+  };
 
-  // Use client:load to ensure the script runs after DOM is ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initObserver);
   } else {

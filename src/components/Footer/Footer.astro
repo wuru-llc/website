@@ -1,5 +1,307 @@
 ---
+import { Image } from "astro:assets";
 
+import WuruLogoFilled from "../../assets/images/wuru-logo-filled.svg";
+import PinIcon from "../../assets/images/location.svg";
+import LogoX from "../../assets/images/svg-x.svg";
+import LogoYT from "../../assets/images/svg-yt-fill.svg";
+import LogoLN from "../../assets/images/svg-ln.svg";
+import LogoSP from "../../assets/images/svg-sp.svg";
+import LogoIG from "../../assets/images/svg-ig.svg";
+import AnimatedItem from "../AnimatedItem.astro";
 ---
 
-<div class="footer-container"></div>
+<script>
+  document.querySelector(".subscribe-form")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const emailInput = document.querySelector(".subscribe-input") as HTMLInputElement | null;
+
+    if (emailInput) {
+      const emailValue = emailInput.value.trim();
+
+      if (!emailValue) {
+        alert("El campo de correo electrónico no puede estar vacío.");
+      } else if (!isValidEmail(emailValue)) {
+        alert("Por favor, introduce un correo electrónico válido.");
+      } else {
+        alert(`¡Gracias por suscribirte, ${emailValue}!`);
+        emailInput.value = "";
+      }
+    } else {
+      console.error("El campo de entrada no se encontró.");
+    }
+  });
+
+  const isValidEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+</script>
+
+<div class="footer-container">
+  <div class="part01">
+    <Image src={WuruLogoFilled} alt="wuru-logo-filled" height={48} class="wuru-logo" loading={"eager"} />
+    <p class="vision">Salud de calidad accesible para todos</p>
+  </div>
+  <div class="part02">
+    <div class="address" title="rosario">
+      <span class="title">
+        <Image src={PinIcon} alt="pin-icon" height={32} loading={"eager"} />
+        <h2>BUENOS AIRES</h2>
+      </span>
+      <span class="info">
+        <p>Av. Del Libertador 1000</p>
+        <p>Vicente López, B1638 (Bs As, AR)</p>
+      </span>
+
+      <a href="https://maps.app.goo.gl/aN97DEThFU95kRBs5" target="_blank" rel="noopener noreferrer">ver mapa</a>
+    </div>
+  </div>
+
+  <div class="part03">
+    <div class="address" title="rosario">
+      <span class="title">
+        <Image src={PinIcon} alt="pin-icon" height={32} loading={"eager"} />
+        <h2>ROSARIO</h2>
+      </span>
+      <span class="info">
+        <p>Mitre 170, Piso 2</p>
+        <p>S2000 (Rosario, AR)</p>
+      </span>
+      <a href="https://maps.app.goo.gl/db9EqeG7uGanwZ1k7" target="_blank" rel="noopener noreferrer">ver mapa</a>
+    </div>
+  </div>
+
+  <div class="part04">
+    <span class="top">
+      <p>suscribite</p>
+      <form class="subscribe-form">
+        <input type="email" class="subscribe-input" placeholder="email@address.com" required />
+        <button type="submit" class="subscribe-button">Suscribirme</button>
+      </form>
+    </span>
+    <span class="bottom">
+      <p>seguinos</p>
+      <div class="footer-social-media-container">
+        <a href="http://www.x.com/somoswuru" target="_blank" title="X" rel="noopener noreferrer">
+          <Image src={LogoX} alt="logo X" height={16} class="icon" style="animation-delay: 0.1s;" loading={"eager"} />
+        </a>
+        <a href="https://www.linkedin.com/company/wuru/" target="_blank" title="Linkedin" rel="noopener noreferrer">
+          <Image src={LogoLN} alt="logo LN" height={18} class="icon" style="animation-delay: 0.2s;" loading={"eager"} />
+        </a>
+        <a href="https://open.spotify.com/show/4Y9ZWdptkgK77ggLblzG8G?si=f9148e7a834343ab" target="_blank" title="Spotify" rel="noopener noreferrer">
+          <Image src={LogoSP} alt="logo SP" height={22} class="icon" style="animation-delay: 0.3s;" loading={"eager"} />
+        </a>
+        <a href="http://www.instagram.com/somoswuru" target="_blank" title="Instagram" rel="noopener noreferrer">
+          <Image src={LogoIG} alt="logo IG" height={20} class="icon" style="animation-delay: 0.4s;" loading={"eager"} />
+        </a>
+        <a href="https://www.youtube.com/channel/UCL2wsaBCQbRUwFgd8S_3mWw" target="_blank" title="Youtube" rel="noopener noreferrer">
+          <Image src={LogoYT} alt="logo YT" height={16} class="icon" style="animation-delay: 0.5s;" loading={"eager"} />
+        </a>
+      </div>
+    </span>
+  </div>
+</div>
+<div class="line-container">
+  <div class="line"></div>
+</div>
+<p class="copyright">Copyright © 2024 Wúru</p>
+
+<style lang="scss">
+  @keyframes icons-appears {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 0.7;
+    }
+  }
+  .footer-container {
+    padding: 48px;
+    height: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 12px;
+    opacity: 0.8;
+
+    .part01 {
+      height: 100%;
+      width: 100%;
+
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      .vision {
+        width: 350px;
+        color: #f1f1f1;
+        font-size: 32px;
+        letter-spacing: 1.1px;
+        margin: 0;
+        font-weight: 900;
+      }
+    }
+
+    .part02,
+    .part03 {
+      display: flex;
+      width: 100%;
+      height: 100%;
+
+      .address {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        color: #f1f1f1;
+        height: 100%;
+        width: 100%;
+
+        .title {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          position: relative;
+          img {
+            opacity: 0.5;
+            position: absolute;
+            left: -38px;
+          }
+          h2 {
+            white-space: nowrap;
+            font-size: 24px;
+            margin: 0;
+          }
+        }
+        .info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          p {
+            margin: 0;
+            font-size: 14px;
+            white-space: nowrap;
+          }
+        }
+        a {
+          font-size: 14px;
+          opacity: 0.6;
+          margin: 0;
+          transition: all ease-in-out 0.3s;
+          color: #f1f1f1;
+          &:hover {
+            opacity: 0.3;
+          }
+        }
+      }
+    }
+
+    .part04 {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      gap: 8px;
+      color: #f1f1f1;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      text-align: right;
+      .top {
+        width: 90%;
+        .subscribe-form {
+          display: flex;
+          gap: 8px;
+          .subscribe-input {
+            background: none;
+            background-color: none;
+            border: none;
+            outline: none;
+            border: solid 0.5px #f1f1f1;
+            border-radius: 5px;
+            width: 100%;
+            padding: 4px 8px;
+            background-color: #f1f1f122;
+            color: #f1f1f1;
+            transition: all ease-in-out 0.3s;
+
+            &:focus {
+              outline: none;
+              background-color: #f1f1f13f;
+              border: solid 0.5px #dd593e;
+            }
+            &::placeholder {
+              font-size: 12px;
+              color: #f1f1f1;
+              opacity: 0.6;
+              letter-spacing: 1.1px;
+            }
+          }
+          button {
+            background: none;
+            background-color: none;
+            border: none;
+            outline: none;
+            background-color: #dd593e;
+            color: #f1f1f1;
+            border-radius: 5px;
+            padding: 4px 12px;
+            opacity: 0.6;
+            transition: all ease-in-out 0.3s;
+            cursor: pointer;
+
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+      }
+      .bottom {
+        .footer-social-media-container {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+          .icon {
+            animation: icons-appears 0.5s ease-out forwards;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            &:hover {
+              opacity: 1 !important;
+              filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.66));
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .line-container {
+    padding-left: 48px;
+    padding-right: 48px;
+    .line {
+      height: 0.5px;
+      opacity: 0.2;
+      width: 100%;
+      border-radius: 0.5px;
+      background-color: #f1f1f1;
+    }
+  }
+  .copyright {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    margin: 0;
+    margin-top: 16px;
+    color: #f1f1f1;
+    opacity: 0.5;
+    padding-bottom: 48px;
+  }
+</style>

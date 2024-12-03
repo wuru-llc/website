@@ -1,0 +1,88 @@
+---
+import AnimatedItem from "../AnimatedItem.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  items?: string[];
+}
+
+const { title = "", description = "", items = [] } = Astro.props;
+
+console.log(items);
+---
+
+<div class="step-info-container">
+  <AnimatedItem animation="translateX(20px)">
+    <h2>{title}</h2>
+  </AnimatedItem>
+  <AnimatedItem animation="translateX(20px)" delay="0.2s">
+    <p>
+      {description}
+    </p>
+  </AnimatedItem>
+  <AnimatedItem animation="translateY(0px)" delay="0.3s">
+    <ul class="items">
+      <div class="line"></div>
+      {
+        items.map((item, index) => (
+          <AnimatedItem delay={`${0.1 * index + 0.3}s`} animation="translateX(10px)" duration="0.2s">
+            <li>{item}</li>
+          </AnimatedItem>
+        ))
+      }
+    </ul>
+  </AnimatedItem>
+</div>
+
+<style lang="scss">
+  .step-info-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: center;
+    color: #f1f1f1;
+    max-width: 60%;
+    min-width: 300px;
+    margin-left: 15%;
+    gap: min(7%, 24px);
+    h2 {
+      margin: 0;
+      font-size: 48px;
+      white-space: nowrap;
+      font-weight: 700;
+    }
+    p {
+      margin: 0;
+      font-size: 20px;
+      text-wrap: pretty;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      .line {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 1px;
+        background-color: #f1f1f1;
+        opacity: 0.5;
+        border-radius: 0.5px;
+      }
+
+      li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        opacity: 0.5;
+        line-height: 24px;
+        margin-left: 24px;
+      }
+    }
+  }
+</style>

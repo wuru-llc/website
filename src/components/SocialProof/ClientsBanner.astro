@@ -30,14 +30,14 @@ const logos = [
   <AnimatedItem animation="translateY(5px)">
     <div class="logo-track">
       {
-        logos.map((logo, index) => (
+        logos.map((logo) => (
           <div class="logo-slide">
             <Image class="client-logo" src={logo.src} alt={logo.alt} width={500} height={300} format="png" loading="lazy" />
           </div>
         ))
       }
       {
-        logos.map((logo, index) => (
+        logos.map((logo) => (
           <div class="logo-slide">
             <Image class="client-logo" src={logo.src} alt={logo.alt} width={500} height={300} format="png" loading="lazy" />
           </div>
@@ -78,6 +78,15 @@ const logos = [
 
     &:hover {
       opacity: 1;
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
     }
   }
 </style>
