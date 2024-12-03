@@ -36,15 +36,17 @@ import boxPanel from "../../assets/videos/boxpanel.webm";
   .cube-img {
     padding-top: 48px;
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
     min-width: 300px;
     height: auto;
+    max-height: 75vh;
     filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.2));
+    filter: brightness(0.8);
   }
 
   @media only screen and (max-width: 1400px) {
     .cube-img {
-      max-width: 30vw;
+      max-width: 33vw;
     }
   }
 
@@ -66,8 +68,5 @@ import boxPanel from "../../assets/videos/boxpanel.webm";
       max-width: unset !important;
       width: 80vw !important;
     }
-  }
-
-  @media only screen and (max-width: 480px) {
   }
 </style>

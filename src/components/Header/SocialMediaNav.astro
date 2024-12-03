@@ -1,0 +1,67 @@
+---
+import { Image } from "astro:assets";
+import LogoX from "../../assets/images/svg-x.svg";
+import LogoYT from "../..//assets/images/svg-yt-fill.svg";
+import LogoLN from "../..//assets/images/svg-ln.svg";
+import LogoSP from "../..//assets/images/svg-sp.svg";
+import LogoIG from "../..//assets/images/svg-ig.svg";
+---
+
+<div class="social-media-container">
+  <a href="http://www.x.com/somoswuru" target="_blank" title="X" rel="noopener noreferrer">
+    <Image src={LogoX} alt="logo X" height={16} class="icon" style="animation-delay: 0.1s;" loading={"eager"} />
+  </a>
+  <a href="https://www.linkedin.com/company/wuru/" target="_blank" title="Linkedin" rel="noopener noreferrer">
+    <Image src={LogoLN} alt="logo LN" height={18} class="icon" style="animation-delay: 0.2s;" loading={"eager"} />
+  </a>
+  <a href="https://open.spotify.com/show/4Y9ZWdptkgK77ggLblzG8G?si=f9148e7a834343ab" target="_blank" title="Spotify" rel="noopener noreferrer">
+    <Image src={LogoSP} alt="logo SP" height={22} class="icon" style="animation-delay: 0.3s;" loading={"eager"} />
+  </a>
+  <a href="http://www.instagram.com/somoswuru" target="_blank" title="Instagram" rel="noopener noreferrer">
+    <Image src={LogoIG} alt="logo IG" height={20} class="icon" style="animation-delay: 0.4s;" loading={"eager"} />
+  </a>
+  <a href="https://www.youtube.com/channel/UCL2wsaBCQbRUwFgd8S_3mWw" target="_blank" title="Youtube" rel="noopener noreferrer">
+    <Image src={LogoYT} alt="logo YT" height={16} class="icon" style="animation-delay: 0.5s;" loading={"eager"} />
+  </a>
+</div>
+
+<style lang="scss">
+  @keyframes icons-appears-nav {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 0.7;
+    }
+  }
+
+  .social-media-container {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    opacity: 0.8;
+    transition: all 0.3s ease-in-out;
+    img {
+      opacity: 0.5;
+      animation: icons-appears-nav 0.5s ease-out forwards;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1 !important;
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.66));
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .social-media-container {
+      display: none;
+    }
+  }
+</style>

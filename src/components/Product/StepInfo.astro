@@ -47,18 +47,19 @@ console.log(items);
     max-width: 70%;
     min-width: 300px;
     margin-left: 15%;
-    gap: min(7%, 24px);
+    gap: min(5%, 24px);
     overflow: hidden;
+
     h2 {
       margin: 0;
-      font-size: 48px;
-      white-space: nowrap;
+      font-size: 40px;
       font-weight: 700;
     }
     p {
       margin: 0;
       font-size: 20px;
       text-wrap: pretty;
+      line-height: 28px;
     }
     ul {
       margin: 0;
@@ -77,6 +78,7 @@ console.log(items);
       }
 
       li {
+        font-size: 16px;
         list-style: none;
         margin: 0;
         padding: 0;
@@ -84,6 +86,77 @@ console.log(items);
         line-height: 24px;
         margin-left: 24px;
       }
+    }
+  }
+
+  @media only screen and (max-width: 1400px) {
+    .step-info-container {
+      margin-left: 12%;
+      max-width: 80%;
+      min-width: 300px;
+      gap: 12px;
+
+      h2 {
+        font-size: 32px;
+      }
+      p {
+        font-size: 16px;
+        line-height: 20px;
+      }
+      ul {
+        li {
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    .step-info-container {
+      margin-left: 8%;
+      max-width: 80%;
+      min-width: 200px;
+
+      h2 {
+        font-size: 24px;
+      }
+      p {
+        font-size: 14px;
+      }
+      ul {
+        li {
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .step-info-container {
+      padding: 10%;
+      margin: 0;
+      aspect-ratio: 1;
+      align-content: center;
+      min-width: 100%;
+      h2 {
+        font-size: 28px;
+      }
+      p {
+        font-size: 14px;
+      }
+      ul {
+        li {
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .step-info-container {
+      aspect-ratio: 3/4;
     }
   }
 </style>

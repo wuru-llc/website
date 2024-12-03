@@ -109,7 +109,7 @@ import LogoIG from "../../assets/images/svg-ig.svg";
       flex-direction: column;
       gap: 16px;
       .vision {
-        max-width: 450px;
+        max-width: 350px;
         color: #f1f1f1;
         font-size: 28px;
         letter-spacing: 1.1px;
@@ -122,8 +122,7 @@ import LogoIG from "../../assets/images/svg-ig.svg";
       display: flex;
       width: 100%;
       height: 100%;
-      flex-direction: column;
-      gap: 16px;
+      gap: 64px;
 
       .address {
         display: flex;
@@ -294,6 +293,36 @@ import LogoIG from "../../assets/images/svg-ig.svg";
     opacity: 0.5;
     padding-bottom: 48px;
   }
+  @media only screen and (max-width: 1400px) {
+    .footer-container {
+      .part01 {
+        .vision {
+          max-width: 250px;
+        }
+      }
+      .part02 {
+        flex-direction: column;
+        gap: 12px;
+
+        .address {
+          gap: 4px;
+
+          .title {
+            gap: 4px;
+
+            h2 {
+              font-size: 16px !important;
+            }
+            img {
+              width: 16px !important;
+              position: unset !important;
+              left: unset;
+            }
+          }
+        }
+      }
+    }
+  }
 
   @media only screen and (max-width: 1024px) {
     *input {
@@ -315,18 +344,7 @@ import LogoIG from "../../assets/images/svg-ig.svg";
         gap: 12px !important;
         .address {
           align-items: end !important;
-          gap: 4px;
-          .title {
-            gap: 4px;
-            h2 {
-              font-size: 16px !important;
-            }
-            img {
-              width: 16px !important;
-              position: unset !important;
-              left: unset;
-            }
-          }
+
           .info {
             align-items: end !important;
             p {
@@ -365,6 +383,7 @@ import LogoIG from "../../assets/images/svg-ig.svg";
 
   @media only screen and (max-width: 768px) {
     .footer-container {
+      padding-top: 48px !important;
       .part02 {
         .address {
           .info {

@@ -4,27 +4,27 @@ import StepInfo from "./StepInfo.astro";
 
 const productHighLights = [
   {
-    title: "Inteligencia Artificial y Diseño",
+    title: "IA & Diseño",
     description: "Construimos soluciones que tienen al profesional de la salud en el centro.",
-    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning"],
   },
   {
     title: "Demanda centralizada",
     description:
       "Formularios, llamados y mensajes de WhatsApp confluyen en una única bandeja de entrada para comenzar a planificar. Automatizamos la centralización de la demanda de todos los canales en una única plataforma.",
-    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+    items: ["Interactive", "Art direction", "Copyrighting", "360 campaigns", "Concept development"],
   },
   {
     title: "Planificación inteligente",
     description:
       "Acomodamos la oferta del servicio a la demanda con un solo click. Predecimos la duración de cada evento y garantizamos que los recursos estén disponibles siguiendo las reglas de negocio de cada institución médica.",
-    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+    items: ["Interactive", "Art direction", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
   },
   {
     title: "Ejecución efectiva",
     description:
       "Capturamos la información de lo que sucede en tiempo real y coordinamos al equipo de salud vía Whatsapp para que maximicen el uso de su tiempo.",
-    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+    items: ["Interactive", "Art direction", "Copyrighting"],
   },
   {
     title: "Mejora continua",
@@ -41,14 +41,19 @@ console.log(productHighLights[0].items);
   <div class="content">
     <div class="left-side">
       <StepInfo title={productHighLights[0].title} description={productHighLights[0].description} items={productHighLights[0].items} />
+      <div class="img-container mobile"><ImageParallax><img src="../../../public/images/1.avif" alt="" /></ImageParallax></div>
 
       <StepInfo title={productHighLights[1].title} description={productHighLights[1].description} items={productHighLights[1].items} />
+      <div class="img-container mobile"><ImageParallax><img src="../../../public/images/2.avif" alt="" /></ImageParallax></div>
 
       <StepInfo title={productHighLights[2].title} description={productHighLights[2].description} items={productHighLights[2].items} />
+      <div class="img-container mobile"><ImageParallax><img src="../../../public/images/3.avif" alt="" /></ImageParallax></div>
 
       <StepInfo title={productHighLights[3].title} description={productHighLights[3].description} items={productHighLights[3].items} />
+      <div class="img-container mobile"><ImageParallax><img src="../../../public/images/4.avif" alt="" /></ImageParallax></div>
 
       <StepInfo title={productHighLights[4].title} description={productHighLights[4].description} items={productHighLights[4].items} />
+      <div class="img-container mobile"><ImageParallax><img src="../../../public/images/5.avif" alt="" /></ImageParallax></div>
     </div>
     <div class="right-side">
       <div class="img-container"><ImageParallax><img src="../../../public/images/1.avif" alt="" /></ImageParallax></div>
@@ -94,6 +99,21 @@ console.log(productHighLights[0].items);
           66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
           101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
           181px 151px 80px rgba(0, 0, 0, 0.1);
+        .mobile {
+          display: none !important;
+        }
+        .img-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #f1f1f1;
+          aspect-ratio: 1;
+          overflow: hidden;
+          position: relative;
+          img {
+            width: 100%;
+          }
+        }
       }
       .right-side {
         display: grid;
@@ -140,12 +160,40 @@ console.log(productHighLights[0].items);
     }
   }
 
+  @media only screen and (max-width: 1400px) {
+  }
+
   @media only screen and (max-width: 1024px) {
+    .product-feature-01 {
+      margin: 24px;
+    }
   }
 
   @media only screen and (max-width: 768px) {
+    .product-feature-01 {
+      .content {
+        display: unset !important;
+        grid-template-columns: unset !important;
+
+        .left-side {
+          width: 100%;
+          display: flex !important;
+          flex-direction: column !important;
+          overflow: hidden;
+
+          .mobile {
+            display: block !important;
+          }
+        }
+        .right-side {
+          display: none;
+        }
+      }
+    }
   }
 
   @media only screen and (max-width: 480px) {
+    .product-feature-01 {
+    }
   }
 </style>
