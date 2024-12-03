@@ -1,12 +1,16 @@
 ---
 import { Image } from "astro:assets";
 import WuruLogo from "../../assets/images/wuru-logo.svg";
+import UserCircle from "../../assets/images/user-circle.svg";
 ---
 
 <div class="header-container">
   <Image src={WuruLogo} alt="wuru-logo" height={32} class="wuru-logo" loading={"eager"} />
   <div class="right-side">
-    <a class="log-in-btn" href="http://app.wuru.ai" target="_blank" title="Iniciar sesión" rel="noopener noreferrer">INICIAR SESIÓN</a>
+    <a class="log-in-btn" href="http://app.wuru.ai" target="_blank" title="Iniciar sesión" rel="noopener noreferrer">
+      <span class="text">INICIAR SESIÓN</span>
+      <Image src={UserCircle} alt="login-icon" height={28} class="login-icon" loading={"eager"} />
+    </a>
   </div>
 </div>
 
@@ -74,6 +78,44 @@ import WuruLogo from "../../assets/images/wuru-logo.svg";
           border: solid 0.25px #7d1703bf;
         }
       }
+      .login-icon {
+        display: none;
+      }
     }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .header-container {
+      padding: 12px 24px !important;
+      img {
+        width: 120px !important;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .header-container {
+      .right-side {
+        .log-in-btn {
+          padding: 12px !important;
+          height: 48px;
+          width: 48px;
+          border-radius: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .login-icon {
+            display: block;
+            opacity: 0.7 !important;
+          }
+          .text {
+            display: none !important;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
   }
 </style>

@@ -3,7 +3,7 @@ import AnimatedItem from "../AnimatedItem.astro";
 import ImageParallax from "../ImageParallax.astro";
 ---
 
-<div class="social-proof-container">
+<div class="mision-statement-container">
   <div class="text-container">
     <AnimatedItem client:idle>
       <h1 class="text-1">Agilidad para</h1>
@@ -18,7 +18,7 @@ import ImageParallax from "../ImageParallax.astro";
 </div>
 
 <style lang="scss">
-  .social-proof-container {
+  .mision-statement-container {
     width: 100%;
     height: 80vh;
     max-height: 900px;
@@ -26,6 +26,7 @@ import ImageParallax from "../ImageParallax.astro";
     align-items: center;
     justify-content: center;
     position: relative;
+    padding: 0px 48px;
     .text-container {
       display: flex;
       align-items: center;
@@ -39,6 +40,8 @@ import ImageParallax from "../ImageParallax.astro";
         font-size: 96px;
         margin: 0;
         font-weight: 900;
+        text-align: center;
+        white-space: nowrap;
         font-family:
           system-ui,
           -apple-system,
@@ -58,6 +61,8 @@ import ImageParallax from "../ImageParallax.astro";
         font-size: 32px;
         margin-top: 32px;
         font-weight: 400;
+        text-align: center;
+
         font-family:
           system-ui,
           -apple-system,
@@ -70,6 +75,57 @@ import ImageParallax from "../ImageParallax.astro";
           "Open Sans",
           "Helvetica Neue",
           sans-serif;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .mision-statement-container {
+      height: 60vh;
+
+      padding: 0px 24px;
+
+      .text-container {
+        .text-1 {
+          font-size: 72px;
+        }
+        .text-2 {
+          font-size: 24px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .mision-statement-container {
+      .text-container {
+        .text-1 {
+          font-size: 8vw !important;
+        }
+        .text-2 {
+          margin-top: 20px;
+          line-height: 24px;
+          max-width: 70vw;
+          font-size: 20px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .mision-statement-container {
+      .text-container {
+        .text-1 {
+          font-size: 36px !important;
+        }
+        .text-2 {
+          margin-top: 20px;
+          line-height: 24px;
+          font-size: 16px;
+          text-align: center;
+        }
       }
     }
   }

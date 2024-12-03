@@ -36,9 +36,38 @@ import boxPanel from "../../assets/videos/boxpanel.webm";
   .cube-img {
     padding-top: 48px;
     width: 100%;
-    max-width: 500px;
+    max-width: 450px;
     min-width: 300px;
     height: auto;
     filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.2));
+  }
+
+  @media only screen and (max-width: 1400px) {
+    .cube-img {
+      max-width: 30vw;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .cube-img {
+      max-width: 50vw;
+    }
+    .hero {
+      gap: 16px !important;
+      .top-hero {
+        flex-direction: column;
+        gap: 48px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .cube-img {
+      max-width: unset !important;
+      width: 80vw !important;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
   }
 </style>

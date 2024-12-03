@@ -4,27 +4,26 @@ import StepInfo from "./StepInfo.astro";
 
 const productHighLights = [
   {
+    title: "Inteligencia Artificial y Diseño",
+    description: "Construimos soluciones que tienen al profesional de la salud en el centro.",
+    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
+  },
+  {
     title: "Demanda centralizada",
     description:
-      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+      "Formularios, llamados y mensajes de WhatsApp confluyen en una única bandeja de entrada para comenzar a planificar. Automatizamos la centralización de la demanda de todos los canales en una única plataforma.",
     items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
   },
   {
     title: "Planificación inteligente",
     description:
-      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+      "Acomodamos la oferta del servicio a la demanda con un solo click. Predecimos la duración de cada evento y garantizamos que los recursos estén disponibles siguiendo las reglas de negocio de cada institución médica.",
     items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
   },
   {
-    title: "Del dicho al hecho",
+    title: "Ejecución efectiva",
     description:
-      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
-    items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
-  },
-  {
-    title: "Comunicación efectiva",
-    description:
-      "The creative work behind a brand sets them apart and speaks to their unique personality, giving the world a peek into their purpose and ambition.",
+      "Capturamos la información de lo que sucede en tiempo real y coordinamos al equipo de salud vía Whatsapp para que maximicen el uso de su tiempo.",
     items: ["Interactive", "Art direction", "Copyrighting", "Campaign design", "Brand positioning", "360 campaigns", "Concept development"],
   },
   {
@@ -95,43 +94,6 @@ console.log(productHighLights[0].items);
           66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
           101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
           181px 151px 80px rgba(0, 0, 0, 0.1);
-
-        .text-container {
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          justify-content: center;
-          align-content: center;
-          color: #f1f1f1;
-          max-width: 60%;
-          min-width: 300px;
-          margin-left: 15%;
-          gap: min(5%, 16px);
-          h2 {
-            margin: 0;
-            font-size: 48px;
-            white-space: nowrap;
-            font-weight: 700;
-          }
-          p {
-            margin: 0;
-            font-size: 20px;
-            text-wrap: pretty;
-          }
-          ul {
-            margin: 0;
-            padding: 0;
-
-            li {
-              list-style: none;
-              margin: 0;
-              padding: 0;
-              opacity: 0.5;
-              line-height: 20px;
-            }
-          }
-        }
       }
       .right-side {
         display: grid;
@@ -176,5 +138,14 @@ console.log(productHighLights[0].items);
       opacity: 1;
       transform: translateY(-100px);
     }
+  }
+
+  @media only screen and (max-width: 1024px) {
+  }
+
+  @media only screen and (max-width: 768px) {
+  }
+
+  @media only screen and (max-width: 480px) {
   }
 </style>
