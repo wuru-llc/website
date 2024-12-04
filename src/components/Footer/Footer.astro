@@ -42,13 +42,17 @@ import LogoIG from "../../assets/images/svg-ig.svg";
   </div>
 
   <div class="part03">
-    <span class="top">
+    <span class="email-container">
+      <p>escribinos</p>
+      <a class="email-link" href="mailto:hola@wuru.ai" title="hola@wuru.ai" target="_blank" rel="noreferrer">hola@wuru.ai</a>
+    </span>
+    <!-- <span class="top">
       <p>suscribite</p>
       <form class="subscribe-form">
         <input type="email" class="subscribe-input" placeholder="email@address.com" required />
         <button type="submit" class="subscribe-button">Suscribirme</button>
       </form>
-    </span>
+    </span> -->
     <span class="bottom">
       <p>seguinos</p>
       <div class="footer-social-media-container">
@@ -184,12 +188,28 @@ import LogoIG from "../../assets/images/svg-ig.svg";
       gap: 24px;
       color: #f1f1f1;
       font-size: 12px;
-      text-transform: uppercase;
       letter-spacing: 1.1px;
       text-align: right;
       p {
         margin: 0;
         margin-bottom: 8px;
+        text-transform: uppercase;
+      }
+      .email-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+
+        .email-link {
+          color: #ff6344;
+          font-size: 16px;
+          transition: all ease-in-out 0.3s;
+
+          &:hover {
+            color: #dd593e;
+          }
+        }
       }
       .top {
         width: 100%;
@@ -364,6 +384,9 @@ import LogoIG from "../../assets/images/svg-ig.svg";
         flex-direction: unset !important;
         align-items: start;
         gap: 48px !important;
+        .email-container {
+          align-items: start !important;
+        }
         .top {
           align-items: start !important;
           .subscribe-form {
