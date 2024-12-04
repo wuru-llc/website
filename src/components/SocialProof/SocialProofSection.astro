@@ -10,14 +10,13 @@ import QuaIcon from "../../assets/images/qua.png";
     <div class="card">
       <Image src={QuaIcon} alt="quotation mark" height={48} loading={"lazy"} class="quotation-marks" />
       <p class="text">
-        "La incorporación de Wúru en Swiss Medical contribuye al análisis de oportunidades e incrementa la eficiencia en los procesos mediante la
-        analítica de datos, con una metodología ágil de gestión que nos ayuda a mantener nuestro compromiso de brindar un servicio integral de
-        excelencia para nuestros pacientes."
+        "Nunca estoy sentado, con Magic Calendar puedo ver qué está pasando en el quirófano rápidamente y en tiempo real. Ya no tengo que cambiarme
+        para entrar y consultar, puedo hacerlo desde el celular"
       </p>
-      <a href="https://www.linkedin.com/in/facundobelocopitt" target="_blank" rel="noopener noreferrer" class="reference">
+      <a href="https://www.linkedin.com/in/juan-molina-b243aa64" target="_blank" rel="noopener noreferrer" class="reference">
         <Image src={LogoLN} alt="logo X" height={14} loading={"lazy"} />
-        <p class="role">Facundo Belocopitt</p>
-        <p class="role opacity">Director</p>
+        <p class="role">Dr. Juan Molina</p>
+        <p class="role opacity">Director Médico</p>
         <p class="role opacity">Swiss Medical Group</p>
       </a>
     </div>
@@ -26,14 +25,15 @@ import QuaIcon from "../../assets/images/qua.png";
     <div class="card">
       <Image src={QuaIcon} alt="quotation mark" height={48} loading={"lazy"} class="quotation-marks" color="#0e76a8" />
       <p class="text">
-        “Gracias a Wúru la comunicación con los cirujanos dejó de estar centrada en reclamos esporádicos para dar continuidad a un trabajo
-        colaborativo centrado en la mejora continua.”
+        “Magic Calendar me permite organizar mejor mi agenda. Puedo anotar mis cirugias en cualquier lugar, ver los procedimientos del resto del
+        servicio, saber mis días libres y cuándo tengo disponibilidad. Siento que estoy más respaldada, con un sistema atrás que me permite estar más
+        organizada y en contacto con las secretarias de cirugía ambulatoria."
       </p>
-      <a href="https://www.linkedin.com/in/juan-camou-76a98214a" target="_blank" rel="noopener noreferrer" class="reference">
+      <a href="https://www.linkedin.com/in/griselda-alfonso-79776824/" target="_blank" rel="noopener noreferrer" class="reference">
         <Image src={LogoLN} alt="logo X" height={14} loading={"lazy"} />
-        <p class="role">J. Ignacio Camou</p>
-        <p class="role opacity">Jefe de quirófanos</p>
-        <p class="role opacity">Hospital Privado de Rosario</p>
+        <p class="role">Dra. Griselda Alfonso</p>
+        <p class="role opacity">Jefa del Servicio de Flebolinfologia y directora de Cirugía Mayor Ambulatoria</p>
+        <p class="role opacity">Grupo Gamma</p>
       </a>
     </div>
   </AnimatedItem>
@@ -41,14 +41,14 @@ import QuaIcon from "../../assets/images/qua.png";
     <div class="card">
       <Image src={QuaIcon} alt="quotation mark" height={48} loading={"lazy"} class="quotation-marks" color="#0e76a8" />
       <p class="text">
-        "Elegimos Wúru por su propuesta innovadora y su solvencia en la analítica de datos. La solución nos ha permitido conocer, democratizar y
-        transformar en acciones la información de nuestros procesos."
+        "Los indicadores son visualmente agradables pero lo más importante era redireccionar el esfuerzo de las personas volviendo su jornada más
+        eficiente."
       </p>
-      <a href="https://www.linkedin.com/in/german-oshiro" target="_blank" rel="noopener noreferrer" class="reference">
+      <a href="https://www.linkedin.com/in/adriana-contreras-80994577/" target="_blank" rel="noopener noreferrer" class="reference">
         <Image src={LogoLN} alt="logo X" height={14} loading={"lazy"} />
-        <p class="role">German Oshiro</p>
-        <p class="role opacity">Gerente general</p>
-        <p class="role opacity">Hospital Español</p>
+        <p class="role">Adriana Contreras</p>
+        <p class="role opacity">Vicepresidente de Operaciones</p>
+        <p class="role opacity">Avidanti SAS</p>
       </a>
     </div>
   </AnimatedItem>
@@ -116,16 +116,22 @@ import QuaIcon from "../../assets/images/qua.png";
         cursor: pointer;
         transition: all ease-in-out 0.3s;
         color: #f1f1f1;
-        gap: 4px;
+        gap: 6px;
         img {
           filter: invert(29%) sepia(63%) saturate(4347%) hue-rotate(181deg) brightness(88%) contrast(89%);
         }
         .role {
           font-size: 12px;
           margin: 0;
+          text-align: right;
+          max-width: 75%;
           &:nth-child(2) {
             font-size: 16px;
             font-weight: 700;
+          }
+          &:nth-child(3) {
+            line-height: 16px;
+            opacity: 0.6;
           }
         }
         .opacity {
