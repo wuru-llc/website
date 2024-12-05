@@ -3,10 +3,7 @@ import { Image } from "astro:assets";
 
 import WuruLogoFilled from "../../assets/images/wuru-logo-filled.svg";
 import PinIcon from "../../assets/images/location.svg";
-import LogoX from "../../assets/images/svg-x.svg";
-import LogoYT from "../../assets/images/svg-yt-fill.svg";
 import LogoLN from "../../assets/images/svg-ln.svg";
-import LogoSP from "../../assets/images/svg-sp.svg";
 import LogoIG from "../../assets/images/svg-ig.svg";
 ---
 
@@ -15,32 +12,6 @@ import LogoIG from "../../assets/images/svg-ig.svg";
     <Image src={WuruLogoFilled} alt="wuru-logo-filled" height={60} class="wuru-logo" loading={"lazy"} />
     <p class="vision">Salud de calidad accesible para todos.</p>
   </div>
-
-  <div class="part02">
-    <div class="address" title="Buenos Aires">
-      <span class="title">
-        <Image src={PinIcon} alt="pin-icon" height={32} loading={"lazy"} />
-        <h2>BUENOS AIRES</h2>
-      </span>
-      <span class="info">
-        <p>Av. Del Libertador 1000.</p>
-        <p>Vicente López, B1638 (Bs As, AR)</p>
-      </span>
-      <a href="https://maps.app.goo.gl/aN97DEThFU95kRBs5" target="_blank" rel="noopener noreferrer">ver mapa</a>
-    </div>
-    <div class="address" title="Rosario">
-      <span class="title">
-        <Image src={PinIcon} alt="pin-icon" height={32} loading={"lazy"} />
-        <h2>ROSARIO</h2>
-      </span>
-      <span class="info">
-        <p>Mitre 170, Piso 2.</p>
-        <p>S2000 (Rosario, AR)</p>
-      </span>
-      <a href="https://maps.app.goo.gl/db9EqeG7uGanwZ1k7" target="_blank" rel="noopener noreferrer">ver mapa</a>
-    </div>
-  </div>
-
   <div class="part03">
     <span class="email-container">
       <p>escribinos</p>
@@ -56,20 +27,11 @@ import LogoIG from "../../assets/images/svg-ig.svg";
     <span class="bottom">
       <p>seguinos</p>
       <div class="footer-social-media-container">
-        <a href="http://www.x.com/somoswuru" target="_blank" title="X" rel="noopener noreferrer">
-          <Image src={LogoX} alt="logo X" height={16} class="icon" style="animation-delay: 0.1s;" loading={"lazy"} />
-        </a>
         <a href="https://www.linkedin.com/company/wuru/" target="_blank" title="Linkedin" rel="noopener noreferrer">
           <Image src={LogoLN} alt="logo LN" height={18} class="icon" style="animation-delay: 0.2s;" loading={"lazy"} />
         </a>
-        <a href="https://open.spotify.com/show/4Y9ZWdptkgK77ggLblzG8G?si=f9148e7a834343ab" target="_blank" title="Spotify" rel="noopener noreferrer">
-          <Image src={LogoSP} alt="logo SP" height={22} class="icon" style="animation-delay: 0.3s;" loading={"lazy"} />
-        </a>
         <a href="http://www.instagram.com/somoswuru" target="_blank" title="Instagram" rel="noopener noreferrer">
           <Image src={LogoIG} alt="logo IG" height={20} class="icon" style="animation-delay: 0.4s;" loading={"lazy"} />
-        </a>
-        <a href="https://www.youtube.com/channel/UCL2wsaBCQbRUwFgd8S_3mWw" target="_blank" title="Youtube" rel="noopener noreferrer">
-          <Image src={LogoYT} alt="logo YT" height={16} class="icon" style="animation-delay: 0.5s;" loading={"lazy"} />
         </a>
       </div>
     </span>
@@ -122,65 +84,8 @@ import LogoIG from "../../assets/images/svg-ig.svg";
       }
     }
 
-    .part02 {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      gap: 64px;
-
-      .address {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #f1f1f1;
-        width: 100%;
-        gap: 8px;
-
-        .title {
-          display: flex;
-          align-items: center;
-
-          gap: 8px;
-          position: relative;
-          img {
-            opacity: 0.5;
-            position: absolute;
-            left: -38px;
-          }
-          h2 {
-            white-space: nowrap;
-            font-size: 24px;
-            margin: 0;
-          }
-        }
-        .info {
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-          gap: 4px;
-          p {
-            margin: 0;
-            font-size: 14px;
-            white-space: nowrap;
-          }
-        }
-        a {
-          font-size: 14px;
-          opacity: 0.6;
-          margin: 0;
-          transition: all ease-in-out 0.3s;
-          color: #f1f1f1;
-          margin-left: 8px;
-          white-space: nowrap;
-          &:hover {
-            opacity: 0.3;
-          }
-        }
-      }
-    }
-
     .part03 {
-      width: 100%;
+      width: fit-content;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -313,36 +218,6 @@ import LogoIG from "../../assets/images/svg-ig.svg";
     opacity: 0.5;
     padding-bottom: 48px;
   }
-  @media only screen and (max-width: 1400px) {
-    .footer-container {
-      .part01 {
-        .vision {
-          max-width: 250px;
-        }
-      }
-      .part02 {
-        flex-direction: column;
-        gap: 12px;
-
-        .address {
-          gap: 4px;
-
-          .title {
-            gap: 4px;
-
-            h2 {
-              font-size: 16px !important;
-            }
-            img {
-              width: 16px !important;
-              position: unset !important;
-              left: unset;
-            }
-          }
-        }
-      }
-    }
-  }
 
   @media only screen and (max-width: 1024px) {
     *input {
@@ -350,43 +225,14 @@ import LogoIG from "../../assets/images/svg-ig.svg";
     }
     .footer-container {
       padding: 24px !important;
-      flex-wrap: wrap;
+      padding-top: 48px !important;
 
       .part01 {
-        flex: 1;
         .vision {
-          max-width: 320px;
           font-size: 28px !important;
         }
       }
-      .part02 {
-        flex: 1;
-        gap: 12px !important;
-        .address {
-          align-items: end !important;
-
-          .info {
-            align-items: end !important;
-            p {
-              font-size: 12px;
-              white-space: nowrap;
-            }
-          }
-          a {
-            margin-top: 4px;
-            margin-left: 0 !important;
-          }
-        }
-      }
       .part03 {
-        flex-basis: 100%;
-        margin-top: 32px;
-        flex-direction: unset !important;
-        align-items: start;
-        gap: 48px !important;
-        .email-container {
-          align-items: start !important;
-        }
         .top {
           align-items: start !important;
           .subscribe-form {
@@ -407,18 +253,10 @@ import LogoIG from "../../assets/images/svg-ig.svg";
   @media only screen and (max-width: 768px) {
     .footer-container {
       padding-top: 48px !important;
-      .part02 {
-        .address {
-          .info {
-            flex-direction: column !important;
-          }
-        }
-      }
-      .part03 {
-        .bottom {
-          .footer-social-media-container {
-            gap: 16px !important;
-          }
+      .part01 {
+        .vision {
+          font-size: 24px !important;
+          max-width: 300px;
         }
       }
     }
@@ -427,29 +265,22 @@ import LogoIG from "../../assets/images/svg-ig.svg";
   @media only screen and (max-width: 480px) {
     .footer-container {
       flex-direction: column;
-      .part02 {
-        .address {
-          align-items: start !important;
-          .info {
-            align-items: start !important;
-          }
-        }
-      }
+
       .part03 {
-        flex-direction: column !important;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between !important;
+        width: 100%;
+        .email-container {
+          align-items: flex-start;
+          width: unset !important;
+        }
         .top {
           .subscribe-form {
             .subscribe-input {
               width: 100% !important;
               max-width: unset !important;
             }
-          }
-        }
-        .bottom {
-          width: 100%;
-          align-items: start !important;
-          .footer-social-media-container {
-            gap: 32px !important;
           }
         }
       }
