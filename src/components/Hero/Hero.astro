@@ -5,69 +5,69 @@ import HeroText from "./HeroText.astro";
 import boxPanel from "../../assets/videos/boxpanel.webm";
 ---
 
-<div class="hero">
+<section class="hero">
   <span class="top-hero">
     <video src={boxPanel} autoplay muted loop class="cube-img"></video>
 
     <HeroText />
   </span>
   <ScrollDown />
+</section>
 
-  <style lang="scss">
-    .hero {
+<style lang="scss">
+  .hero {
+    width: 100%;
+    height: 85vh;
+    max-height: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    position: relative;
+    gap: 48px;
+    .top-hero {
+      height: 100%;
       width: 100%;
-      height: 85vh;
-      max-height: 900px;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      flex-direction: column;
+      justify-content: center;
       position: relative;
-      gap: 48px;
-      .top-hero {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-      }
     }
+  }
+  .cube-img {
+    padding-top: 48px;
+    width: 100%;
+    max-width: 500px;
+    min-width: 300px;
+    height: auto;
+    max-height: 75vh;
+    filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.2));
+    filter: brightness(0.8);
+  }
+
+  @media only screen and (max-width: 1400px) {
     .cube-img {
-      padding-top: 48px;
-      width: 100%;
-      max-width: 500px;
-      min-width: 300px;
-      height: auto;
-      max-height: 75vh;
-      filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.2));
-      filter: brightness(0.8);
+      max-width: 33vw;
     }
+  }
 
-    @media only screen and (max-width: 1400px) {
-      .cube-img {
-        max-width: 33vw;
+  @media only screen and (max-width: 1024px) {
+    .cube-img {
+      max-width: 50vw;
+    }
+    .hero {
+      gap: 16px !important;
+      .top-hero {
+        flex-direction: column;
+        gap: 48px;
       }
     }
+  }
 
-    @media only screen and (max-width: 1024px) {
-      .cube-img {
-        max-width: 50vw;
-      }
-      .hero {
-        gap: 16px !important;
-        .top-hero {
-          flex-direction: column;
-          gap: 48px;
-        }
-      }
+  @media only screen and (max-width: 768px) {
+    .cube-img {
+      max-width: unset !important;
+      width: 80vw !important;
     }
-
-    @media only screen and (max-width: 768px) {
-      .cube-img {
-        max-width: unset !important;
-        width: 80vw !important;
-      }
-    }
-  </style>
-</div>
+  }
+</style>

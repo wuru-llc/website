@@ -2,41 +2,52 @@
 import { Image } from "astro:assets";
 
 import WuruLogoFilled from "../../assets/images/wuru-logo-filled.svg";
-import PinIcon from "../../assets/images/location.svg";
 import LogoLN from "../../assets/images/svg-ln.svg";
 import LogoIG from "../../assets/images/svg-ig.svg";
+import Boston from "../../assets/images/boston-cientific.png";
+import Microsoft from "../../assets/images/microsoft.png";
 ---
 
 <div class="footer-container">
-  <div class="part01">
-    <Image src={WuruLogoFilled} alt="wuru-logo-filled" height={60} class="wuru-logo" loading={"lazy"} />
-    <p class="vision">Salud de calidad accesible para todos.</p>
+  <div class="principal-data">
+    <div class="part01">
+      <Image src={WuruLogoFilled} alt="wuru-logo-filled" height={60} class="wuru-logo" loading={"lazy"} />
+      <p class="vision">Salud de calidad accesible para todos.</p>
+    </div>
+    <div class="part03">
+      <span class="email-container">
+        <p>escribinos</p>
+        <a class="email-link" href="mailto:hola@wuru.ai" title="hola@wuru.ai" target="_blank" rel="noreferrer">hola@wuru.ai</a>
+      </span>
+      <!-- <span class="top">
+        <p>suscribite</p>
+        <form class="subscribe-form">
+          <input type="email" class="subscribe-input" placeholder="email@address.com" required />
+          <button type="submit" class="subscribe-button">Suscribirme</button>
+        </form>
+      </span> -->
+      <span class="bottom">
+        <p>seguinos</p>
+        <div class="footer-social-media-container">
+          <a href="https://www.linkedin.com/company/wuru/" target="_blank" title="Linkedin" rel="noopener noreferrer">
+            <Image src={LogoLN} alt="logo LN" height={18} class="icon" style="animation-delay: 0.2s;" loading={"lazy"} />
+          </a>
+          <a href="http://www.instagram.com/somoswuru" target="_blank" title="Instagram" rel="noopener noreferrer">
+            <Image src={LogoIG} alt="logo IG" height={20} class="icon" style="animation-delay: 0.4s;" loading={"lazy"} />
+          </a>
+        </div>
+      </span>
+    </div>
   </div>
-  <div class="part03">
-    <span class="email-container">
-      <p>escribinos</p>
-      <a class="email-link" href="mailto:hola@wuru.ai" title="hola@wuru.ai" target="_blank" rel="noreferrer">hola@wuru.ai</a>
-    </span>
-    <!-- <span class="top">
-      <p>suscribite</p>
-      <form class="subscribe-form">
-        <input type="email" class="subscribe-input" placeholder="email@address.com" required />
-        <button type="submit" class="subscribe-button">Suscribirme</button>
-      </form>
-    </span> -->
-    <span class="bottom">
-      <p>seguinos</p>
-      <div class="footer-social-media-container">
-        <a href="https://www.linkedin.com/company/wuru/" target="_blank" title="Linkedin" rel="noopener noreferrer">
-          <Image src={LogoLN} alt="logo LN" height={18} class="icon" style="animation-delay: 0.2s;" loading={"lazy"} />
-        </a>
-        <a href="http://www.instagram.com/somoswuru" target="_blank" title="Instagram" rel="noopener noreferrer">
-          <Image src={LogoIG} alt="logo IG" height={20} class="icon" style="animation-delay: 0.4s;" loading={"lazy"} />
-        </a>
-      </div>
-    </span>
+  <div class="partnership-container">
+    <p>Nuestros socios estratégicos</p>
+    <div class="images-container">
+      <span class="boston"><Image src={Boston} height={75} alt="logo Boston Cientific" loading={"lazy"} /></span>
+      <span class="microsoft"> <Image src={Microsoft} height={30} alt="logo Microsoft Partner" loading={"lazy"} /></span>
+    </div>
   </div>
 </div>
+
 <div class="line-container">
   <div class="line"></div>
 </div>
@@ -60,138 +71,169 @@ import LogoIG from "../../assets/images/svg-ig.svg";
   .footer-container {
     padding: 48px;
     padding-top: 64px;
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    gap: 48px;
-    opacity: 0.8;
     overflow: hidden;
-
-    .part01 {
-      height: 100%;
-      width: 100%;
-
+    position: relative;
+    .principal-data {
       display: flex;
-      flex-direction: column;
-      gap: 16px;
-      .vision {
-        max-width: 350px;
-        color: #f1f1f1;
-        font-size: 28px;
-        letter-spacing: 1.1px;
-        margin: 0;
-        font-weight: 900;
-      }
-    }
-
-    .part03 {
-      width: fit-content;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: end;
-      gap: 24px;
-      color: #f1f1f1;
-      font-size: 12px;
-      letter-spacing: 1.1px;
-      text-align: right;
-      p {
-        margin: 0;
-        margin-bottom: 8px;
-        text-transform: uppercase;
-      }
-      .email-container {
+      justify-content: space-between;
+      align-items: start;
+      gap: 48px;
+      .part01 {
+        height: 100%;
         width: 100%;
+
         display: flex;
         flex-direction: column;
-        align-items: end;
-
-        .email-link {
-          color: #ff6344;
-          font-size: 16px;
-          transition: all ease-in-out 0.3s;
-
-          &:hover {
-            color: #dd593e;
-          }
+        gap: 16px;
+        .vision {
+          max-width: 350px;
+          color: #f1f1f1;
+          font-size: 28px;
+          letter-spacing: 1.1px;
+          margin: 0;
+          font-weight: 900;
         }
       }
-      .top {
-        width: 100%;
+
+      .part03 {
+        width: fit-content;
+        height: 100%;
         display: flex;
         flex-direction: column;
         align-items: end;
-        gap: 4px;
-        .subscribe-form {
+        gap: 24px;
+        color: #f1f1f1;
+        font-size: 12px;
+        letter-spacing: 1.1px;
+        text-align: right;
+        p {
+          margin: 0;
+          margin-bottom: 8px;
+          text-transform: uppercase;
+        }
+        .email-container {
+          width: 100%;
           display: flex;
           flex-direction: column;
-          justify-content: end;
           align-items: end;
-          gap: 12px;
-          width: 100%;
-          .subscribe-input {
-            background: none;
-            background-color: none;
-            border: none;
-            outline: none;
-            border: solid 0.5px #f1f1f1;
-            border-radius: 5px;
-            width: 80%;
-            max-width: 350px;
-            padding: 4px 8px;
-            background-color: #f1f1f122;
-            color: #f1f1f1;
-            transition: all ease-in-out 0.3s;
 
-            &:focus {
-              outline: none;
-              background-color: #f1f1f13f;
-              border: solid 0.5px #dd593e;
-            }
-            &::placeholder {
-              font-size: 12px;
-              color: #f1f1f1;
-              opacity: 0.6;
-              letter-spacing: 1.1px;
-            }
-          }
-          button {
-            background: none;
-            background-color: none;
-            border: none;
-            outline: none;
-            background-color: #dd593ea7;
-            color: #f1f1f1;
-            border-radius: 5px;
-            padding: 4px 12px;
-            opacity: 1;
+          .email-link {
+            color: #ff6344;
+            font-size: 16px;
             transition: all ease-in-out 0.3s;
-            cursor: pointer;
 
             &:hover {
-              background-color: #dd593e;
+              color: #dd593e;
+            }
+          }
+        }
+        .top {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: end;
+          gap: 4px;
+          .subscribe-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: end;
+            gap: 12px;
+            width: 100%;
+            .subscribe-input {
+              background: none;
+              background-color: none;
+              border: none;
+              outline: none;
+              border: solid 0.5px #f1f1f1;
+              border-radius: 5px;
+              width: 80%;
+              max-width: 350px;
+              padding: 4px 8px;
+              background-color: #f1f1f122;
+              color: #f1f1f1;
+              transition: all ease-in-out 0.3s;
+
+              &:focus {
+                outline: none;
+                background-color: #f1f1f13f;
+                border: solid 0.5px #dd593e;
+              }
+              &::placeholder {
+                font-size: 12px;
+                color: #f1f1f1;
+                opacity: 0.6;
+                letter-spacing: 1.1px;
+              }
+            }
+            button {
+              background: none;
+              background-color: none;
+              border: none;
+              outline: none;
+              background-color: #dd593ea7;
+              color: #f1f1f1;
+              border-radius: 5px;
+              padding: 4px 12px;
+              opacity: 1;
+              transition: all ease-in-out 0.3s;
+              cursor: pointer;
+
+              &:hover {
+                background-color: #dd593e;
+              }
+            }
+          }
+        }
+        .bottom {
+          display: flex;
+          flex-direction: column;
+          align-items: end;
+          gap: 4px;
+          .footer-social-media-container {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            .icon {
+              animation: icons-appears 0.5s ease-out forwards;
+              transition: all 0.2s ease-in-out;
+              cursor: pointer;
+              &:hover {
+                opacity: 1 !important;
+                filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.66));
+              }
             }
           }
         }
       }
-      .bottom {
+    }
+    .partnership-container {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      top: 64px;
+      left: 40%;
+      p {
+        margin: 0;
+        margin-bottom: 16px;
+        color: #f1f1f1;
+        letter-spacing: 1.1px;
+        text-transform: uppercase;
+        font-size: 12px;
+      }
+      .images-container {
         display: flex;
-        flex-direction: column;
-        align-items: end;
-        gap: 4px;
-        .footer-social-media-container {
-          display: flex;
-          align-items: center;
-          gap: 32px;
-          .icon {
-            animation: icons-appears 0.5s ease-out forwards;
-            transition: all 0.2s ease-in-out;
-            cursor: pointer;
-            &:hover {
-              opacity: 1 !important;
-              filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.66));
-            }
-          }
+        align-items: center;
+        justify-content: center;
+        gap: 64px;
+        .boston {
+          filter: grayscale(1) brightness(10);
+        }
+        .microsoft {
+          background-color: #f1f1f1;
+          padding: 24px;
+          border-radius: 10px 10px 0px 10px;
         }
       }
     }
@@ -243,6 +285,11 @@ import LogoIG from "../../assets/images/svg-ig.svg";
           }
         }
       }
+      .partnership-container {
+        position: unset !important;
+        margin-top: 64px;
+        align-items: flex-start;
+      }
     }
     .line-container {
       padding-left: 24px !important;
@@ -258,6 +305,11 @@ import LogoIG from "../../assets/images/svg-ig.svg";
           font-size: 24px !important;
           max-width: 300px;
         }
+      }
+      .partnership-container {
+        position: unset !important;
+        margin-top: 64px;
+        align-items: center;
       }
     }
   }
@@ -280,6 +332,27 @@ import LogoIG from "../../assets/images/svg-ig.svg";
             .subscribe-input {
               width: 100% !important;
               max-width: unset !important;
+            }
+          }
+        }
+      }
+      .partnership-container {
+        position: unset !important;
+        margin-top: 48px;
+        align-items: center;
+        .images-container {
+          gap: 24px;
+          .boston {
+            img {
+              height: 50px;
+              width: auto;
+            }
+          }
+          .microsoft {
+            padding: 16px;
+            img {
+              height: 20px;
+              width: auto;
             }
           }
         }
