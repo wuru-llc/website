@@ -12,13 +12,47 @@ const { title } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Meta tags básicos -->
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta name="description" content="WÚRU, la plataforma para equipos de salud ágiles." />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/website/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Título de la página -->
     <title>{title}</title>
+
+    <!-- Meta tag para SEO -->
+    <meta
+      name="description"
+      content="WÚRU, la plataforma diseñada para equipos de salud ágiles, optimizando la gestión y coordinación de los procesos médicos con herramientas innovadoras y eficientes."
+    />
+    <meta
+      name="keywords"
+      content="plataforma salud, equipos de salud ágiles, gestión de salud, tecnología médica, salud digital, WÚRU, HIS, sitema operativo hospitales"
+    />
+
+    <!-- Open Graph (OG) para redes sociales -->
+    <meta property="og:title" content="WÚRU, la plataforma para equipos de salud ágiles" />
+    <meta
+      property="og:description"
+      content="WÚRU es la plataforma diseñada para equipos de salud ágiles, mejorando la gestión y la eficiencia en el sector médico."
+    />
+    <meta property="og:image" content="/images/wuru-logo-filled.svg" />
+    <meta property="og:url" content="https://www.tusitio.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card para compartir en Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WÚRU, la plataforma para equipos de salud ágiles" />
+    <meta
+      name="twitter:description"
+      content="WÚRU es la plataforma diseñada para equipos de salud ágiles, mejorando la gestión y la eficiencia en el sector médico."
+    />
+    <meta name="twitter:image" content="/images/wuru-logo-filled.svg" />
+    <meta name="twitter:creator" content="@wuru" />
   </head>
+
   <body>
     <slot />
   </body>
