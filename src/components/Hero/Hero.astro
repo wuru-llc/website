@@ -1,13 +1,41 @@
 ---
 import ScrollDown from "./ScrollDown.astro";
 import HeroText from "./HeroText.astro";
-
 import boxPanel from "../../assets/videos/boxpanel.webm";
+import boxPanelGif from "../../assets/videos/boxpanel-low.gif";
 ---
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const isSafari = () => {
+      const userAgent = navigator.userAgent;
+      return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
+    };
+
+    const heroVideo = document.getElementById("hero-video");
+    const heroGif = document.getElementById("hero-gif");
+
+    if (heroGif && heroVideo) {
+      if (isSafari()) {
+        heroGif.style.display = "block";
+        heroVideo.style.display = "none";
+      } else {
+        heroGif.style.display = "none";
+        heroVideo.style.display = "block";
+      }
+    }
+  });
+</script>
 
 <section class="hero">
   <span class="top-hero">
-    <video src={boxPanel} autoplay muted loop class="cube-img"></video>
+    <!-- Video (hidden for Safari) -->
+    <video id="hero-video" autoplay muted loop playsinline class="cube-img" style="display: none;">
+      <source src={boxPanel} type="video/webm" />
+    </video>
+
+    <!-- GIF (hidden for others navigators) -->
+    <img id="hero-gif" src={boxPanelGif.src} alt="box gif" class="cube-img" style="display: none;" />
 
     <HeroText />
   </span>
