@@ -36,7 +36,7 @@ const productHighLights = [
 ];
 ---
 
-<div class="product-feature">
+<section class="product-feature">
   <div class="content">
     <div class="left-side">
       <StepInfo title={productHighLights[0].title} description={productHighLights[0].description} items={productHighLights[0].items} />
@@ -83,7 +83,7 @@ const productHighLights = [
     </div>
   </div>
   <p class="bottom-text-images">*Todas las imagenes fueron generadas con IA.</p>
-</div>
+</section>
 
 <style lang="scss">
   .product-feature {
@@ -190,9 +190,6 @@ const productHighLights = [
       opacity: 1;
       transform: translateY(-100px);
     }
-  }
-
-  @media only screen and (max-width: 1400px) {
   }
 
   @media only screen and (max-width: 1024px) {

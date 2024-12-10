@@ -5,7 +5,7 @@ import UserCircle from "../../assets/images/user-circle.svg";
 import SocialMediaNav from "./SocialMediaNav.astro";
 ---
 
-<div class="header-container">
+<header class="header-container">
   <Image src={WuruLogo} alt="wuru-logo" height={32} class="wuru-logo" loading={"eager"} />
   <div class="right-side">
     <SocialMediaNav />
@@ -14,7 +14,7 @@ import SocialMediaNav from "./SocialMediaNav.astro";
       <Image src={UserCircle} alt="login-icon" height={28} class="login-icon" loading={"eager"} />
     </a>
   </div>
-</div>
+</header>
 
 <style lang="scss">
   @keyframes logo-in-slide {
