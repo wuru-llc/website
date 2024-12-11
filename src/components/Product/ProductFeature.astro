@@ -18,8 +18,8 @@ const productHighLights = [
   {
     title: "Planificación inteligente",
     description:
-      "Acomodamos la oferta del servicio a la demanda con un solo click. Predecimos la duración de cada evento y garantizamos que los recursos estén disponibles siguiendo las reglas de negocio de cada institución médica.",
-    items: ["Asistencia artificial embebida", "Agenda mágica", "Sugerencias de espacios", "Predicción de tiempos"],
+      "Optimizamos la utilización de los recursos en base a la demanda. Predecimos la duración de cada evento según datos históricos y recomendamos espacios que minimicen errores y atrasos, siguiendo las reglas de negocio de cada institución médica.",
+    items: ["Asistencia artificial embebida", "Agenda mágica", "Sugerencias de espacios", "Predicción de tiempos", "Prevenir de errores"],
   },
   {
     title: "Ejecución efectiva",
@@ -31,7 +31,7 @@ const productHighLights = [
     title: "Mejora continua",
     description:
       "Recolectamos datos de punta a punta de todos los procesos, proporcionando una visión integral del uso de los recursos. Mostramos las métricas clave para tomar decisiones informadas que optimicen la capacidad operativa.",
-    items: ["Tableros de analítica", "Métrias personales e institucionales", "Retroalimentación continua de los datos"],
+    items: ["Tableros de analítica", "Métricas personales e institucionales", "Retroalimentación continua de los datos"],
   },
 ];
 ---
@@ -41,48 +41,48 @@ const productHighLights = [
     <div class="left-side">
       <StepInfo title={productHighLights[0].title} description={productHighLights[0].description} items={productHighLights[0].items} />
       <div class="img-container mobile">
-        <ImageParallax> <Image src={image1} alt="Parallax image 2" width={600} loading={"lazy"} /> </ImageParallax>
+        <ImageParallax> <Image src={image1} alt="Parallax image 2" width={1200} loading={"lazy"} /> </ImageParallax>
       </div>
 
       <StepInfo title={productHighLights[1].title} description={productHighLights[1].description} items={productHighLights[1].items} />
       <div class="img-container mobile">
-        <ImageParallax> <Image src={image2} alt="Parallax image 3" width={600} loading={"lazy"} /> </ImageParallax>
+        <ImageParallax> <Image src={image2} alt="Parallax image 3" width={1200} loading={"lazy"} /> </ImageParallax>
       </div>
 
       <StepInfo title={productHighLights[2].title} description={productHighLights[2].description} items={productHighLights[2].items} />
       <div class="img-container mobile">
-        <ImageParallax> <Image src={image3} alt="Parallax image 4" width={600} loading={"lazy"} /> </ImageParallax>
+        <ImageParallax> <Image src={image3} alt="Parallax image 4" width={1000} loading={"lazy"} /> </ImageParallax>
       </div>
 
       <StepInfo title={productHighLights[3].title} description={productHighLights[3].description} items={productHighLights[3].items} />
       <div class="img-container mobile">
-        <ImageParallax> <Image src={image4} alt="Parallax image 5" width={600} loading={"lazy"} /> </ImageParallax>
+        <ImageParallax> <Image src={image4} alt="Parallax image 5" width={1200} loading={"lazy"} /> </ImageParallax>
       </div>
     </div>
     <div class="right-side">
       <div class="img-container">
         <ImageParallax>
-          <Image src={image1} alt="Parallax image 2" width={500} loading={"lazy"} />
+          <Image src={image1} alt="Parallax image 2" width={1200} loading={"lazy"} />
         </ImageParallax>
       </div>
       <div class="img-container">
         <ImageParallax>
-          <Image src={image2} alt="Parallax image 3" width={500} loading={"lazy"} />
+          <Image src={image2} alt="Parallax image 3" width={1200} loading={"lazy"} />
         </ImageParallax>
       </div>
       <div class="img-container">
         <ImageParallax>
-          <Image src={image3} alt="Parallax image 4" width={500} loading={"lazy"} />
+          <Image src={image3} alt="Parallax image 4" width={1200} loading={"lazy"} />
         </ImageParallax>
       </div>
       <div class="img-container">
         <ImageParallax>
-          <Image src={image4} alt="Parallax image 5" width={500} loading={"lazy"} />
+          <Image src={image4} alt="Parallax image 5" width={1200} loading={"lazy"} />
         </ImageParallax>
       </div>
     </div>
   </div>
-  <p class="bottom-text-images">*Todas las imagenes fueron generadas con IA.</p>
+  <p class="bottom-text-images">*Todas las imágenes fueron generadas con IA.</p>
 </section>
 
 <style lang="scss">
@@ -100,15 +100,9 @@ const productHighLights = [
         display: grid;
         grid-template-rows: 1fr 1fr 1fr 1fr;
         border-radius: 10px;
-        background-image: linear-gradient(
-          to right top,
-          rgba(50, 50, 50, 0.8),
-          rgba(44, 44, 44, 0.8),
-          rgba(39, 39, 39, 0.8),
-          rgba(33, 33, 33, 0.8),
-          rgba(28, 28, 28, 0.8)
-        );
-        border: solid 1px #3a3a3a;
+        background-color: #f1f1f11c;
+        backdrop-filter: blur(5px);
+        border: 0.5px solid #f1f1f157;
         box-shadow:
           2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
           6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),

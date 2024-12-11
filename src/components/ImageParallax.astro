@@ -25,7 +25,7 @@ const { parallaxSpeed = 0.2 } = Astro.props;
 
   const initScrollEffect = () => {
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Apply the effect on page load
+    handleScroll();
   };
 
   document.addEventListener("astro:page-load", initScrollEffect);

@@ -6,6 +6,7 @@ import LogoLN from "../../assets/images/svg-ln.svg";
 import LogoIG from "../../assets/images/svg-ig.svg";
 import Boston from "../../assets/images/boston-cientific.png";
 import Microsoft from "../../assets/images/microsoft.png";
+import Link from "../../assets/images/link.svg";
 ---
 
 <div class="footer-container">
@@ -19,13 +20,6 @@ import Microsoft from "../../assets/images/microsoft.png";
         <p>escribinos</p>
         <a class="email-link" href="mailto:hola@wuru.ai" title="hola@wuru.ai" target="_blank" rel="noreferrer">hola@wuru.ai</a>
       </span>
-      <!-- <span class="top">
-        <p>suscribite</p>
-        <form class="subscribe-form">
-          <input type="email" class="subscribe-input" placeholder="email@address.com" required />
-          <button type="submit" class="subscribe-button">Suscribirme</button>
-        </form>
-      </span> -->
       <span class="bottom">
         <p>seguinos</p>
         <div class="footer-social-media-container">
@@ -37,13 +31,19 @@ import Microsoft from "../../assets/images/microsoft.png";
           </a>
         </div>
       </span>
+      <span class="documentos">
+        <a class="docs-link" href="http://docs.wuru.ai" target="_blank" title="WÚRU DOCS" rel="noopener noreferrer">
+          <p>wúru docs</p>
+          <Image src={Link} alt="logo IG" height={20} class="icon" loading={"lazy"} />
+        </a>
+      </span>
     </div>
   </div>
   <div class="partnership-container">
     <p>Nuestros socios estratégicos</p>
     <div class="images-container">
       <span class="boston"><Image src={Boston} height={75} alt="logo Boston Cientific" loading={"lazy"} /></span>
-      <span class="microsoft"> <Image src={Microsoft} height={30} alt="logo Microsoft Partner" loading={"lazy"} /></span>
+      <!-- <span class="microsoft"> <Image src={Microsoft} height={30} alt="logo Microsoft Partner" loading={"lazy"} /></span> -->
     </div>
   </div>
 </div>
@@ -101,15 +101,33 @@ import Microsoft from "../../assets/images/microsoft.png";
         display: flex;
         flex-direction: column;
         align-items: end;
-        gap: 24px;
-        color: #f1f1f1;
+        gap: 16px;
         font-size: 12px;
         letter-spacing: 1.1px;
         text-align: right;
+
         p {
           margin: 0;
           margin-bottom: 8px;
           text-transform: uppercase;
+          color: #f1f1f1;
+        }
+
+        .docs-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          transition: all ease-in-out 0.3s;
+          cursor: pointer;
+
+          p {
+            margin: 0;
+            white-space: nowrap;
+          }
+          &:hover {
+            opacity: 0.7;
+          }
         }
         .email-container {
           width: 100%;
@@ -214,6 +232,7 @@ import Microsoft from "../../assets/images/microsoft.png";
       align-items: center;
       top: 64px;
       left: 40%;
+      gap: 16px;
       p {
         margin: 0;
         margin-bottom: 16px;
@@ -289,6 +308,7 @@ import Microsoft from "../../assets/images/microsoft.png";
         position: unset !important;
         margin-top: 64px;
         align-items: flex-start;
+        gap: 8px;
       }
     }
     .line-container {
@@ -310,6 +330,7 @@ import Microsoft from "../../assets/images/microsoft.png";
         position: unset !important;
         margin-top: 64px;
         align-items: center;
+        gap: 0px;
       }
     }
   }

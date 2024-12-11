@@ -10,8 +10,8 @@ import QuaIcon from "../../assets/images/qua.png";
     <div class="card">
       <Image src={QuaIcon} alt="quotation mark" height={48} loading={"lazy"} class="quotation-marks" />
       <p class="text">
-        "Nunca estoy sentado, con Magic Calendar puedo ver qué está pasando en el quirófano rápidamente y en tiempo real. Ya no tengo que cambiarme
-        para entrar y consultar, puedo hacerlo desde el celular"
+        "Nunca estoy sentado, con <strong>Wúru</strong> puedo ver qué está pasando en el quirófano <strong>rápidamente y en tiempo real.</strong> Ya no
+        tengo que cambiarme para entrar y consultar, puedo hacerlo <strong>desde el celular</strong>"
       </p>
       <a href="https://www.linkedin.com/in/juan-molina-b243aa64" target="_blank" rel="noopener noreferrer" class="reference">
         <Image src={LogoLN} alt="logo X" height={14} loading={"lazy"} />
@@ -25,9 +25,9 @@ import QuaIcon from "../../assets/images/qua.png";
     <div class="card">
       <Image src={QuaIcon} alt="quotation mark" height={48} loading={"lazy"} class="quotation-marks" color="#0e76a8" />
       <p class="text">
-        “Magic Calendar me permite organizar mejor mi agenda. Puedo anotar mis cirugias en cualquier lugar, ver los procedimientos del resto del
-        servicio, saber mis días libres y cuándo tengo disponibilidad. Siento que estoy más respaldada, con un sistema atrás que me permite estar más
-        organizada y en contacto con las secretarias de cirugía ambulatoria."
+        “<strong>Wúru</strong> me permite <strong>organizar mejor mi agenda.</strong> Puedo anotar mis cirugias en cualquier lugar, ver los procedimientos
+        del resto del servicio, saber mis días libres y cuándo tengo disponibilidad. <strong>Siento que estoy más respaldada</strong>, con un sistema
+        atrás que me permite estar más organizada y en contacto con las secretarias de cirugía ambulatoria."
       </p>
       <a href="https://www.linkedin.com/in/griselda-alfonso-79776824/" target="_blank" rel="noopener noreferrer" class="reference">
         <Image src={LogoLN} alt="logo X" height={14} loading={"lazy"} />
@@ -41,8 +41,8 @@ import QuaIcon from "../../assets/images/qua.png";
     <div class="card">
       <Image src={QuaIcon} alt="quotation mark" height={48} loading={"lazy"} class="quotation-marks" color="#0e76a8" />
       <p class="text">
-        "Los indicadores son visualmente agradables pero lo más importante era redireccionar el esfuerzo de las personas volviendo su jornada más
-        eficiente."
+        "Los indicadores son visualmente agradables pero <strong>lo más importante era redireccionar el esfuerzo de las personas</strong> volviendo su
+        jornada más eficiente."
       </p>
       <a href="https://www.linkedin.com/in/adriana-contreras-80994577/" target="_blank" rel="noopener noreferrer" class="reference">
         <Image src={LogoLN} alt="logo X" height={14} loading={"lazy"} />
@@ -104,7 +104,13 @@ import QuaIcon from "../../assets/images/qua.png";
         line-height: 25px;
         letter-spacing: 1.1px;
         text-wrap: pretty;
+        font-weight: 200;
+        color: #f1f1f1ed;
         flex-grow: 1;
+        strong {
+          font-weight: 900;
+          color: #f1f1f1;
+        }
       }
       a {
         text-decoration: none;
