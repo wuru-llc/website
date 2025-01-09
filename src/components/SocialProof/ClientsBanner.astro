@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import AnimatedItem from "../AnimatedItem.astro";
 
 // Importa las imágenes directamente para que Astro las gestione
 import AunaLogo from "../../assets/images/auna-logo.png";
@@ -31,24 +30,22 @@ const logos = [
 ---
 
 <section class="social-proof-container" id="social-proof-container">
-  <AnimatedItem animation="translateY(5px)">
-    <div class="logo-track">
-      {
-        logos.map((logo) => (
-          <div class="logo-slide">
-            <Image class="client-logo" src={logo.src} alt={logo.alt} width={500} height={300} format="png" loading="lazy" />
-          </div>
-        ))
-      }
-      {
-        logos.map((logo) => (
-          <div class="logo-slide">
-            <Image class="client-logo" src={logo.src} alt={logo.alt} width={500} height={300} format="png" loading="lazy" />
-          </div>
-        ))
-      }
-    </div>
-  </AnimatedItem>
+  <div class="logo-track">
+    {
+      logos.map((logo) => (
+        <div class="logo-slide">
+          <Image class="client-logo" src={logo.src} alt={logo.alt} width={500} height={300} format="png" loading="lazy" />
+        </div>
+      ))
+    }
+    {
+      logos.map((logo) => (
+        <div class="logo-slide">
+          <Image class="client-logo" src={logo.src} alt={logo.alt} width={500} height={300} format="png" loading="lazy" />
+        </div>
+      ))
+    }
+  </div>
 </section>
 
 <style lang="scss">
@@ -72,10 +69,12 @@ const logos = [
     align-items: center;
     justify-content: center;
     margin: 0 32px;
+    flex: 0 0 auto;
   }
 
   .client-logo {
     height: 50px;
+    max-width: 100%;
     width: auto;
     opacity: 0.5;
     transition: opacity 0.5s ease;
