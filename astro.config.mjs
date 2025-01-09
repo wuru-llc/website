@@ -5,8 +5,4 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   site: "https://www.wuru.ai",
   base: "",
-  server: {
-    host: true,
-    port: 4321,
-  },
 });
