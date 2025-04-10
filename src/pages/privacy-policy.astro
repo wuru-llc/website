@@ -1,14 +1,473 @@
 ---
 import Layout from "../layouts/Base.astro";
-import Header from "../components/Header/Header.astro";
-import Footer from "../components/Footer/Footer.astro";
-import PrivacyPolicy from "../components/PrivacyPolicy.astro";
-import FloatingHeader from "../components/Header/FloatingHeader.astro";
+
+import { Image } from "astro:assets";
+import WuruLogo from "../assets/images/wuru-logo.svg";
 ---
 
-<Layout title="Wúru">
-  <Header />
-  <FloatingHeader />
-  <PrivacyPolicy />
-  <Footer />
+<Layout title="Wúru | Políticas de Privacidad">
+  <div class="privacy-policies-dim">
+    <div class="privacy-policies-modal">
+      <header>
+        <span class="titles">
+          <Image src={WuruLogo} alt="wuru-logo" height={28} class="wuru-logo" loading={"eager"} />
+          <h2 class="subtitle">Políticas de Privacidad</h2>
+        </span>
+
+        <p class="update-date">Última actualización: 26 de diciembre de 2024</p>
+        <a class="back-btn" id="back-btn" href="http://wuru.ai" target="_self" title="Volver a wúru" rel="noopener noreferrer"> ← </a>
+      </header>
+      <div class="content">
+        <section class="section" id="section-1">
+          <h3 class="section-title">1. Objeto de la Política de Privacidad.</h3>
+          <p class="section-content">
+            En esta política de privacidad (la “Política de Privacidad”), se refleja la manera en que 4 YODAS S.A. y sus afiliadas a nivel global
+            (referidas en forma conjunta como “Wúru” o “nosotros”), respetan la privacidad del usuario y la manera en la que la mantienen protegida.
+          </p>
+          <p class="section-content">
+            A los fines de la legislación de privacidad de datos aplicable, la afiliada de Wúru responsable de la recopilación y/o el tratamiento de
+            sus datos personales será la afiliada con la que el usuario contrata, o la afiliada ubicada en el país en el que el usuario reside, según
+            el caso. Si desea confirmar la entidad responsable, puede contactarse mediante alguna de las formas previstas en la Sección 15 del
+            presente.
+          </p>
+          <p class="section-content">
+            La Política de Privacidad se aplica a todo tratamiento de datos personales que realice Wúru; describe los tipos de información que Wúru
+            recopila del usuario o que el usuario puede llegar a proporcionarle a Wúru cuando utiliza sus aplicaciones móviles y/o navega por su sitio
+            web (“Servicios”).
+          </p>
+          <p class="section-content">
+            Nuestros Servicios no están intencionados para ser utilizados por niños, por lo que no pueden usar los mismos las personas que no alcancen
+            la mayoría de edad. Si eres menor, no puedes usar nuestros Servicios, y te pedimos que no proveas tus datos ya que resulta indispensable
+            contar con la mayoría de edad para prestar el consentimiento al tratamiento de los datos personales.
+          </p>
+          <p class="section-content">
+            En esta Política de Privacidad, también se detallan las políticas y los procedimientos de Wúru sobre la recopilación, el uso y la
+            divulgación de la información que recopila del usuario cuando accede o utiliza los Servicios. El usuario se encontrará con información
+            sobre sus derechos de privacidad y cómo la ley lo protege.
+          </p>
+          <p class="section-content">
+            Al usar los Servicios, el usuario está aceptando la recopilación y el uso de información de acuerdo con la Política de Privacidad.
+          </p>
+        </section>
+
+        <section class="section" id="section-2">
+          <h3 class="section-title">2. Forma de Recolección de Datos – ¿Cómo Wúru recolecta los datos personales?</h3>
+          <p class="section-content">
+            Wúru le informa que, en cumplimiento de la normativa vigente en materia de protección de datos de carácter personal, recolecta información
+            del usuario:
+          </p>
+          <ul class="list">
+            <li class="list-item">a) De manera automática cuando el usuario navega a través del sitio web wuru.ai (“Sitio”); y/o</li>
+            <li class="list-item">
+              b) De manera directa cuando el usuario completa el formulario del Sitio, intercambia correos electrónicos, mensajes de texto y otros
+              mensajes electrónicos con Wúru; y/o
+            </li>
+            <li class="list-item">c) Interactúa con la publicidad y aplicaciones en el Sitio.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="section-3">
+          <h3 class="section-title">3. Datos Personales Recogidos – ¿Qué datos personales recoge Wúru?</h3>
+          <p class="section-content">Wúru recolecta información cuando el usuario visita el Sitio.</p>
+          <p class="section-content">Los siguientes datos personales son los que se pueden llegar a recolectar:</p>
+          <ul class="list">
+            <li class="list-item">
+              a) Información por la cual el usuario puede ser personalmente identificado; tales como nombre completo, dirección de correo electrónico,
+              y/o empresa donde trabaja o por la cual quiere consultar.
+            </li>
+            <li class="list-item">
+              b) Otra información que no permite identificar al usuario; tales como fecha de nacimiento y/o IP del equipo utilizado para utilizar los
+              Servicios.
+            </li>
+          </ul>
+          <p class="section-content">
+            Por regla general, cuando para utilizar un servicio o acceder a cierto contenido se solicite algún dato personal, la entrega del mismo no
+            será obligatoria, con excepción de aquellos casos donde específicamente se indicara que es un dato requerido para la prestación del
+            servicio, en cuyo caso el usuario podrá optar libremente por no registrarse y/o no contratar los servicios.
+          </p>
+          <p class="section-content">
+            El usuario declara y garantiza que todos los datos facilitados son ciertos y correctos, y se compromete a mantenerlos actualizados.
+          </p>
+          <p class="section-content">
+            Los cambios podrán ser comunicados al Delegado de Protección de Datos identificado en la Sección 4 o por cualquier medio indicado en la
+            Sección 15 de la Política de Privacidad.
+          </p>
+          <p class="section-content">
+            Cualquier manifestación falsa o inexacta que se produzca como consecuencia de las informaciones y datos manifestados, así como los
+            perjuicios que tal información pudiera causar será responsabilidad del usuario.
+          </p>
+        </section>
+        <section class="section" id="section-4">
+          <h3 class="section-title">4. Finalidad – ¿Para qué utiliza Wúru los datos personales?</h3>
+          <p class="section-content">Los datos personales requeridos al usuario serán utilizados con las siguientes finalidades:</p>
+          <ul class="list">
+            <li class="list-item">
+              a) En caso de consultas de los servicios ofertados y/o publicitados a través del Sitio, para crear y mantener la comunicación con el
+              usuario y poder brindarle la información más completa posible respecto a los servicios ofrecidos por Wúru.
+            </li>
+            <li class="list-item">
+              b) Enviar boletines de noticias (newsletters), así como comunicaciones comerciales, promociones y/o publicidades de Wúru, ya sea de
+              manera ocasional o periódica.
+            </li>
+            <li class="list-item">c) Realizar una encuesta o administrar un concurso.</li>
+            <li class="list-item">d) Personalizar la experiencia del usuario, aumentando la capacidad de responder a las necesidades del mismo.</li>
+            <li class="list-item">
+              e) Mejorar el Sitio y la oferta de servicios de Wúru, basado en el legítimo interés de Wúru en mejorar constantemente sus productos y
+              servicios.
+            </li>
+            <li class="list-item">
+              f) Procesar transacciones y cumplir con las obligaciones legales a las que Wúru se encuentre sujeto, como por ejemplo, obligaciones de
+              carácter tributario.
+            </li>
+          </ul>
+          <p class="section-content">
+            Los datos objeto de tratamiento no serán procesados de manera incompatible con los fines para los que fueron recogidos o, con
+            posterioridad autorizados por el usuario.
+          </p>
+          <p class="section-content">
+            En caso de que los datos personales sean tratados para una finalidad distinta de la especificada inicialmente al recolectar dichos datos,
+            un análisis de compatibilidad será realizado por Wúru de conformidad con la normativa aplicable.
+          </p>
+        </section>
+
+        <section class="section" id="section-5">
+          <h3 class="section-title">5. Consentimiento del usuario al tratamiento de datos por parte de Wúru</h3>
+          <p class="section-content">
+            Al facilitar los datos de carácter personal a Wúru, el usuario declara aceptar plenamente y sin reservas el tratamiento de los mismos por
+            parte de Wúru de conformidad con lo dispuesto en esta Política de Privacidad.
+          </p>
+          <p class="section-content">
+            El usuario otorga por el presente su consentimiento libre, expreso e informado para que Wúru utilice los datos recabados con las
+            finalidades indicadas en la Sección 4 del presente.
+          </p>
+          <p class="section-content">
+            Se deja aclarado que, de acuerdo con lo establecido en la normativa aplicable, no será necesario el consentimiento del usuario para la
+            obtención de los datos personales cuando:
+          </p>
+          <ul class="list">
+            <li class="list-item">a) Los datos solicitados se obtengan de fuentes de acceso público irrestricto;</li>
+            <li class="list-item">
+              b) Se trate de listados cuyos datos se limiten a nombre, documento nacional de identidad, identificación tributaria o previsional,
+              ocupación, fecha de nacimiento y domicilio;
+            </li>
+            <li class="list-item">
+              c) Deriven de una relación contractual, científica o profesional del titular de los datos, y resulten necesarios para su desarrollo o
+              cumplimiento.
+            </li>
+          </ul>
+        </section>
+
+        <section class="section" id="section-6">
+          <h3 class="section-title">6. Conservación de los datos – ¿Por cuánto tiempo Wúru almacena los datos?</h3>
+          <p class="section-content">
+            Los datos serán destruidos o archivados cuando hayan dejado de ser estrictamente necesarios o pertinentes a los fines detallados en la
+            Sección 4 arriba.
+          </p>
+          <p class="section-content">
+            Wúru informa que retendrá por un período máximo de 24 meses la información imprescindible para identificar el origen de los datos
+            almacenados y el momento en que se inició la prestación del servicio.
+          </p>
+        </section>
+        <section class="section" id="section-7">
+          <h3 class="section-title">7. Confidencialidad y Transferencia Internacional – ¿Wúru revela los datos a terceros?</h3>
+          <p class="section-content">
+            Wúru mantendrá los datos personales recabados bajo confidencia y reserva, y no usará los mismos para otros fines que no sean los
+            establecidos en la Sección 4 de la presente. Wúru requiere la firma de convenios de confidencialidad y tratamiento de datos personales por
+            parte de sus empleados y terceros que presten servicios que accedan al contenido de las bases de datos (o incluye dichas obligaciones
+            dentro de los convenios de servicios que firma con tales prestadores conforme se indica en el próximo párrafo).
+          </p>
+          <p class="section-content">
+            Los datos personales del usuario recabados por Wúru no se cederán, venderán, intercambiarán, transmitirán y/o comunicarán a ningún tercero
+            ajeno a Wúru sin el consentimiento del usuario, salvo obligación legal y/o con el propósito de prestar los servicios al usuario. Esto no
+            incluye a ciertos empleados y proveedores de servicios que permiten a Wúru mantener operativo el Sitio y/o la aplicación móvil, dar
+            cumplimiento a las finalidades establecidas en la Sección 4 de la presente y/o contestar consultas al usuario, los que han asumido la
+            obligación de mantener la confidencialidad de los datos suministrados y comprometido el cumplimiento de la normativa aplicable en materia
+            de protección de datos personales, en el momento de su contratación. Los contratos con los prestadores de servicios estipulan el objeto,
+            alcance, contenido, duración, naturaleza y finalidad del tratamiento de datos, el tipo de datos personales, las categorías de titulares de
+            los datos y las obligaciones y responsabilidades de Wúru y de los terceros contratados.
+          </p>
+          <p class="section-content">En particular:</p>
+          <ul class="list">
+            <li class="list-item">
+              a) Wúru podrá compartir la información personal suministrada con las empresas controlantes, afiliadas, subsidiarias, empresas vinculadas
+              y/o los intermediarios relacionados con Wúru.
+            </li>
+            <li class="list-item">
+              b) Wúru podrá compartir cierta información personal suministrada por el usuario internamente dentro de Wúru, con ciertos departamentos,
+              como por ejemplo, administración, marketing o IT.
+            </li>
+            <li class="list-item">
+              c) WURU transfiere, procesa y almacena los datos de sus clientes hacia la nube AWS adoptando las recomendaciones sobre protección de
+              datos provistas por AWS, implementando cifrado del lado del servidor (server side encryption) y en tránsito HTTPS.
+            </li>
+          </ul>
+          <p class="section-content">
+            Por último, el usuario debe saber que Wúru podrá (y que Wúru se reserva el derecho de) revelar su información en los siguientes casos:
+          </p>
+          <ul class="list">
+            <li class="list-item">a) Si fuese requerida por una autoridad judicial o administrativa;</li>
+            <li class="list-item">b) Si fuese necesario a fin de ejercer sus derechos bajo esta Política de Privacidad;</li>
+            <li class="list-item">c) En caso de ser necesario para cumplir con la ley;</li>
+            <li class="list-item">d) Si dichos datos pudieran resultar de utilidad para la protección de derechos de terceros;</li>
+            <li class="list-item">
+              e) Cuando fuese útil para la protección de los derechos, propiedad o seguridad de Wúru, sus controlantes, controladas, vinculadas,
+              directores, gerentes, empleados, los usuarios o el público en general; y
+            </li>
+            <li class="list-item">f) Cuando medien razones fundadas relativas a la seguridad pública, la defensa nacional o la salud pública.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="section-8">
+          <h3 class="section-title">8. Medidas de seguridad – ¿Cómo vela Wúru por la seguridad de los datos?</h3>
+          <p class="section-content">
+            Wúru declara su intención de adoptar las medidas de índole técnica y organizativas necesarias para garantizar la seguridad, integridad y
+            confidencialidad de los datos conforme a lo dispuesto por las normativas aplicables, de modo de evitar su adulteración, pérdida, consulta
+            o tratamiento no autorizado.
+          </p>
+          <p class="section-content">
+            Wúru mantiene medidas de seguridad físicas, electrónicas y de procedimiento para cumplir con los estándares federales para proteger la
+            información de salud, incluido el almacenamiento de toda la información que nos proporciona en nuestros servidores que operan sobre la
+            nube AWS respetando el modelo de responsabilidad compartida que cumple con los estándares HIPAA¹ y el Reglamento General de Protección de
+            Datos².
+          </p>
+          <p class="section-content">
+            Wúru no garantiza privacidad absoluta en la utilización del Sitio, ya que no debe descartarse la posibilidad de que terceros no
+            autorizados puedan tener conocimiento de la misma. El usuario reconoce que los medios técnicos existentes que brindan seguridad no son
+            inexpugnables y que aun cuando se adopten todos los recaudos razonables de seguridad, es posible sufrir manipulaciones, destrucción y/o
+            pérdida de información. En caso de detectarse un incidente de seguridad y que éste implique un riesgo significativo para el titular del
+            dato, se comunicará sin dilación tal evento a la autoridad de contralor competente, junto con las medidas correctivas y paliativas
+            implementadas y/o a implementar.
+          </p>
+          <p class="section-content">
+            Wúru no se responsabiliza de la pérdida o el borrado de los datos por parte de los usuarios. Asimismo, Wúru no acepta responsabilidad
+            alguna por los posibles daños causado por virus informáticos.
+          </p>
+          <p class="section-content">
+            Por último, el usuario también deberá tomar medidas para proteger su información. Wúru le insiste en que tome toda precaución para
+            proteger su información personal mientras está en Internet.
+          </p>
+        </section>
+
+        <section class="section" id="section-9">
+          <h3 class="section-title">9. Derechos de privacidad del usuario – ¿Qué derechos tiene el usuario como titular de los datos?</h3>
+          <p class="section-content">
+            El usuario es el titular de sus datos personales y es quien tiene el control de los mismos, es por eso que para acceder a ellos y realizar
+            modificaciones, correcciones y/o eliminaciones debe enviar un email dirigido a dpo@wuru.ai, o mediante comunicación escrita dirigida al
+            Delegado de Protección de Datos en la dirección especificada en la Sección 15, o bien por cualquiera de los métodos previstos en la
+            normativa aplicable referenciada arriba. Recibido el requerimiento, se le dará curso inmediato al mismo para poder asistir al usuario lo
+            mejor posible.
+          </p>
+          <p class="section-content">
+            En cualquier momento podrá el usuario ejercitar los derechos de acceso, rectificación, cancelación, oposición, limitación de tratamiento,
+            portabilidad, confidencialidad y supresión respecto de sus datos personales.
+          </p>
+          <p class="section-content">
+            Para ello, deberá acompañar a la comunicación fotocopia del DNI, pasaporte u otro documento válido que identifique al titular del derecho,
+            salvo que se use firma electrónica identificativa, en cuyo caso se eximirá la presentación de la documentación identificativa.
+          </p>
+          <p class="section-content">
+            La supresión de algunos datos no procederá cuando pudiese causar perjuicios a derechos o intereses legítimos de terceros, o cuando
+            existiera una obligación legal de conservar los datos.
+          </p>
+        </section>
+
+        <section class="section" id="section-10">
+          <h3 class="section-title">10. Designación de un Delegado de Protección de Datos</h3>
+          <p class="section-content">
+            A fin de mantener un diálogo transparente y adecuado, Wúru ha designado delegado de la aplicación y control de la presente Política de
+            Privacidad y la relación con la autoridad de aplicación, al Sr. Matias Sosa a quien se puede contactar mediante los siguientes medios:
+            <ul class="list">
+              <li class="list-item">- Email: matias@wuru.ai</li>
+              <li class="list-item">- Teléfono: +54 911 5927 7352.</li>
+            </ul>
+          </p>
+          <p class="section-content">
+            Por cualquier duda, consulta o para ejercer cualquier derecho respecto de sus datos, animamos al usuario a contactarse con el delegado
+            referido en el párrafo anterior.
+          </p>
+        </section>
+
+        <section class="section" id="section-11">
+          <h3 class="section-title">11. Capacitación – ¿Nos capacitamos?</h3>
+          <p class="section-content">
+            El personal de Wúru cuyas funciones están relacionadas con el tratamiento de datos personales es capacitado a fin de garantizar una mejor
+            protección de los datos personales y los derechos de sus titulares:
+          </p>
+          <ul class="list">
+            <li class="list-item">
+              – Definimos el enfoque de mínimo acceso y manejo de datos. Limitamos el acceso interno según sea necesario, todos los empleados están
+              capacitados en el manejo adecuado de datos para garantizar que cumplan con nuestro estricto compromiso con la privacidad y la seguridad
+              de los datos.
+            </li>
+            <li class="list-item">
+              – Contamos con un programa interno de entrenamiento sobre mejores prácticas y el correcto uso de las herramientas internas, para todos
+              los empleados involucrados en tareas relacionadas al tratamiento de datos.
+            </li>
+          </ul>
+        </section>
+
+        <section class="section" id="section-12">
+          <h3 class="section-title">12. Enlaces a terceros – ¿El Sitio o la aplicación móvil contiene enlaces a otros sitios?</h3>
+          <p class="section-content">
+            El Sitio y/o la aplicación móvil puede contener enlaces a sitios de terceros, con o sin contenido publicitario, cuyas políticas de
+            privacidad son ajenas a Wúru. Los sitios enlazados no tienen relación con Wúru y, su existencia de ninguna manera presupone que exista
+            alguna clase de sugerencia, invitación o recomendación para la visita de los lugares de destino o ninguna clase de vínculo o asociación
+            entre Wúru y tales sitios. Wúru no se responsabiliza ni responderá por los contenidos, uso y actividades de estos sitios web enlazados, ni
+            por los daños y perjuicios, ya sean actuales o eventuales, materiales o morales, directos o indirectos, que sufrieren los usuarios y que
+            se derivaran de la información contenida en tales sitios o de la relación que los usuarios pudieren entablar con terceros cuyos servicios
+            hayan sido publicados en el Sitio y/o la aplicación móvil. Sin perjuicio de lo anterior, cualquier comentario sobre estos sitios web
+            enlazados será de utilidad para Wúru a fin de mejorar los servicios y/o asegurar la integridad del Sitio y/o la aplicación móvil. Wúru se
+            compromete a hacer lo posible por evitar la existencia en su Sitio y/o la aplicación móvil de enlaces a sitios de contenido ilegal.
+          </p>
+        </section>
+
+        <section class="section" id="section-13">
+          <h3 class="section-title">13. Aceptación</h3>
+          <p class="section-content">
+            El uso del Sitio por el usuario implica el conocimiento y plena aceptación de la Política de Privacidad de Wúru y los Términos y
+            Condiciones de Wúru.
+          </p>
+          <p class="section-content">
+            Asimismo, el usuario reconoce que los datos requeridos por Wúru son necesarios, adecuados y no excesivos para realizar las finalidades
+            expresadas en la Sección 4 de la Política de Privacidad, las que serían de imposible cumplimiento si dichos datos no son aportados.
+          </p>
+        </section>
+
+        <section class="section" id="section-14">
+          <h3 class="section-title">14. Comunicación con el usuario – ¿Cómo puede el usuario contactarse con Wúru?</h3>
+          <p class="section-content">
+            En caso de tener alguna consulta sobre la Política de Privacidad, el usuario puede contactarse con Wúru a través de los siguientes medios:
+          </p>
+          <ul class="list">
+            <li class="list-item">
+              a) Comunicación escrita dirigida a la sede ubicada en: Gorriti 196, Puerto Norte Cubo , Piso 3 Of. A C.P: 2013 – Rosario Santa Fe –
+              Argentina; y/o
+            </li>
+            <li class="list-item">b) Llamada telefónica al siguiente número: +5491167915993; y/o</li>
+            <li class="list-item">c) Correo electrónico a la siguiente dirección: contacto@wuru.ai.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="section-15">
+          <h3 class="section-title">15. Modificaciones – ¿Es esta la versión más actual?</h3>
+          <p class="section-content">Esta es la versión vigente de la Política de Privacidad de Wúru, actualizada el 30 de diciembre de 2022.</p>
+          <p class="section-content">
+            Wúru podrá en cualquier momento y sin necesidad de previo aviso modificar esta Política de Privacidad. Tales modificaciones serán
+            operativas a partir de su publicación en el Sitio o desde que sean notificadas a los usuarios por cualquier medio, lo que ocurra primero.
+            El usuario deberá mantenerse informado en cuanto a los términos aquí incluidos ingresando en forma periódica.
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
 </Layout>
+
+<style lang="scss">
+  h1,
+  h2,
+  h3,
+  p,
+  ul,
+  li {
+    margin: 0;
+  }
+  body {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .privacy-policies-dim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+    .privacy-policies-modal {
+      width: 70vw;
+      max-width: 1200px;
+      max-height: 80vh;
+      min-height: 500px;
+      border-radius: 10px;
+      background-color: #ffffff1e;
+      border: 0.5px solid #f1f1f157;
+      box-shadow:
+        2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
+        6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
+        10.4px 8.7px 4.6px rgba(0, 0, 0, 0.038),
+        15.7px 13.1px 6.9px rgba(0, 0, 0, 0.044),
+        22.7px 18.9px 10px rgba(0, 0, 0, 0.05),
+        32.1px 26.8px 14.2px rgba(0, 0, 0, 0.056),
+        45.5px 37.9px 20.1px rgba(0, 0, 0, 0.062),
+        66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
+        101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
+        181px 151px 80px rgba(0, 0, 0, 0.1);
+      color: #f1f1f1;
+      height: 100%;
+      padding: 48px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      backdrop-filter: blur(1px);
+
+      header {
+        position: relative;
+        margin-bottom: 24px;
+
+        .titles {
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+          gap: 16px;
+          margin-bottom: 12px;
+        }
+        .update-date {
+          font-size: 14px;
+          text-align: center;
+          opacity: 0.5;
+        }
+        .back-btn {
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: none;
+          border: none;
+          color: #f1f1f1;
+          font-size: 32px;
+          cursor: pointer;
+        }
+      }
+      .content {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        height: 100%;
+        .section {
+          margin-bottom: 32px;
+        }
+        .section-content {
+          margin-bottom: 12px;
+        }
+        .section-title {
+          font-size: 20px;
+          margin-bottom: 12px;
+        }
+        p {
+          line-height: 22px;
+          font-size: 16px;
+        }
+        .list {
+          margin-bottom: 12px;
+          font-size: 16px;
+
+          .list-item {
+            list-style: none;
+            line-height: 22px;
+          }
+        }
+      }
+    }
+  }
+</style>
