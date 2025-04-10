@@ -15,7 +15,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
         </span>
 
         <p class="update-date">Última actualización: 26 de diciembre de 2024</p>
-        <a class="back-btn" id="back-btn" href="http://wuru.ai" target="_self" title="Volver a wúru" rel="noopener noreferrer"> ← </a>
+        <a class="back-btn" id="back-btn" href="/" target="_self" title="Volver a wúru" rel="noopener noreferrer"> ← </a>
       </header>
       <div class="content">
         <section class="section" id="section-1">
@@ -466,6 +466,79 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
             list-style: none;
             line-height: 22px;
           }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .privacy-policies-modal {
+      width: 90vw !important;
+      max-height: 90vh !important;
+      padding: 24px !important;
+      backdrop-filter: blur(0.6px) !important;
+      -webkit-backdrop-filter: blur(0.6px);
+      header {
+        .titles {
+          gap: 12px !important;
+
+          .wuru-logo {
+            width: 80px !important;
+          }
+          h2 {
+            font-size: 20px !important;
+          }
+        }
+        .update-date {
+          font-size: 12px !important;
+        }
+        .back-btn {
+          font-size: 24px !important;
+        }
+      }
+      .content {
+        .section-title {
+          font-size: 16px !important;
+        }
+
+        p {
+          line-height: 16px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .privacy-policies-modal {
+      width: 100vw !important;
+      max-height: 100vh !important;
+      border-radius: unset !important;
+      border: unset !important;
+      padding: 12px !important;
+      background-color: #ffffff19 !important;
+      box-shadow: unset !important;
+      backdrop-filter: blur(0.6px) !important;
+      -webkit-backdrop-filter: blur(0.6px);
+      header {
+        .titles {
+          .wuru-logo {
+            width: 80px !important;
+          }
+          h2 {
+            font-size: 16px !important;
+          }
+        }
+        .update-date {
+          font-size: 12px !important;
+        }
+      }
+      .content {
+        .section-title {
+          font-size: 14px !important;
+        }
+
+        p {
+          line-height: 12px;
+          font-size: 14px;
         }
       }
     }

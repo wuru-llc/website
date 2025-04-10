@@ -38,10 +38,10 @@ import Policy from "../../assets/images/privacy-policy-icon.svg";
           <Image src={Link} alt="logo Link" height={20} class="icon" loading={"lazy"} />
         </a>
       </span>
-      <span class="documentos">
+      <span class="policy">
         <a class="docs-link" href="/privacy-policy" title="WÚRU PRIVACY POLICY" rel="noopener noreferrer">
           <p>Políticas de privacidad</p>
-          <Image src={Policy} alt="logo IG" height={16} class="icon" loading={"lazy"} />
+          <Image src={Policy} alt="logo policy" height={20} class="icon" loading={"lazy"} />
         </a>
       </span>
     </div>
@@ -363,6 +363,10 @@ import Policy from "../../assets/images/privacy-policy-icon.svg";
               max-width: unset !important;
             }
           }
+        }
+        .policy p {
+          white-space: unset !important;
+          min-width: 150px;
         }
       }
       .partnership-container {
