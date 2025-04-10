@@ -7,6 +7,7 @@ import LogoIG from "../../assets/images/svg-ig.svg";
 import Boston from "../../assets/images/boston-cientific.png";
 import Microsoft from "../../assets/images/microsoft.png";
 import Link from "../../assets/images/link.svg";
+import Policy from "../../assets/images/privacy-policy-icon.svg";
 ---
 
 <div class="footer-container">
@@ -34,7 +35,13 @@ import Link from "../../assets/images/link.svg";
       <span class="documentos">
         <a class="docs-link" href="http://docs.wuru.ai" target="_blank" title="WÚRU DOCS" rel="noopener noreferrer">
           <p>wúru docs</p>
-          <Image src={Link} alt="logo IG" height={20} class="icon" loading={"lazy"} />
+          <Image src={Link} alt="logo Link" height={20} class="icon" loading={"lazy"} />
+        </a>
+      </span>
+      <span class="policy">
+        <a class="docs-link" href="/privacy-policy" title="WÚRU PRIVACY POLICY" rel="noopener noreferrer">
+          <p>Políticas de privacidad</p>
+          <Image src={Policy} alt="logo policy" height={20} class="icon" loading={"lazy"} />
         </a>
       </span>
     </div>
@@ -43,7 +50,7 @@ import Link from "../../assets/images/link.svg";
     <p>Nuestros socios estratégicos</p>
     <div class="images-container">
       <span class="boston"><Image src={Boston} height={75} alt="logo Boston Cientific" loading={"lazy"} /></span>
-      <!-- <span class="microsoft"> <Image src={Microsoft} height={30} alt="logo Microsoft Partner" loading={"lazy"} /></span> -->
+      <span class="microsoft"> <Image src={Microsoft} height={30} alt="logo Microsoft Partner" loading={"lazy"} /></span>
     </div>
   </div>
 </div>
@@ -356,6 +363,10 @@ import Link from "../../assets/images/link.svg";
               max-width: unset !important;
             }
           }
+        }
+        .policy p {
+          white-space: unset !important;
+          min-width: 150px;
         }
       }
       .partnership-container {
