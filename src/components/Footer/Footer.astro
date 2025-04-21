@@ -8,6 +8,7 @@ import Boston from "../../assets/images/boston-cientific.png";
 import Microsoft from "../../assets/images/microsoft.png";
 import Link from "../../assets/images/link.svg";
 import Policy from "../../assets/images/privacy-policy-icon.svg";
+import LogoNews from "../../assets/images/news.svg";
 ---
 
 <div class="footer-container">
@@ -29,6 +30,9 @@ import Policy from "../../assets/images/privacy-policy-icon.svg";
           </a>
           <a href="http://www.instagram.com/somoswuru" target="_blank" title="Instagram" rel="noopener noreferrer">
             <Image src={LogoIG} alt="logo IG" height={20} class="icon" style="animation-delay: 0.4s;" loading={"lazy"} />
+          </a>
+          <a href="/newsletter-signup" target="_blank" title="Newsletter" rel="noopener noreferrer">
+            <Image src={LogoNews} alt="logo newsletter" height={20} class="icon" style="animation-delay: 0.6s;" loading={"eager"} />
           </a>
         </div>
       </span>
@@ -241,6 +245,7 @@ import Policy from "../../assets/images/privacy-policy-icon.svg";
       left: 0;
       right: 0;
       gap: 16px;
+      z-index: -1;
       p {
         margin: 0;
         margin-bottom: 16px;

@@ -40,10 +40,10 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
         messageBox.textContent = "✓ ¡Suscripción exitosa!";
         messageBox.className = "form-message success visible";
         //redirect
-        setTimeout(() => {
-          form.reset();
-          window.location.href = "/";
-        }, 1500);
+        // setTimeout(() => {
+        //   form.reset();
+        //   window.location.href = "/";
+        // }, 1500);
       } catch (error) {
         //error
         console.error("Error al enviar a Intercom:", error);
@@ -64,25 +64,24 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
           <h2 class="subtitle">Newsletter</h2>
         </span>
         <a class="back-btn" id="back-btn" href="/" target="_self" title="Volver a wúru" rel="noopener noreferrer"> ← </a>
+        <p class="sub-title">¡Unite a nuestra comunidad!</p>
       </header>
       <div class="content">
         <section class="section" id="section-newsletter">
           <form action="contact-form" class="form-newsletter" id="contact-form">
-            <h3 class="section-title">¡Unite a nuestra comunidad!</h3>
-            <p class="section-description">Recibe noticias periódicas de WÚRU y mantente al tanto de nuestras novedades.</p>
-            <p class="section-description">
+            <p class="section-description">Recibe noticias periódicas y mantente al tanto de nuestras novedades.</p>
+            <p class="section-description" style="margin-bottom: 16px;">
               Al registrarte, aceptas recibir correos electrónicos de WÚRU. Puedes darte de baja en cualquier momento.
             </p>
-            <br />
 
-            <label for="name">Nombre y apellido <span style="font-size: 14px;">*</span></label>
-            <input type="text" id="name" name="name" placeholder="Nombre y apellido" required />
+            <label for="name">Nombre y apellido <span style="font-size: 12px; opacity: 0.4; margin-left: 4px;">(obligatorio)</span></label>
+            <input type="text" id="name" name="name" placeholder="Luciano Tourn" required />
 
-            <label for="email">Correo electrónico <span style="font-size: 14px;">*</span></label>
-            <input type="email" id="email" name="email" placeholder="Correo electronico" required />
+            <label for="email">Correo electrónico <span style="font-size: 12px; opacity: 0.4; margin-left: 4px;">(obligatorio)</span></label>
+            <input type="email" id="email" name="email" placeholder="Luciano@wuru.ai" required />
 
             <label for="institution">Institución</label>
-            <input type="text" id="institution" name="institution" placeholder="Institución" />
+            <input type="text" id="institution" name="institution" placeholder="Clínica wúru" />
 
             <label for="more-info">Comentarios | notas</label>
             <textarea id="more-info" name="more-info" placeholder="¿Querés decirnos algo más?" class="form-text-area"></textarea>
@@ -104,7 +103,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
 <style lang="scss">
   @keyframes submit-btn-animation {
     0% {
-      transform: translateY(-20);
+      transform: translateY(-20px);
       opacity: 0;
     }
     50% {
@@ -144,7 +143,6 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
       width: 70vw;
       max-width: 500px;
       max-height: 900px;
-      min-height: 800px;
       border-radius: 10px;
       background-color: #ffffff1e;
       border: 0.5px solid #f1f1f157;
@@ -177,7 +175,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
           gap: 16px;
           margin-bottom: 12px;
         }
-        .update-date {
+        .sub-title {
           font-size: 14px;
           text-align: center;
           opacity: 0.5;
@@ -226,15 +224,16 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
           input {
             border: none;
             background-color: #ffffff1e;
-            padding: 8px 16px;
-            height: 32px;
+            padding: 6px 16px;
+            height: 28px;
             font-size: 14px;
-            border-radius: 16px;
+            border-radius: 14px;
             color: #f1f1f1;
 
             &::placeholder {
               color: #f1f1f1;
-              opacity: 0.5;
+              opacity: 0.3;
+              font-style: italic;
             }
             &:focus {
               outline: none;
@@ -246,7 +245,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
             resize: none;
             border: none;
             background-color: #ffffff1e;
-            padding: 8px 16px;
+            padding: 6px 16px;
             font-size: 14px;
             border-radius: 16px;
             min-height: 80px;
@@ -257,8 +256,9 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
 
             &::placeholder {
               color: #f1f1f1;
-              opacity: 0.5;
+              opacity: 0.3;
               font-size: 14px;
+              font-style: italic;
               font-family:
                 system-ui,
                 -apple-system,
@@ -281,7 +281,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
           label {
             font-size: 12px;
             color: #f1f1f1;
-            opacity: 0.7;
+            opacity: 0.8;
             margin-bottom: -8px;
             margin-left: 16px;
           }
@@ -316,13 +316,19 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
             display: flex;
             align-items: center;
             justify-content: center;
+            position: absolute;
+            bottom: 32px;
+            left: 0;
+            right: 0;
+            padding-left: 48px;
+            padding-right: 48px;
             .form-message {
               margin-top: 16px;
               font-size: 14px;
               opacity: 0;
               animation: submit-btn-animation 1s ease forwards;
               color: white;
-              padding: 4px 8px;
+              padding: 8px 16px;
               border-radius: 4px;
               width: 100%;
               text-align: center;
