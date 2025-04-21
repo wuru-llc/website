@@ -1,0 +1,428 @@
+---
+import Layout from "../layouts/Base.astro";
+
+import { Image } from "astro:assets";
+import WuruLogo from "../assets/images/wuru-logo.svg";
+---
+
+<script type="module">
+  window.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("contact-form");
+    const submitBtn = document.querySelector(".submit-btn");
+    const messageBox = document.getElementById("form-message");
+
+    if (!form || !submitBtn || !messageBox) return;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+
+      const formData = new FormData(e.target);
+      const name = formData.get("name");
+      const email = formData.get("email");
+      const institution = formData.get("institution");
+      const moreInfo = formData.get("more-info");
+
+      try {
+        if (typeof window.Intercom === "function") {
+          window.Intercom("update", {
+            name,
+            email,
+            custom_attributes: {
+              institution,
+              moreInfo,
+            },
+          });
+        }
+
+        // success
+        messageBox.textContent = "✓ ¡Suscripción exitosa!";
+        messageBox.className = "form-message success visible";
+        //redirect
+        setTimeout(() => {
+          form.reset();
+          window.location.href = "/";
+        }, 1500);
+      } catch (error) {
+        //error
+        console.error("Error al enviar a Intercom:", error);
+        messageBox.textContent = "✕ Ocurrió un error. Intentalo de nuevo.";
+        messageBox.className = "form-message error visible";
+        submitBtn.disabled = false;
+      }
+    });
+  });
+</script>
+
+<Layout title="Wúru | Newsletter">
+  <div class="newsletter-form-dim">
+    <div class="newsletter-form-modal">
+      <header>
+        <span class="titles">
+          <Image src={WuruLogo} alt="wuru-logo" height={28} class="wuru-logo" loading={"eager"} />
+          <h2 class="subtitle">Newsletter</h2>
+        </span>
+        <a class="back-btn" id="back-btn" href="/" target="_self" title="Volver a wúru" rel="noopener noreferrer"> ← </a>
+      </header>
+      <div class="content">
+        <section class="section" id="section-newsletter">
+          <form action="contact-form" class="form-newsletter" id="contact-form">
+            <h3 class="section-title">¡Unite a nuestra comunidad!</h3>
+            <p class="section-description">Recibe noticias periódicas de WÚRU y mantente al tanto de nuestras novedades.</p>
+            <p class="section-description">
+              Al registrarte, aceptas recibir correos electrónicos de WÚRU. Puedes darte de baja en cualquier momento.
+            </p>
+            <br />
+
+            <label for="name">Nombre y apellido <span style="font-size: 14px;">*</span></label>
+            <input type="text" id="name" name="name" placeholder="Nombre y apellido" required />
+
+            <label for="email">Correo electrónico <span style="font-size: 14px;">*</span></label>
+            <input type="email" id="email" name="email" placeholder="Correo electronico" required />
+
+            <label for="institution">Institución</label>
+            <input type="text" id="institution" name="institution" placeholder="Institución" />
+
+            <label for="more-info">Comentarios | notas</label>
+            <textarea id="more-info" name="more-info" placeholder="¿Querés decirnos algo más?" class="form-text-area"></textarea>
+
+            <span class="message-container">
+              <div id="form-message" class="form-message hidden"></div>
+            </span>
+
+            <div class="form-footer">
+              <button type="submit" class="submit-btn">Suscribirme</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style lang="scss">
+  @keyframes submit-btn-animation {
+    0% {
+      transform: translateY(-20);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(5px);
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  ul,
+  li {
+    margin: 0;
+  }
+  body {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .newsletter-form-dim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+    .newsletter-form-modal {
+      width: 70vw;
+      max-width: 500px;
+      max-height: 800px;
+      min-height: 500px;
+      border-radius: 10px;
+      background-color: #ffffff1e;
+      border: 0.5px solid #f1f1f157;
+      box-shadow:
+        2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
+        6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
+        10.4px 8.7px 4.6px rgba(0, 0, 0, 0.038),
+        15.7px 13.1px 6.9px rgba(0, 0, 0, 0.044),
+        22.7px 18.9px 10px rgba(0, 0, 0, 0.05),
+        32.1px 26.8px 14.2px rgba(0, 0, 0, 0.056),
+        45.5px 37.9px 20.1px rgba(0, 0, 0, 0.062),
+        66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
+        101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
+        181px 151px 80px rgba(0, 0, 0, 0.1);
+      color: #f1f1f1;
+      height: 100%;
+      padding: 48px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      backdrop-filter: blur(1px);
+
+      header {
+        position: relative;
+        margin-bottom: 24px;
+
+        .titles {
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+          gap: 16px;
+          margin-bottom: 12px;
+        }
+        .update-date {
+          font-size: 14px;
+          text-align: center;
+          opacity: 0.5;
+        }
+        .back-btn {
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: none;
+          border: none;
+          color: #f1f1f1;
+          font-size: 32px;
+          cursor: pointer;
+        }
+      }
+      .content {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        height: 100%;
+        .section {
+          height: 100%;
+        }
+        .section-title {
+          font-size: 20px;
+          margin-bottom: 12px;
+        }
+        p {
+          line-height: 22px;
+          font-size: 16px;
+        }
+        .list {
+          margin-bottom: 12px;
+          font-size: 16px;
+
+          .list-item {
+            list-style: none;
+            line-height: 22px;
+          }
+        }
+        .form-newsletter {
+          color: #f1f1f1;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          height: 100%;
+          input {
+            border: none;
+            background-color: #ffffff1e;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 4px;
+            color: #f1f1f1;
+
+            &::placeholder {
+              color: #f1f1f1;
+              opacity: 0.5;
+            }
+            &:focus {
+              outline: none;
+              border: none;
+              background-color: #ffffff67;
+            }
+          }
+          .form-text-area {
+            resize: none;
+            border: none;
+            background-color: #ffffff1e;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 4px;
+            min-height: 80px;
+            max-height: 150px;
+            field-sizing: content;
+            line-height: 1.3rem;
+            color: #f1f1f1;
+
+            &::placeholder {
+              color: #f1f1f1;
+              opacity: 0.5;
+              font-size: 14px;
+              font-family:
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Oxygen,
+                Ubuntu,
+                Cantarell,
+                "Open Sans",
+                "Helvetica Neue",
+                sans-serif;
+            }
+            &:focus {
+              outline: none;
+              border: none;
+              background-color: #ffffff67;
+            }
+          }
+          label {
+            font-size: 12px;
+            color: #f1f1f1;
+            opacity: 0.7;
+            margin-bottom: -8px;
+          }
+          .form-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            height: 100%;
+
+            .submit-btn {
+              background-color: #f1f1f1;
+              padding: 16px 24px;
+              border: none;
+              border-radius: 4px;
+              font-size: 20px;
+              font-weight: 900;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              &:hover {
+                background-color: #f1f1f1;
+                opacity: 0.8;
+              }
+              &[disabled] {
+                background-color: #f1f1f1;
+                opacity: 0.2;
+                cursor: not-allowed;
+              }
+            }
+          }
+          .message-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .form-message {
+              margin-top: 16px;
+              font-size: 14px;
+              opacity: 0;
+              animation: submit-btn-animation 1s ease forwards;
+              color: white;
+              padding: 4px 8px;
+              border-radius: 4px;
+              width: 100%;
+              text-align: center;
+
+              &.success {
+                background-color: #39974fb8;
+              }
+              &.error {
+                background-color: #b0404bc8;
+              }
+              &.visible {
+                opacity: 1;
+              }
+              &.hidden {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .newsletter-form-modal {
+      width: 90vw !important;
+      max-height: 700px !important;
+      padding: 24px !important;
+      backdrop-filter: blur(0.6px) !important;
+      -webkit-backdrop-filter: blur(0.6px);
+      header {
+        .titles {
+          gap: 12px !important;
+          djkh .wuru-logo {
+            width: 80px !important;
+          }
+          h2 {
+            font-size: 20px !important;
+          }
+        }
+        .update-date {
+          font-size: 12px !important;
+        }
+        .back-btn {
+          font-size: 24px !important;
+        }
+      }
+      .content {
+        .section-title {
+          font-size: 16px !important;
+        }
+
+        p {
+          line-height: 16px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .newsletter-form-modal {
+      width: 100vw !important;
+      max-height: 100vh !important;
+      border-radius: unset !important;
+      border: unset !important;
+      padding: 12px !important;
+      background-color: #ffffff19 !important;
+      box-shadow: unset !important;
+      backdrop-filter: blur(0.6px) !important;
+      -webkit-backdrop-filter: blur(0.6px);
+      header {
+        .titles {
+          .wuru-logo {
+            width: 80px !important;
+          }
+          h2 {
+            font-size: 20px !important;
+          }
+        }
+        .update-date {
+          font-size: 12px !important;
+        }
+      }
+      .content {
+        .section-title {
+          font-size: 14px !important;
+        }
+
+        p {
+          line-height: 12px;
+          font-size: 14px;
+        }
+        form {
+          max-height: 600px;
+          p {
+            font-size: 14px !important;
+          }
+
+          input,
+          .form-text-area {
+            font-size: 16px !important;
+          }
+        }
+      }
+    }
+  }
+</style>
