@@ -6,13 +6,11 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
 ---
 
 <script type="module">
-  // Espera a que el DOM esté completamente cargado
   window.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("contact-form");
     const submitBtn = document.querySelector(".submit-btn");
     const messageBox = document.getElementById("form-message");
 
-    // Verifica que todos los elementos existan
     if (!form || !submitBtn || !messageBox) {
       console.error("No se encontraron los elementos del formulario");
       return;
@@ -21,7 +19,6 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      // Deshabilita el botón mientras se procesa
       submitBtn.disabled = true;
 
       const formData = new FormData(e.target);
@@ -30,7 +27,6 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
       const companyName = formData.get("companyName");
 
       try {
-        // Aquí es donde se hace la llamada al API endpoint
         const res = await fetch("/api/create-lead", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -45,7 +41,6 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
           }),
         });
 
-        // Si la respuesta no es OK, lanza un error
         if (!res.ok) {
           const data = await res.json();
           throw new Error(data?.error || "Error al crear lead");
@@ -53,24 +48,18 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
 
         const data = await res.json();
 
-        // Muestra mensaje de éxito
         messageBox.textContent = "✓ ¡Suscripción exitosa!";
         messageBox.className = "form-message success visible";
 
-        // Resetea el formulario después de un breve tiempo
         setTimeout(() => {
           form.reset();
-          // Si quieres redirigir, descomenta la siguiente línea:
-          // window.location.href = "/";
+          window.location.href = "/";
         }, 1500);
       } catch (error) {
         console.error("Error al crear lead:", error);
-
-        // Muestra mensaje de error
         messageBox.textContent = "✕ Ocurrió un error. Intentalo de nuevo.";
         messageBox.className = "form-message error visible";
       } finally {
-        // Vuelve a habilitar el botón en cualquier caso
         submitBtn.disabled = false;
       }
     });
@@ -104,9 +93,6 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
 
             <label for="companyName">Institución</label>
             <input type="text" id="companyName" name="companyName" placeholder="Clínica wúru" />
-
-            <!-- <label for="more-info">Comentarios | notas</label>
-            <textarea id="more-info" name="more-info" placeholder="¿Querés decirnos algo más?" class="form-text-area"></textarea> -->
 
             <span class="message-container">
               <div id="form-message" class="form-message hidden"></div>
