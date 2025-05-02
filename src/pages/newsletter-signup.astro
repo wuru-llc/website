@@ -6,49 +6,71 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
 ---
 
 <script type="module">
+  // Espera a que el DOM esté completamente cargado
   window.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("contact-form");
     const submitBtn = document.querySelector(".submit-btn");
     const messageBox = document.getElementById("form-message");
 
-    if (!form || !submitBtn || !messageBox) return;
+    // Verifica que todos los elementos existan
+    if (!form || !submitBtn || !messageBox) {
+      console.error("No se encontraron los elementos del formulario");
+      return;
+    }
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
+      // Deshabilita el botón mientras se procesa
       submitBtn.disabled = true;
 
       const formData = new FormData(e.target);
       const name = formData.get("name");
       const email = formData.get("email");
-      const institution = formData.get("institution");
-      const moreInfo = formData.get("more-info");
+      const companyName = formData.get("companyName");
 
       try {
-        if (typeof window.Intercom === "function") {
-          window.Intercom("update", {
+        // Aquí es donde se hace la llamada al API endpoint
+        const res = await fetch("/api/create-lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
             name,
             email,
+            role: "lead",
             custom_attributes: {
-              institution,
-              moreInfo,
+              "Company Name": companyName || "",
+              "lead state": "web_lead_form",
             },
-          });
+          }),
+        });
+
+        // Si la respuesta no es OK, lanza un error
+        if (!res.ok) {
+          const data = await res.json();
+          throw new Error(data?.error || "Error al crear lead");
         }
 
-        // success
+        const data = await res.json();
+
+        // Muestra mensaje de éxito
         messageBox.textContent = "✓ ¡Suscripción exitosa!";
         messageBox.className = "form-message success visible";
-        //redirect
-        // setTimeout(() => {
-        //   form.reset();
-        //   window.location.href = "/";
-        // }, 1500);
+
+        // Resetea el formulario después de un breve tiempo
+        setTimeout(() => {
+          form.reset();
+          // Si quieres redirigir, descomenta la siguiente línea:
+          // window.location.href = "/";
+        }, 1500);
       } catch (error) {
-        //error
-        console.error("Error al enviar a Intercom:", error);
+        console.error("Error al crear lead:", error);
+
+        // Muestra mensaje de error
         messageBox.textContent = "✕ Ocurrió un error. Intentalo de nuevo.";
         messageBox.className = "form-message error visible";
+      } finally {
+        // Vuelve a habilitar el botón en cualquier caso
         submitBtn.disabled = false;
       }
     });
@@ -80,11 +102,11 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
             <label for="email">Correo electrónico <span style="font-size: 12px; opacity: 0.4; margin-left: 4px;">(obligatorio)</span></label>
             <input type="email" id="email" name="email" placeholder="Luciano@wuru.ai" required />
 
-            <label for="institution">Institución</label>
-            <input type="text" id="institution" name="institution" placeholder="Clínica wúru" />
+            <label for="companyName">Institución</label>
+            <input type="text" id="companyName" name="companyName" placeholder="Clínica wúru" />
 
-            <label for="more-info">Comentarios | notas</label>
-            <textarea id="more-info" name="more-info" placeholder="¿Querés decirnos algo más?" class="form-text-area"></textarea>
+            <!-- <label for="more-info">Comentarios | notas</label>
+            <textarea id="more-info" name="more-info" placeholder="¿Querés decirnos algo más?" class="form-text-area"></textarea> -->
 
             <span class="message-container">
               <div id="form-message" class="form-message hidden"></div>
@@ -142,7 +164,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
     .newsletter-form-modal {
       width: 70vw;
       max-width: 500px;
-      max-height: 900px;
+      max-height: 650px;
       border-radius: 10px;
       background-color: #ffffff1e;
       border: 0.5px solid #f1f1f157;
@@ -317,7 +339,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
             align-items: center;
             justify-content: center;
             position: absolute;
-            bottom: 32px;
+            top: 455px;
             left: 0;
             right: 0;
             padding-left: 48px;
@@ -354,7 +376,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
   @media only screen and (max-width: 768px) {
     .newsletter-form-modal {
       width: 90vw !important;
-      max-height: 900px !important;
+      max-height: 650px !important;
       padding: 24px !important;
       backdrop-filter: blur(0.6px) !important;
       -webkit-backdrop-filter: blur(0.6px);
@@ -421,7 +443,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
           font-size: 14px;
         }
         form {
-          max-height: 700px;
+          max-height: 500px;
           p {
             font-size: 14px !important;
           }
