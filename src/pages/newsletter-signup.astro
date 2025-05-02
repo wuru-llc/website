@@ -72,15 +72,15 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
       <header>
         <span class="titles">
           <Image src={WuruLogo} alt="wuru-logo" height={28} class="wuru-logo" loading={"eager"} />
-          <h2 class="subtitle">Newsletter</h2>
+          <h2 class="subtitle">Adopters</h2>
         </span>
         <a class="back-btn" id="back-btn" href="/" target="_self" title="Volver a wúru" rel="noopener noreferrer"> ← </a>
-        <p class="sub-title">¡Unite a nuestra comunidad!</p>
+        <p class="sub-title">La plataforma para equipos de salud ágiles.</p>
       </header>
       <div class="content">
         <section class="section" id="section-newsletter">
           <form action="contact-form" class="form-newsletter" id="contact-form">
-            <p class="section-description">Recibe noticias periódicas y mantente al tanto de nuestras novedades.</p>
+            <p class="section-description">Recibe noticias periódicas y mantente al tanto de las novedades de nuestros productos.</p>
             <p class="section-description" style="margin-bottom: 16px;">
               Al registrarte, aceptas recibir correos electrónicos de WÚRU. Puedes darte de baja en cualquier momento.
             </p>
@@ -182,6 +182,9 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
           align-items: flex-end;
           gap: 16px;
           margin-bottom: 12px;
+          h2 {
+            margin-bottom: -4px;
+          }
         }
         .sub-title {
           font-size: 14px;
@@ -373,7 +376,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
             width: 80px !important;
           }
           h2 {
-            font-size: 20px !important;
+            font-size: 28px !important;
           }
         }
         .update-date {
@@ -413,6 +416,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
           }
           h2 {
             font-size: 20px !important;
+            margin-bottom: 1px !important;
           }
         }
         .update-date {
