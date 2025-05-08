@@ -15,17 +15,18 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
       console.error("No se encontraron los elementos del formulario");
       return;
     }
-
+    
+    // change this to handle the form submission the right way
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
+      
       submitBtn.disabled = true;
-
+      
       const formData = new FormData(e.target);
       const name = formData.get("name");
       const email = formData.get("email");
       const companyName = formData.get("companyName");
-
+      
       try {
         const res = await fetch("/api/create-lead", {
           method: "POST",
@@ -40,17 +41,17 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
             },
           }),
         });
-
+        
         if (!res.ok) {
           const data = await res.json();
           throw new Error(data?.error || "Error al crear lead");
         }
-
+        
         const data = await res.json();
-
+        
         messageBox.textContent = "✓ ¡Suscripción exitosa!";
         messageBox.className = "form-message success visible";
-
+        
         setTimeout(() => {
           form.reset();
           window.location.href = "/";
@@ -101,6 +102,8 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
             <div class="form-footer">
               <button type="submit" class="submit-btn">Suscribirme</button>
             </div>
+
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAABbm-oLvgC9_OZur"></div>
           </form>
         </section>
       </div>
