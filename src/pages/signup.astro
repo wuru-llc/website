@@ -16,49 +16,31 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
       return;
     }
 
-    // change this to handle the form submission the right way
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       submitBtn.disabled = true;
+      messageBox.textContent = "";
+      messageBox.className = "form-message"; // reset
 
       const formData = new FormData(e.target);
-      const name = formData.get("name");
-      const email = formData.get("email");
-      const companyName = formData.get("companyName");
 
       try {
         const res = await fetch("/api/create-lead", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name,
-            email,
-            role: "lead",
-            custom_attributes: {
-              "Company Name": companyName || "",
-              "lead state": "web_lead_form",
-            },
-          }),
+          body: formData,
         });
 
-        if (!res.ok) {
-          const data = await res.json();
-          throw new Error(data?.error || "Error al crear lead");
-        }
-
-        const data = await res.json();
-
-        messageBox.textContent = "✓ ¡Suscripción exitosa!";
-        messageBox.className = "form-message success visible";
-
-        setTimeout(() => {
+        if (res.ok) {
+          messageBox.textContent = "✓ Enviado correctamente.";
+          messageBox.className = "form-message success visible";
           form.reset();
-          window.location.href = "/";
-        }, 1500);
+        } else {
+          messageBox.textContent = "✕ Falló la verificación. Intenta de nuevo.";
+          messageBox.className = "form-message error visible";
+        }
       } catch (error) {
         console.error("Error al crear lead:", error);
-        messageBox.textContent = "✕ Ocurrió un error. Intentalo de nuevo.";
+        messageBox.textContent = "✕ Ocurrió un error. Intenta de nuevo.";
         messageBox.className = "form-message error visible";
       } finally {
         submitBtn.disabled = false;
@@ -72,28 +54,74 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
     <div class="newsletter-form-modal">
       <header>
         <span class="titles">
-          <Image src={WuruLogo} alt="wuru-logo" height={28} class="wuru-logo" loading={"eager"} />
+          <Image
+            src={WuruLogo}
+            alt="wuru-logo"
+            height={28}
+            class="wuru-logo"
+            loading={"eager"}
+          />
           <h2 class="subtitle">On Boarding</h2>
         </span>
-        <a class="back-btn" id="back-btn" href="/" target="_self" title="Volver a wúru" rel="noopener noreferrer"> ← </a>
+        <a
+          class="back-btn"
+          id="back-btn"
+          href="/"
+          target="_self"
+          title="Volver a wúru"
+          rel="noopener noreferrer"
+        >
+          ←
+        </a>
         <p class="sub-title">La plataforma para equipos de salud ágiles.</p>
       </header>
       <div class="content">
         <section class="section" id="section-newsletter">
           <form action="contact-form" class="form-newsletter" id="contact-form">
-            <p class="section-description">Recibe noticias periódicas y mantente al tanto de las novedades de nuestros productos.</p>
+            <p class="section-description">
+              Recibe noticias periódicas y mantente al tanto de las novedades de
+              nuestros productos.
+            </p>
             <p class="section-description" style="margin-bottom: 16px;">
-              Al registrarte, aceptas recibir correos electrónicos de WÚRU. Puedes darte de baja en cualquier momento.
+              Al registrarte, aceptas recibir correos electrónicos de WÚRU.
+              Puedes darte de baja en cualquier momento.
             </p>
 
-            <label for="name">Nombre y apellido <span style="font-size: 12px; opacity: 0.4; margin-left: 4px;">(obligatorio)</span></label>
-            <input type="text" id="name" name="name" placeholder="Luciano Tourn" required />
+            <label for="name"
+              >Nombre y apellido <span
+                style="font-size: 12px; opacity: 0.4; margin-left: 4px;"
+                >(obligatorio)</span
+              ></label
+            >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Luciano Tourn"
+              required
+            />
 
-            <label for="email">Correo electrónico <span style="font-size: 12px; opacity: 0.4; margin-left: 4px;">(obligatorio)</span></label>
-            <input type="email" id="email" name="email" placeholder="Luciano@wuru.ai" required />
+            <label for="email"
+              >Correo electrónico <span
+                style="font-size: 12px; opacity: 0.4; margin-left: 4px;"
+                >(obligatorio)</span
+              ></label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Luciano@wuru.ai"
+              required
+            />
 
             <label for="companyName">Institución</label>
-            <input type="text" id="companyName" name="companyName" placeholder="Clínica wúru" />
+            <input
+              type="text"
+              id="companyName"
+              name="companyName"
+              placeholder="Clínica wúru"
+            />
 
             <span class="message-container">
               <div id="form-message" class="form-message hidden"></div>
@@ -103,7 +131,8 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
               <button type="submit" class="submit-btn">Suscribirme</button>
             </div>
 
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAABbm-oLvgC9_OZur"></div>
+            <div class="cf-turnstile" data-sitekey="2x00000000000000000000BB">
+            </div>
           </form>
         </section>
       </div>
@@ -207,7 +236,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
       }
       .content {
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
         height: 100%;
         .section {
           height: 100%;
@@ -307,7 +336,14 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
 
             .submit-btn {
               color: #f1f1f1;
-              background-image: linear-gradient(45deg, #301928, #1a1117, #21121d, #281319, #301a14);
+              background-image: linear-gradient(
+                45deg,
+                #301928,
+                #1a1117,
+                #21121d,
+                #281319,
+                #301a14
+              );
               border: solid 0.25px rgba(125, 23, 3, 0.3882352941);
               padding: 12px 24px;
               height: 48px;
@@ -316,7 +352,14 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
               transition: all 0.2s ease-in-out;
               cursor: pointer;
               &:hover {
-                background-image: linear-gradient(45deg, #44203a, #2a1a24, #301b2a, #3a1e22, #442417);
+                background-image: linear-gradient(
+                  45deg,
+                  #44203a,
+                  #2a1a24,
+                  #301b2a,
+                  #3a1e22,
+                  #442417
+                );
                 border: solid 0.25px #7d1703bf;
               }
               &[disabled] {
