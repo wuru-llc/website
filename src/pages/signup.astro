@@ -15,18 +15,18 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
       console.error("No se encontraron los elementos del formulario");
       return;
     }
-    
+
     // change this to handle the form submission the right way
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      
+
       submitBtn.disabled = true;
-      
+
       const formData = new FormData(e.target);
       const name = formData.get("name");
       const email = formData.get("email");
       const companyName = formData.get("companyName");
-      
+
       try {
         const res = await fetch("/api/create-lead", {
           method: "POST",
@@ -41,17 +41,17 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
             },
           }),
         });
-        
+
         if (!res.ok) {
           const data = await res.json();
           throw new Error(data?.error || "Error al crear lead");
         }
-        
+
         const data = await res.json();
-        
+
         messageBox.textContent = "✓ ¡Suscripción exitosa!";
         messageBox.className = "form-message success visible";
-        
+
         setTimeout(() => {
           form.reset();
           window.location.href = "/";
@@ -67,13 +67,13 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
   });
 </script>
 
-<Layout title="Wúru | SignUp">
+<Layout title="Wúru | On Boarding">
   <div class="newsletter-form-dim">
     <div class="newsletter-form-modal">
       <header>
         <span class="titles">
           <Image src={WuruLogo} alt="wuru-logo" height={28} class="wuru-logo" loading={"eager"} />
-          <h2 class="subtitle">On Board</h2>
+          <h2 class="subtitle">On Boarding</h2>
         </span>
         <a class="back-btn" id="back-btn" href="/" target="_self" title="Volver a wúru" rel="noopener noreferrer"> ← </a>
         <p class="sub-title">La plataforma para equipos de salud ágiles.</p>
