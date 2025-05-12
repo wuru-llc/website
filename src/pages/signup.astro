@@ -16,11 +16,11 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
       return;
     }
 
-    form.addEventListener("submit", async (e) => {
+        form.addEventListener("submit", async (e) => {
       e.preventDefault();
       submitBtn.disabled = true;
       messageBox.textContent = "";
-      messageBox.className = "form-message"; // reset
+      messageBox.className = "form-message";
 
       const formData = new FormData(e.target);
 
@@ -30,12 +30,14 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
           body: formData,
         });
 
+        const data = await res.json();
+
         if (res.ok) {
           messageBox.textContent = "✓ Enviado correctamente.";
           messageBox.className = "form-message success visible";
           form.reset();
         } else {
-          messageBox.textContent = "✕ Falló la verificación. Intenta de nuevo.";
+          messageBox.textContent = data?.error || "✕ Falló la verificación.";
           messageBox.className = "form-message error visible";
         }
       } catch (error) {
@@ -131,7 +133,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
               <button type="submit" class="submit-btn">Suscribirme</button>
             </div>
 
-            <div class="cf-turnstile" data-sitekey="2x00000000000000000000BB">
+            <div class="cf-turnstile" data-sitekey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY}></div>
             </div>
           </form>
         </section>
