@@ -16,8 +16,9 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
       return;
     }
 
-        form.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
+
       submitBtn.disabled = true;
       messageBox.textContent = "";
       messageBox.className = "form-message";
@@ -30,14 +31,16 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
           body: formData,
         });
 
-        const data = await res.json();
-
         if (res.ok) {
-          messageBox.textContent = "✓ Enviado correctamente.";
+          messageBox.textContent = "✓ ¡Enviado correctamente!";
           messageBox.className = "form-message success visible";
-          form.reset();
+          setTimeout(() => {
+            messageBox.className = "form-message hidden";
+            form.reset();
+            window.location.href = "/";
+          }, 1500);
         } else {
-          messageBox.textContent = data?.error || "✕ Falló la verificación.";
+          messageBox.textContent = "✕ Falló la verificación.";
           messageBox.className = "form-message error visible";
         }
       } catch (error) {
@@ -56,74 +59,28 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
     <div class="newsletter-form-modal">
       <header>
         <span class="titles">
-          <Image
-            src={WuruLogo}
-            alt="wuru-logo"
-            height={28}
-            class="wuru-logo"
-            loading={"eager"}
-          />
+          <Image src={WuruLogo} alt="wuru-logo" height={28} class="wuru-logo" loading={"eager"} />
           <h2 class="subtitle">On Boarding</h2>
         </span>
-        <a
-          class="back-btn"
-          id="back-btn"
-          href="/"
-          target="_self"
-          title="Volver a wúru"
-          rel="noopener noreferrer"
-        >
-          ←
-        </a>
+        <a class="back-btn" id="back-btn" href="/" target="_self" title="Volver a wúru" rel="noopener noreferrer"> ← </a>
         <p class="sub-title">La plataforma para equipos de salud ágiles.</p>
       </header>
-      <div class="content">
+      <main class="content">
         <section class="section" id="section-newsletter">
           <form action="contact-form" class="form-newsletter" id="contact-form">
-            <p class="section-description">
-              Recibe noticias periódicas y mantente al tanto de las novedades de
-              nuestros productos.
-            </p>
+            <p class="section-description">Recibe noticias periódicas y mantente al tanto de las novedades de nuestros productos.</p>
             <p class="section-description" style="margin-bottom: 16px;">
-              Al registrarte, aceptas recibir correos electrónicos de WÚRU.
-              Puedes darte de baja en cualquier momento.
+              Al registrarte, aceptas recibir correos electrónicos de WÚRU. Puedes darte de baja en cualquier momento.
             </p>
 
-            <label for="name"
-              >Nombre y apellido <span
-                style="font-size: 12px; opacity: 0.4; margin-left: 4px;"
-                >(obligatorio)</span
-              ></label
-            >
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Luciano Tourn"
-              required
-            />
+            <label for="name">Nombre y apellido <span style="font-size: 12px; opacity: 0.4; margin-left: 4px;">(obligatorio)</span></label>
+            <input type="text" id="name" name="name" placeholder="Luciano Tourn" required />
 
-            <label for="email"
-              >Correo electrónico <span
-                style="font-size: 12px; opacity: 0.4; margin-left: 4px;"
-                >(obligatorio)</span
-              ></label
-            >
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Luciano@wuru.ai"
-              required
-            />
+            <label for="email">Correo electrónico <span style="font-size: 12px; opacity: 0.4; margin-left: 4px;">(obligatorio)</span></label>
+            <input type="email" id="email" name="email" placeholder="Luciano@wuru.ai" required />
 
             <label for="companyName">Institución</label>
-            <input
-              type="text"
-              id="companyName"
-              name="companyName"
-              placeholder="Clínica wúru"
-            />
+            <input type="text" id="companyName" name="companyName" placeholder="Clínica wúru" />
 
             <span class="message-container">
               <div id="form-message" class="form-message hidden"></div>
@@ -134,10 +91,9 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
             </div>
 
             <div class="cf-turnstile" data-sitekey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY}></div>
-            </div>
           </form>
         </section>
-      </div>
+      </main>
     </div>
   </div>
 </Layout>
@@ -338,14 +294,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
 
             .submit-btn {
               color: #f1f1f1;
-              background-image: linear-gradient(
-                45deg,
-                #301928,
-                #1a1117,
-                #21121d,
-                #281319,
-                #301a14
-              );
+              background-image: linear-gradient(45deg, #301928, #1a1117, #21121d, #281319, #301a14);
               border: solid 0.25px rgba(125, 23, 3, 0.3882352941);
               padding: 12px 24px;
               height: 48px;
@@ -354,14 +303,7 @@ import WuruLogo from "../assets/images/wuru-logo.svg";
               transition: all 0.2s ease-in-out;
               cursor: pointer;
               &:hover {
-                background-image: linear-gradient(
-                  45deg,
-                  #44203a,
-                  #2a1a24,
-                  #301b2a,
-                  #3a1e22,
-                  #442417
-                );
+                background-image: linear-gradient(45deg, #44203a, #2a1a24, #301b2a, #3a1e22, #442417);
                 border: solid 0.25px #7d1703bf;
               }
               &[disabled] {

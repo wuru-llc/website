@@ -1,11 +1,11 @@
 export const prerender = false;
-
 import type { APIRoute } from 'astro';
 
 const INTERCOM_ACCESS_TOKEN = import.meta.env.INTERCOM_ACCESS_TOKEN;
 const TURNSTILE_SECRET_KEY = import.meta.env.TURNSTILE_SECRET_KEY;
 
 export const POST: APIRoute = async ({ request }) => {
+
   const formData = await request.formData();
   const token = formData.get('cf-turnstile-response')?.toString() || '';
 
@@ -21,6 +21,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   if (!verifyData.success) {
     console.warn("Turnstile failed:", verifyData);
+
     return new Response(JSON.stringify({ error: 'Turnstile verification failed' }), {
       status: 403,
       headers: { 'Content-Type': 'application/json' }
@@ -34,13 +35,6 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const data = Object.fromEntries(formData.entries());
-  console.log('Received data:', data);
-  if (!data.email) {
-    return new Response(JSON.stringify({ error: 'Email is required' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' }
-    });
-  }
 
   try {
     const response = await fetch('https://api.intercom.io/contacts', {
@@ -51,10 +45,13 @@ export const POST: APIRoute = async ({ request }) => {
         Accept: 'application/json'
       },
       body: JSON.stringify({
-        role: data.role || 'lead',
+        role: 'lead',
         email: data.email,
         name: data.name,
-        custom_attributes: data.custom_attributes
+        custom_attributes: {
+          "Company Name" : data.companyName || "",
+           "lead state" : "web_lead_form"
+          }
       })
     });
 
