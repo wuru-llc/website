@@ -1,0 +1,439 @@
+---
+import Layout from "../layouts/Base.astro";
+
+import { Image } from "astro:assets";
+import WuruLogo from "../assets/images/wuru-logo.svg";
+---
+
+<script type="module">
+  window.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("contact-form");
+    const submitBtn = document.querySelector(".submit-btn");
+    const messageBox = document.getElementById("form-message");
+
+    if (!form || !submitBtn || !messageBox) {
+      console.error("No se encontraron los elementos del formulario");
+      return;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+      messageBox.textContent = "";
+      messageBox.className = "form-message";
+
+      const formData = new FormData(e.target);
+
+      try {
+        const res = await fetch("/api/create-lead", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (res.ok) {
+          messageBox.textContent = "✓ ¡Enviado correctamente!";
+          messageBox.className = "form-message success visible";
+          setTimeout(() => {
+            messageBox.className = "form-message hidden";
+            form.reset();
+            window.location.href = "/";
+          }, 1500);
+        } else {
+          messageBox.textContent = "✕ Falló la verificación.";
+          messageBox.className = "form-message error visible";
+        }
+      } catch (error) {
+        console.error("Error al crear lead:", error);
+        messageBox.textContent = "✕ Ocurrió un error. Intenta de nuevo.";
+        messageBox.className = "form-message error visible";
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  });
+</script>
+
+<Layout title="Wúru | Onboarding">
+  <div class="newsletter-form-dim">
+    <div class="newsletter-form-modal">
+      <header>
+        <span class="titles">
+          <Image src={WuruLogo} alt="wuru-logo" height={28} class="wuru-logo" loading={"eager"} />
+          <h2 class="subtitle">Onboarding</h2>
+        </span>
+        <a class="back-btn" id="back-btn" href="/" target="_self" title="Volver a wúru" rel="noopener noreferrer"> ← </a>
+        <p class="sub-title">La plataforma para equipos de salud ágiles.</p>
+      </header>
+      <main class="content">
+        <section class="section" id="section-newsletter">
+          <form action="contact-form" class="form-newsletter" id="contact-form">
+            <p class="section-description">Recibe noticias periódicas y mantente al tanto de las novedades de nuestros productos.</p>
+            <p class="section-description" style="margin-bottom: 16px;">
+              Al registrarte, aceptas recibir correos electrónicos de WÚRU. Puedes darte de baja en cualquier momento.
+            </p>
+
+            <label for="name">Nombre y apellido <span style="font-size: 12px; opacity: 0.4; margin-left: 4px;">(obligatorio)</span></label>
+            <input type="text" id="name" name="name" placeholder="Luciano Tourn" required />
+
+            <label for="email">Correo electrónico <span style="font-size: 12px; opacity: 0.4; margin-left: 4px;">(obligatorio)</span></label>
+            <input type="email" id="email" name="email" placeholder="Luciano@wuru.ai" required />
+
+            <label for="companyName">Institución</label>
+            <input type="text" id="companyName" name="companyName" placeholder="Clínica wúru" />
+
+            <span class="message-container">
+              <div id="form-message" class="form-message hidden"></div>
+            </span>
+
+            <div class="form-footer">
+              <button type="submit" class="submit-btn">Enviar</button>
+            </div>
+
+            <div class="cf-turnstile" data-sitekey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY}></div>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+</Layout>
+
+<style lang="scss">
+  @keyframes submit-btn-animation {
+    0% {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(5px);
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  ul,
+  li {
+    margin: 0;
+  }
+  body {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .newsletter-form-dim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+    .newsletter-form-modal {
+      width: 70vw;
+      max-width: 500px;
+      max-height: 650px;
+      border-radius: 10px;
+      background-color: #ffffff1e;
+      border: 0.5px solid #f1f1f157;
+      box-shadow:
+        2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
+        6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
+        10.4px 8.7px 4.6px rgba(0, 0, 0, 0.038),
+        15.7px 13.1px 6.9px rgba(0, 0, 0, 0.044),
+        22.7px 18.9px 10px rgba(0, 0, 0, 0.05),
+        32.1px 26.8px 14.2px rgba(0, 0, 0, 0.056),
+        45.5px 37.9px 20.1px rgba(0, 0, 0, 0.062),
+        66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
+        101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
+        181px 151px 80px rgba(0, 0, 0, 0.1);
+      color: #f1f1f1;
+      height: 100%;
+      padding: 48px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      backdrop-filter: blur(2px);
+
+      header {
+        position: relative;
+        margin-bottom: 24px;
+
+        .titles {
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+          gap: 16px;
+          margin-bottom: 12px;
+          h2 {
+            margin-bottom: -4px;
+          }
+        }
+        .sub-title {
+          font-size: 14px;
+          text-align: center;
+          opacity: 0.5;
+        }
+        .back-btn {
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: none;
+          border: none;
+          color: #f1f1f1;
+          font-size: 32px;
+          cursor: pointer;
+        }
+      }
+      .content {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 100%;
+        .section {
+          height: 100%;
+        }
+        .section-title {
+          font-size: 20px;
+          margin-bottom: 12px;
+        }
+        p {
+          line-height: 22px;
+          font-size: 16px;
+        }
+        .list {
+          margin-bottom: 12px;
+          font-size: 16px;
+
+          .list-item {
+            list-style: none;
+            line-height: 22px;
+          }
+        }
+        .form-newsletter {
+          color: #f1f1f1;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          height: 100%;
+          input {
+            border: none;
+            background-color: #ffffff1e;
+            padding: 6px 16px;
+            height: 28px;
+            font-size: 14px;
+            border-radius: 14px;
+            color: #f1f1f1;
+
+            &::placeholder {
+              color: #f1f1f1;
+              opacity: 0.3;
+              font-style: italic;
+            }
+            &:focus {
+              outline: none;
+              border: none;
+              background-color: #ffffff67;
+            }
+          }
+          .form-text-area {
+            resize: none;
+            border: none;
+            background-color: #ffffff1e;
+            padding: 6px 16px;
+            font-size: 14px;
+            border-radius: 16px;
+            min-height: 80px;
+            max-height: 150px;
+            field-sizing: content;
+            line-height: 1.3rem;
+            color: #f1f1f1;
+
+            &::placeholder {
+              color: #f1f1f1;
+              opacity: 0.3;
+              font-size: 14px;
+              font-style: italic;
+              font-family:
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Oxygen,
+                Ubuntu,
+                Cantarell,
+                "Open Sans",
+                "Helvetica Neue",
+                sans-serif;
+            }
+            &:focus {
+              outline: none;
+              border: none;
+              background-color: #ffffff67;
+            }
+          }
+          label {
+            font-size: 12px;
+            color: #f1f1f1;
+            opacity: 0.8;
+            margin-bottom: -8px;
+            margin-left: 16px;
+          }
+          .form-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            height: 100%;
+
+            .submit-btn {
+              color: #f1f1f1;
+              background-image: linear-gradient(45deg, #301928, #1a1117, #21121d, #281319, #301a14);
+              border: solid 0.25px rgba(125, 23, 3, 0.3882352941);
+              padding: 12px 24px;
+              height: 48px;
+              border-radius: 24px;
+              font-size: 16px;
+              transition: all 0.2s ease-in-out;
+              cursor: pointer;
+              &:hover {
+                background-image: linear-gradient(45deg, #44203a, #2a1a24, #301b2a, #3a1e22, #442417);
+                border: solid 0.25px #7d1703bf;
+              }
+              &[disabled] {
+                background-color: #f1f1f1;
+                opacity: 0.2;
+                cursor: not-allowed;
+              }
+            }
+          }
+          .message-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 455px;
+            left: 0;
+            right: 0;
+            padding-left: 48px;
+            padding-right: 48px;
+            .form-message {
+              margin-top: 16px;
+              font-size: 14px;
+              opacity: 0;
+              animation: submit-btn-animation 1s ease forwards;
+              color: white;
+              padding: 8px 16px;
+              border-radius: 4px;
+              width: 100%;
+              text-align: center;
+
+              &.success {
+                background-color: #39974fb8;
+              }
+              &.error {
+                background-color: #b0404bc8;
+              }
+              &.visible {
+                opacity: 1;
+              }
+              &.hidden {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .newsletter-form-modal {
+      width: 90vw !important;
+      max-height: 650px !important;
+      padding: 24px !important;
+      backdrop-filter: blur(0.6px) !important;
+      -webkit-backdrop-filter: blur(0.6px);
+      header {
+        .titles {
+          gap: 12px !important;
+          djkh .wuru-logo {
+            width: 80px !important;
+          }
+          h2 {
+            font-size: 28px !important;
+          }
+        }
+        .update-date {
+          font-size: 12px !important;
+        }
+        .back-btn {
+          font-size: 24px !important;
+        }
+      }
+      .content {
+        .section-title {
+          font-size: 16px !important;
+        }
+
+        p {
+          line-height: 16px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .newsletter-form-modal {
+      width: 100vw !important;
+      max-height: 100vh !important;
+      border-radius: unset !important;
+      border: unset !important;
+      padding: 12px !important;
+      background-color: #ffffff19 !important;
+      box-shadow: unset !important;
+      backdrop-filter: blur(0.6px) !important;
+      -webkit-backdrop-filter: blur(0.6px);
+      header {
+        .titles {
+          .wuru-logo {
+            width: 80px !important;
+          }
+          h2 {
+            font-size: 20px !important;
+            margin-bottom: 1px !important;
+          }
+        }
+        .update-date {
+          font-size: 12px !important;
+        }
+      }
+      .content {
+        .section-title {
+          font-size: 14px !important;
+        }
+
+        p {
+          line-height: 12px;
+          font-size: 14px;
+        }
+        form {
+          max-height: 500px;
+          p {
+            font-size: 14px !important;
+          }
+
+          input,
+          .form-text-area {
+            font-size: 16px !important;
+          }
+        }
+      }
+    }
+  }
+</style>

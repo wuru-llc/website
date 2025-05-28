@@ -2,14 +2,23 @@
 import { Image } from "astro:assets";
 import LogoLN from "../../assets/images/svg-ln.svg";
 import LogoIG from "../../assets/images/svg-ig.svg";
+import LogoNews from "../../assets/images/news.svg";
+import Link from "../../assets/images/link.svg";
+import Policy from "../../assets/images/privacy-policy-icon.svg";
 ---
 
 <div class="social-media-container">
   <a href="https://www.linkedin.com/company/wuru/" target="_blank" title="Linkedin" rel="noopener noreferrer">
     <Image src={LogoLN} alt="logo LN" height={18} class="icon" style="animation-delay: 0.2s;" loading={"eager"} />
+    <span class="tooltip">Linkedin</span>
   </a>
   <a href="http://www.instagram.com/somoswuru" target="_blank" title="Instagram" rel="noopener noreferrer">
     <Image src={LogoIG} alt="logo IG" height={20} class="icon" style="animation-delay: 0.4s;" loading={"eager"} />
+    <span class="tooltip">Instagram</span>
+  </a>
+  <a href="/signup" title="Onboarding" rel="noopener noreferrer">
+    <Image src={LogoNews} alt="logo onboarding" height={20} class="icon" style="animation-delay: 0.6s;" loading={"eager"} />
+    <span class="tooltip">Onboarding</span>
   </a>
 </div>
 
@@ -24,7 +33,7 @@ import LogoIG from "../../assets/images/svg-ig.svg";
     }
     100% {
       transform: translateY(0px);
-      opacity: 0.7;
+      opacity: 0.6;
     }
   }
 
@@ -34,6 +43,36 @@ import LogoIG from "../../assets/images/svg-ig.svg";
     gap: 32px;
     opacity: 0.8;
     transition: all 0.3s ease-in-out;
+
+    a {
+      position: relative;
+      display: inline-block;
+      height: 28px;
+      display: flex;
+      align-items: center;
+
+      .tooltip {
+        position: absolute;
+        bottom: -24px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s ease-in-out;
+        pointer-events: none;
+      }
+
+      &:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
     img {
       opacity: 0.5;
       animation: icons-appears-nav 0.5s ease-out forwards;
