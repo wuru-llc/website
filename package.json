@@ -11,10 +11,11 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@fontsource/roboto": "^5.1.0",
-    "astro": "^4.16.8",
-    "motion": "^11.11.14",
-    "typescript": "^5.6.3"
+    "@astrojs/vercel": "^8.1.4",
+    "@fontsource/roboto": "^5.2.5",
+    "astro": "^5.8.0",
+    "motion": "^12.15.0",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
     "sass-embedded": "^1.80.6"
