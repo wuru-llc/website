@@ -6,7 +6,12 @@ import SocialMediaNav from "./SocialMediaNav.astro";
 ---
 
 <header class="header-container">
-  <Image src={WuruLogo} alt="wuru-logo" height={32} class="wuru-logo" loading={"eager"} />
+  <div class="left-side">
+    <a href="/" title="Ir al inicio de WÚRU" rel="noopener noreferrer">
+      <Image src={WuruLogo} alt="wuru-logo" height={32} class="wuru-logo" loading={"eager"} />
+    </a>
+    <a class="nav-link" href="/product" title="Nuestros productos" rel="noopener noreferrer"> SOLUCIONES </a>
+  </div>
   <div class="right-side">
     <SocialMediaNav />
     <a class="log-in-btn" href="http://app.wuru.ai" target="_blank" title="Iniciar sesión" rel="noopener noreferrer">
@@ -44,14 +49,31 @@ import SocialMediaNav from "./SocialMediaNav.astro";
 
   .header-container {
     width: 100%;
-    color: white;
+    color: #f1f1f1;
     padding: 24px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .wuru-logo {
-      filter: drop-shadow(2px 2px 4px rgb(0, 0, 0, 0.7));
-      animation: logo-in-slide 0.8s ease-out forwards;
+    .left-side {
+      display: flex;
+      align-items: baseline;
+      gap: 32px;
+      a {
+        text-decoration: none;
+        color: unset;
+      }
+      .nav-link {
+        font-size: 14px;
+        transition: all 0.2s ease-in-out;
+        letter-spacing: 1px;
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+      .wuru-logo {
+        filter: drop-shadow(2px 2px 4px rgb(0, 0, 0, 0.7));
+        animation: logo-in-slide 0.8s ease-out forwards;
+      }
     }
     .right-side {
       font-size: 12px;

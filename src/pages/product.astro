@@ -1,0 +1,186 @@
+---
+import FloatingHeader from "../components/Header/FloatingHeader.astro";
+import Header from "../components/Header/Header.astro";
+import Layout from "../layouts/Base.astro";
+---
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll(".product-scroll-link");
+    const sections = document.querySelectorAll("section");
+    const buttonPill = document.querySelector(".button-pill");
+
+    let isScrollingFromClick = false;
+    let observer;
+
+    function movePillTo(link) {
+      const newLeft = link.offsetLeft;
+      buttonPill.style.left = `${newLeft}px`;
+
+      // Mostrar el pill si aún está oculto
+      if (!buttonPill.classList.contains("visible")) {
+        buttonPill.classList.add("visible");
+      }
+    }
+
+    function setupObserver() {
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.6,
+      };
+
+      observer = new IntersectionObserver((entries) => {
+        if (isScrollingFromClick) return; // 👈 bloquear durante scroll de clic
+
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            const activeLink = document.querySelector(`.product-scroll-link[data-target="${id}"]`);
+            if (activeLink) {
+              movePillTo(activeLink);
+            }
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => observer.observe(section));
+    }
+
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        isScrollingFromClick = true;
+        movePillTo(link);
+
+        // Esperar que el scroll termine (~500ms)
+        setTimeout(() => {
+          isScrollingFromClick = false;
+        }, 700); // Ajusta según la duración del scroll animado
+      });
+    });
+
+    setupObserver();
+  });
+</script>
+
+<Layout title="Wúru | Productos">
+  <Header />
+  <FloatingHeader />
+
+  <div class="floating-product-nav-container">
+    <span class="product-nav">
+      <a href="#qx-section" class="product-scroll-link" data-target="qx-section">QUIRÓFANOS</a>
+      <a href="#infusion-section" class="product-scroll-link" data-target="infusion-section">CENTROS DE INFUSIÓN</a>
+      <a href="#assistant-section" class="product-scroll-link" data-target="assistant-section">ASISTENTE VIRTUAL</a>
+
+      <div class="button-pill">
+        <span class="back-color"></span>
+      </div>
+    </span>
+  </div>
+  <section class="hero"></section>
+  <section class="qx-section" id="qx-section">QX</section>
+  <section class="infusion-section" id="infusion-section">INFUSION</section>
+  <section class="assistant-section" id="assistant-section">ASISTENTE</section>
+</Layout>
+
+<style lang="scss">
+  h1,
+  h2,
+  h3,
+  p,
+  ul,
+  li {
+    margin: 0;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    position: relative;
+  }
+
+  .floating-product-nav-container {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+    bottom: 32px;
+    z-index: 1;
+    .product-nav {
+      position: relative;
+      height: 64px;
+      border-radius: 32px;
+      background-image: linear-gradient(45deg, #110e10, #1a1117, #21121d, #281319, #301a14);
+      border: solid 0.25px #7d170363;
+      display: flex;
+      align-items: center;
+      color: #f1f1f1;
+      font-size: 14px;
+      font-weight: 400px;
+      letter-spacing: 1px;
+      box-shadow:
+        5px 5px 20px 0px #000000,
+        -5px -5px 20px 0px #400000;
+
+      a {
+        text-decoration: none;
+        color: unset;
+      }
+      .product-scroll-link {
+        width: 250px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+      }
+      .button-pill {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        position: absolute;
+        width: 250px;
+        left: 0%;
+        padding: 4px;
+        z-index: 0;
+        transition: all 0.2s ease-out;
+        opacity: 0; // ← inicia invisible
+
+        &.visible {
+          opacity: 1;
+        }
+
+        .back-color {
+          height: 100%;
+          width: 100%;
+          background-color: rgba(241, 241, 241, 0.1098039216);
+          backdrop-filter: blur(5px);
+          border: 0.5px solid rgba(241, 241, 241, 0.3411764706);
+          border-radius: 32px;
+        }
+      }
+    }
+  }
+  section {
+    height: 100vh;
+    max-height: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f1f1f1;
+  }
+  .qx-section {
+    background-color: rgba(255, 0, 0, 0.154);
+  }
+  .infusion-section {
+    background-color: rgba(0, 217, 255, 0.168);
+  }
+  .assistant-section {
+    background-color: rgba(0, 255, 0, 0.193);
+  }
+</style>
