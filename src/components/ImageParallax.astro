@@ -2,12 +2,15 @@
 interface Props {
   parallaxSpeed?: number;
 }
+
 const { parallaxSpeed = 0.2 } = Astro.props;
 ---
 
-<script>
-  const parallaxSpeed = parseFloat(document.documentElement.dataset.parallaxSpeed || "0.2");
+<div class="parallax" data-parallax-speed={parallaxSpeed}>
+  <slot />
+</div>
 
+<script>
   const handleScroll = () => {
     window.requestAnimationFrame(() => {
       const backgrounds = document.querySelectorAll(".parallax");
@@ -17,7 +20,10 @@ const { parallaxSpeed = 0.2 } = Astro.props;
           const rect = background.getBoundingClientRect();
           const offsetTop = rect.top;
 
-          background.style.transform = `translate3d(0,${-offsetTop * parallaxSpeed}px,0)`;
+          // Obtiene el parallaxSpeed desde el atributo data
+          const speed = parseFloat(background.dataset.parallaxSpeed || "0.2");
+
+          background.style.transform = `translate3d(0,${-offsetTop * speed}px,0)`;
         }
       });
     });
@@ -31,10 +37,6 @@ const { parallaxSpeed = 0.2 } = Astro.props;
   document.addEventListener("astro:page-load", initScrollEffect);
   initScrollEffect();
 </script>
-
-<div class="parallax">
-  <slot />
-</div>
 
 <style>
   .parallax {

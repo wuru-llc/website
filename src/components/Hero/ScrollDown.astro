@@ -1,9 +1,15 @@
 ---
 import { Image } from "astro:assets";
 import ArrowDown from "../../assets/images/arrow.svg";
+
+interface Props {
+  scrollDownTo?: string;
+}
+
+const { scrollDownTo = "" } = Astro.props;
 ---
 
-<a class="scroll-down-container" href="#social-proof-container">
+<a class="scroll-down-container" href={scrollDownTo} id="scroll-down">
   <p>EXPLORAR</p>
   <span class="arrow">
     <Image src={ArrowDown} alt="logo" width={24} loading={"eager"} />

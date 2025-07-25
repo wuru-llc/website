@@ -3,15 +3,28 @@ import { Image } from "astro:assets";
 import WuruLogo from "../../assets/images/wuru-logo.svg";
 import UserCircle from "../../assets/images/user-circle.svg";
 import SocialMediaNav from "./SocialMediaNav.astro";
+import homeIcon from "../../assets/images/home-icon.svg";
+import solutionsIcon from "../../assets/images/solutions-icon.svg";
 ---
 
 <header class="floating-header">
   <div class="container">
     <div class="left-side">
-      <a href="/" title="Ir al inicio de WÚRU" rel="noopener noreferrer">
+      <a id="wuru-logo" href="/" title="Ir al inicio de WÚRU" rel="noopener noreferrer">
         <Image src={WuruLogo} alt="wuru-logo" height={32} class="wuru-logo" loading={"eager"} />
       </a>
-      <a class="nav-link" href="/product" title="Nuestros productos" rel="noopener noreferrer"> SOLUCIONES </a>
+      <span class="icon-nav">
+        <a id="home-btn" href="/" title="Inicio" rel="noopener noreferrer">
+          <Image src={homeIcon} alt="login-icon" height={24} class="login-icon" loading={"eager"} />
+        </a>
+        <a id="solutions-btn" href="/solutions" title="Soluciones WÚRU" rel="noopener noreferrer">
+          <Image src={solutionsIcon} alt="login-icon" height={24} class="login-icon" loading={"eager"} />
+        </a>
+      </span>
+      <span class="typo-nav">
+        <a class="nav-link" id="home-btn" href="/" title="Inicio" rel="noopener noreferrer"> INCIO </a>
+        <a class="nav-link" id="solutions-btn" href="/solutions" title="Soluciones WÚRU" rel="noopener noreferrer"> SOLUCIONES </a>
+      </span>
     </div>
     <div class="right-side">
       <SocialMediaNav />
@@ -82,17 +95,33 @@ import SocialMediaNav from "./SocialMediaNav.astro";
           text-decoration: none;
           color: unset;
         }
+        .typo-nav {
+          display: flex;
+          gap: 24px;
+        }
+        .icon-nav {
+          display: none;
+          align-items: center;
+          gap: 24px;
+          justify-content: center;
+          opacity: 0.7;
+        }
         .nav-link {
           font-size: 14px;
           transition: all 0.2s ease-in-out;
           letter-spacing: 1px;
+          opacity: 0;
+          animation: login-appears 0.2s ease-out forwards;
+          animation-delay: 0.25s;
+
           &:hover {
-            opacity: 0.7;
+            color: #f1f1f1b0;
           }
         }
         .wuru-logo {
           filter: drop-shadow(2px 2px 4px rgb(0, 0, 0, 0.7));
           animation: logo-in-slide 0.8s ease-out forwards;
+          margin-right: 32px;
         }
       }
 
@@ -136,8 +165,18 @@ import SocialMediaNav from "./SocialMediaNav.astro";
     .floating-header {
       .container {
         padding: 12px 24px !important;
-        img {
-          width: 120px !important;
+        .left-side {
+          gap: 40px;
+          #wuru-logo {
+            width: 120px !important;
+          }
+          .typo-nav {
+            display: none;
+          }
+          .icon-nav {
+            display: flex;
+            gap: 40px;
+          }
         }
       }
     }
