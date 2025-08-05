@@ -172,10 +172,18 @@ const {
     }
   }
 
-  @media only screen and (max-width: 1024px) {
+  @media only screen and (max-width: 1024px) and (min-width: 769px) {
     .step-info-container {
       margin-left: 8% !important;
       margin-right: 8% !important;
+
+      h2 {
+        font-size: 24px;
+      }
+
+      p {
+        font-size: 14px;
+      }
     }
     .step-info-container.invert {
       margin-left: 8% !important;

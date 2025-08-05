@@ -1,12 +1,20 @@
 ---
 interface Props {
   parallaxSpeed?: number;
+  zIndex?: number;
+  layerBLur?: number;
+  horizontalParallax?: boolean;
 }
 
-const { parallaxSpeed = 0.2 } = Astro.props;
+const { parallaxSpeed = 0.2, zIndex = 1, layerBLur = 0, horizontalParallax = false } = Astro.props;
 ---
 
-<div class="parallax" data-parallax-speed={parallaxSpeed}>
+<div
+  class="parallax"
+  data-parallax-speed={parallaxSpeed}
+  data-horizontal-parallax={horizontalParallax}
+  style=`z-index: ${zIndex}; filter: blur(${layerBLur}px);`
+>
   <slot />
 </div>
 
@@ -22,8 +30,13 @@ const { parallaxSpeed = 0.2 } = Astro.props;
 
           // Obtiene el parallaxSpeed desde el atributo data
           const speed = parseFloat(background.dataset.parallaxSpeed || "0.2");
+          const horizontalParallax = background.dataset.horizontalParallax === "true";
 
-          background.style.transform = `translate3d(0,${-offsetTop * speed}px,0)`;
+          if (horizontalParallax) {
+            background.style.transform = `translate3d(${-offsetTop * speed}px, 0, 0)`;
+          } else {
+            background.style.transform = `translate3d(0,${-offsetTop * speed}px,0)`;
+          }
         }
       });
     });

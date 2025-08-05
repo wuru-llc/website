@@ -10,9 +10,16 @@ import BrainIcon from "../assets/images/brain.svg";
 import TimeIcon from "../assets/images/time.svg";
 import VitalIcon from "../assets/images/vital.svg";
 import ImageParallax from "../components/ImageParallax.astro";
-import image1 from "../assets/images/1p.webp";
-import image2 from "../assets/images/2p.webp";
-import image3 from "../assets/images/3p.webp";
+
+import image1 from "../assets/images/send.png";
+
+import image2 from "../assets/images/infusion1.png";
+import image2b from "../assets/images/infusion2.png";
+
+import image3a from "../assets/images/assist01.png";
+import image3b from "../assets/images/assist02.png";
+import image3c from "../assets/images/assist03.png";
+
 import chat from "../assets/images/chat.svg";
 import surgeon from "../assets/images/surgeon.svg";
 import infusion from "../assets/images/infusion.svg";
@@ -125,6 +132,166 @@ const solutionInfo = [
 
     setupObserver();
   });
+
+  // Infinite list effect
+  const initInfiniteList = () => {
+    const listContainer = document.getElementById("infinite-list");
+    if (!listContainer) return;
+
+    let cardCount = 0;
+
+    const createCard = () => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const isCompact = window.innerWidth <= 1200;
+
+      // Estilos inline necesarios para elementos dinámicos
+      card.style.cssText = `
+        background: #44444450;
+        border: 1px solid #555;
+        border-radius: 16px;
+        padding: ${isCompact ? "12px" : "16px"};
+        height: ${isCompact ? "40px" : "50px"};
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+        margin-bottom: 12px;
+        opacity: 0;
+        transform: translateY(100px);
+        transition: all 0.4s ease;
+        position: absolute;
+        bottom: -100px;
+      `;
+
+      // Create data layout: multiple bars + dot
+      const barsContainer = document.createElement("div");
+      barsContainer.style.cssText = `
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      `;
+
+      // Create 2-3 bars stacked vertically
+      const numBars = Math.floor(Math.random() * 2) + 2; // 2 or 3 bars
+      for (let i = 0; i < numBars; i++) {
+        const bar = document.createElement("div");
+        bar.style.cssText = `
+          height: 4px;
+          background: #ec5a3d;
+          border-radius: 2px;
+          width: ${Math.floor(Math.random() * 60) + 40}px;
+          opacity: ${0.4 + i * 0.3}; // Different opacity for each bar
+        `;
+        barsContainer.appendChild(bar);
+      }
+
+      const dot = document.createElement("div");
+      dot.style.cssText = `
+        width: 16px;
+        height: 16px;
+        background: #ff6b35;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 6px;
+        color: white;
+        font-weight: bold;
+        transition: all 0.8s ease-in-out;
+      `;
+
+      // Animate dot color transitions and checkmark
+      setTimeout(() => {
+        dot.style.background = "#00bcd4"; // cyan
+      }, 2500);
+
+      setTimeout(() => {
+        dot.style.background = "#4ade80"; // green
+      }, 7000);
+
+      setTimeout(() => {
+        dot.innerHTML = "✓";
+        dot.style.fontSize = "10px";
+        dot.style.background = "#2d5a3d";
+        dot.style.color = "#4ade80";
+      }, 8500);
+
+      card.appendChild(barsContainer);
+      card.appendChild(dot);
+
+      listContainer.appendChild(card);
+
+      // Get container height to know when to remove cards
+      const containerHeight = listContainer.clientHeight;
+
+      // Animate existing cards up and check for removal
+      const existingCards = listContainer.querySelectorAll(".card");
+      existingCards.forEach((existingCard) => {
+        if (existingCard !== card) {
+          const currentBottom = parseInt(existingCard.style.bottom || "0");
+          const newBottom = currentBottom + (isCompact ? 52 : 62); // Compact: 40px + 12px gap, Normal: 50px + 12px gap
+          existingCard.style.bottom = `${newBottom}px`;
+
+          // Remove card if it's moved completely out of view
+          if (newBottom > containerHeight + 100) {
+            setTimeout(() => {
+              if (existingCard.parentNode) {
+                existingCard.remove();
+              }
+            }, 400); // Wait for animation to complete
+          }
+        }
+      });
+
+      // Animate new card in from below
+      setTimeout(() => {
+        card.style.bottom = "0px";
+        card.style.opacity = "1";
+        card.style.transform = "translateY(0)";
+      }, 100);
+
+      cardCount++;
+    };
+
+    // Start infinite card generation when section comes into view
+    const startInfiniteList = () => {
+      let cardInterval;
+
+      // Start with accelerated speed for first 3 seconds
+      cardInterval = setInterval(() => {
+        createCard();
+      }, 200); // Accelerated: new card every 200ms (6x speed)
+
+      // After 3 seconds, switch to normal speed
+      setTimeout(() => {
+        clearInterval(cardInterval);
+
+        cardInterval = setInterval(() => {
+          createCard();
+        }, 1200); // Normal: new card every 1.2 seconds
+      }, 3000);
+    };
+
+    // Observer to start when section is visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            startInfiniteList();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(document.getElementById("qx-section"));
+  };
+
+  document.addEventListener("DOMContentLoaded", initInfiniteList);
 </script>
 
 <Layout title="Wúru | Productos">
@@ -203,12 +370,41 @@ const solutionInfo = [
     </AnimatedItem>
   </section>
 
-  <section class="product-big-features">
+  <div class="product-big-features">
     <div class="product-descrtiption" id="qx-section">
       <div class="img-container">
-        <ImageParallax>
-          <Image src={image1} alt="Parallax image 1" width={1200} loading={"lazy"} />
-        </ImageParallax>
+        <div class="left-side">
+          {
+            Array.from({ length: 150 }, (_, i) => {
+              const scale = 0.3 + Math.random() * 0.9; // 0.3 a 1.2
+              const yOffset = Math.random() * 100; // 0% a 100%
+              const xOffset = Math.random() * 100 + 25; // 0% a 100% +25%
+              const parallaxSpeed = 2.2 - scale * 1.5; // más chico = más rápido (2 a 0.4 aprox)
+              const blur = (1.2 - scale) * 5.56; // 0px a 5px (cuando scale=1.2 → blur=0, cuando scale=0.3 → blur=5)
+
+              return (
+                <span
+                  class="png-container"
+                  style={`
+                    position: absolute;
+                    top: ${yOffset}%;
+                    left: ${xOffset}%;
+                    transform: scale(${scale}) rotate(-25deg);
+                  `}
+                >
+                  <ImageParallax parallaxSpeed={parallaxSpeed} zIndex={1} horizontalParallax={true} layerBLur={blur}>
+                    <Image src={image1} alt={`Parallax image ${i + 1}`} height={48} width={57} loading="lazy" />
+                  </ImageParallax>
+                </span>
+              );
+            })
+          }
+        </div>
+        <div class="right-side">
+          <div class="infinite-list" id="infinite-list">
+            <!-- Cards will be dynamically added here -->
+          </div>
+        </div>
       </div>
       <StepInfo title={solutionInfo[0].title} description={solutionInfo[0].description} items={solutionInfo[0].items}>
         <div class="icon-container">
@@ -223,19 +419,80 @@ const solutionInfo = [
         <div class="icon-container">
           <Image src={infusion} alt="brain" height={24} loading={"eager"} />
           Centros de Infusión
-        </div></StepInfo
-      >
+        </div>
+      </StepInfo>
+      <div class="mobile-only">
+        <StepInfo title={solutionInfo[1].title} description={solutionInfo[1].description} items={solutionInfo[1].items}>
+          <div class="icon-container">
+            <Image src={infusion} alt="brain" height={24} loading={"eager"} />
+            Centros de Infusión
+          </div>
+        </StepInfo>
+      </div>
       <div class="img-container">
-        <ImageParallax>
-          <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+        <ImageParallax parallaxSpeed={0.3} zIndex={1} layerBLur={1.4}>
+          <span style="transform: translateX(-10%)  scale(0.4);">
+            <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.25} zIndex={2} layerBLur={1.1}>
+          <span style="transform: translateX(35%)  scale(0.5);">
+            <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={0.4} zIndex={2} layerBLur={1.05}>
+          <span style="transform: translateX(-20%)  scale(0.6);">
+            <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.15} zIndex={3}>
+          <span style="transform: translateX(-35%)  scale(0.7);">
+            <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={0.2} zIndex={3}>
+          <span style="transform: translateX(5%) scale(0.8);">
+            <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.3} zIndex={4}>
+          <span style="transform: translateX(15%) scale(1.5);">
+            <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.35} horizontalParallax={true} zIndex={1} layerBLur={1.05}>
+          <span style="transform: translateY(-8%) scale(0.6) rotate(90deg)">
+            <Image src={image2b} alt="Parallax image 2b" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.2} horizontalParallax={true} zIndex={2} layerBLur={1.01}>
+          <span style="transform: translateY(5%)  scale(1) rotate(90deg)">
+            <Image src={image2b} alt="Parallax image 2b" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={0.25} horizontalParallax={true} zIndex={3}>
+          <span style="transform: translateY(10%) scale(1.2) rotate(90deg)">
+            <Image src={image2b} alt="Parallax image 2b" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={0.25} horizontalParallax={true} zIndex={3}>
+          <span style="transform: translateY(-1%) scale(1.2) rotate(90deg)">
+            <Image src={image2b} alt="Parallax image 2b" width={1200} loading={"lazy"} />
+          </span>
         </ImageParallax>
       </div>
     </div>
 
     <div class="product-descrtiption" id="assistant-section">
       <div class="img-container">
-        <ImageParallax>
-          <Image src={image3} alt="Parallax image 3" width={1200} loading={"lazy"} />
+        <ImageParallax parallaxSpeed={0.05}>
+          <Image src={image3a} alt="Parallax image 3a" width={1200} loading={"lazy"} />
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.2}>
+          <Image src={image3b} alt="Parallax image 3b" width={1200} loading={"lazy"} />
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.3}>
+          <Image src={image3c} alt="Parallax image 3c" width={1200} loading={"lazy"} />
         </ImageParallax>
       </div>
       <StepInfo title={solutionInfo[2].title} description={solutionInfo[2].description} items={solutionInfo[2].items}>
@@ -245,7 +502,7 @@ const solutionInfo = [
         </div>
       </StepInfo>
     </div>
-  </section>
+  </div>
 
   <div class="text-banner-container">
     <h1><span style="opacity: 0.5">Transformando los </span>flujos de trabajo<span style="opacity: 0.5"> en salud</span></h1>
@@ -254,9 +511,9 @@ const solutionInfo = [
       Contáctanos para una demostración personalizada y descubre cómo nuestras soluciones pueden mejorar la eficiencia y la calidad de atención en tu
       institución.
     </p>
-  </div>
-  <Footer />
-</Layout>
+  </div></Layout
+>
+<Footer />
 
 <style lang="scss">
   @keyframes text-in-slide {
@@ -583,79 +840,140 @@ const solutionInfo = [
         }
       }
     }
-  }
 
-  @keyframes parallax {
-    from {
-      opacity: 0;
-      transform: translateY(400px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(-100px);
-    }
-  }
-
-  @media only screen and (max-width: 1024px) {
-    .solutions-hero {
-      .top {
-        height: 70vh;
-        flex-direction: column-reverse;
-        .left-side {
-          align-items: center;
+    #qx-section {
+      .img-container {
+        background-color: #4a3444;
+        background-image: radial-gradient(#ffffff2d 1px, transparent 1px);
+        background-size: 12px 12px;
+        :global(.parallax) {
+          position: absolute !important;
+          display: flex;
           justify-content: center;
-          h3 {
-            text-align: center;
-            width: 100%;
-          }
         }
-        .scroll-to-btn {
-          bottom: 0px !important;
+        .png-container img {
+          width: unset;
+          height: unset;
+          object-fit: unset;
         }
-      }
-      .card-container {
-        .card {
-          flex-direction: column;
-          height: 300px !important;
-        }
-      }
-    }
-    .product-big-features {
-      margin: 24px;
-    }
-    .text-banner-container {
-      .bottom-text {
-        font-size: 24px !important;
-      }
-    }
-    :global(.step-info-container) {
-      max-width: 90% !important;
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    .product-feature {
-      .content {
-        display: unset !important;
-        grid-template-columns: unset !important;
-
         .left-side {
-          width: 100%;
-          display: flex !important;
-          flex-direction: column !important;
+          width: 50%;
+          height: 100%;
+          position: relative;
           overflow: hidden;
-
-          .mobile {
-            display: block !important;
-          }
         }
         .right-side {
-          display: none;
+          width: 50%;
+          height: 100%;
+          background-color: #1c1c1c;
+          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+          padding: 24px;
+          overflow: hidden;
+        }
+        .infinite-list {
+          height: 100%;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          position: relative;
+        }
+        .card {
+          background: #444;
+          border: 1px solid #555;
+          border-radius: 16px;
+          padding: 16px;
+          height: 50px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-shrink: 0;
+          margin-bottom: 12px;
+          opacity: 0;
+          transform: translateY(100px);
+          transition: all 0.6s ease;
+          position: absolute;
+          bottom: -100px;
+
+          &.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+            bottom: 0;
+          }
+
+          .data-bar {
+            height: 4px;
+            background: #ec5a3d;
+            border-radius: 2px;
+          }
+
+          .data-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+          }
+
+          .data-line {
+            width: 2px;
+            background: #666;
+            border-radius: 1px;
+          }
+        }
+      }
+    }
+    #infusion-section {
+      .img-container {
+        background-color: #4a3444;
+        opacity: 1;
+        background-size: 32px 32px;
+        background-image: url("../assets/images/drop.png");
+        position: relative;
+
+        :global(.parallax) {
+          position: absolute !important;
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+    #assistant-section {
+      .img-container {
+        background-color: #344a43;
+        opacity: 1;
+        background:
+          radial-gradient(circle, transparent 20%, #344a43 20%, #344a43 80%, transparent 80%, transparent),
+          radial-gradient(circle, transparent 20%, #344a43 20%, #344a43 80%, transparent 80%, transparent) 15px 15px,
+          linear-gradient(#627968 1.2000000000000002px, transparent 1.2000000000000002px) 0 -0.6000000000000001px,
+          linear-gradient(90deg, #627968 1.2000000000000002px, #344a43 1.2000000000000002px) -0.6000000000000001px 0;
+        background-size:
+          30px 30px,
+          30px 30px,
+          15px 15px,
+          15px 15px;
+
+        position: relative;
+        :global(.parallax) {
+          position: absolute !important;
+          display: flex;
+          justify-content: center;
+        }
+        :global(.parallax:nth-child(1)) img {
+          width: 100%;
+          transform: translateY(20vh);
+        }
+        :global(.parallax:nth-child(2)) img {
+          width: 50%;
+          transform: translateY(10vh);
+        }
+        :global(.parallax:nth-child(3)) img {
+          width: 70%;
+          transform: translateY(20vh);
         }
       }
     }
   }
-
   .text-banner-container {
     width: 100%;
     height: 50vh;
@@ -696,5 +1014,316 @@ const solutionInfo = [
     justify-content: center;
     gap: 8px;
     font-weight: 600;
+  }
+
+  @keyframes parallax {
+    from {
+      opacity: 0;
+      transform: translateY(400px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(-100px);
+    }
+  }
+
+  @media only screen and (max-width: 1200px) {
+    #qx-section {
+      .img-container {
+        .card {
+          height: 40px !important;
+          padding: 12px !important;
+        }
+        .left-side {
+          .png-container img {
+            transform: scale(0.6);
+          }
+        }
+      }
+    }
+    #assistant-section {
+      .img-container {
+        :global(.parallax:nth-child(2)) img {
+          width: 70% !important;
+        }
+        :global(.parallax:nth-child(3)) img {
+          width: 90% !important;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    .solutions-hero {
+      padding-top: 5vh;
+      .top {
+        height: 80vh;
+        flex-direction: column-reverse;
+        .left-side {
+          align-items: center;
+          justify-content: center;
+          h3 {
+            text-align: center;
+            width: 100%;
+          }
+        }
+        .scroll-to-btn {
+          bottom: 0px !important;
+        }
+      }
+      .card-container {
+        .card {
+          flex-direction: column;
+          height: 300px !important;
+        }
+      }
+    }
+    .product-big-features {
+      margin: 24px;
+      .product-descrtiption {
+        .img-container {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .text-banner-container {
+      .bottom-text {
+        font-size: 20px !important;
+        width: 80% !important;
+      }
+    }
+    :global(.step-info-container) {
+      max-width: 90% !important;
+      padding: 16px !important;
+    }
+    :global(.step-info-container h2) {
+      font-size: 28px !important;
+    }
+    :global(.step-info-container p) {
+      font-size: 14px !important;
+    }
+    :global(.icon-container) {
+      padding: 0 !important;
+      background-color: transparent !important;
+      border: none !important;
+    }
+  }
+
+  #infusion-section .mobile-only {
+    width: 100%;
+    display: none !important;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .floating-solutions-nav-container {
+      .solutions-nav {
+        font-size: 12px;
+        .solutions-scroll-link {
+          width: 200px;
+        }
+        .button-pill {
+          width: 200px;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .floating-solutions-nav-container {
+      .solutions-nav {
+        font-size: 11px;
+        .solutions-scroll-link {
+          width: 120px;
+          position: relative;
+          color: transparent;
+          &[data-target="qx-section"]::after {
+            content: "QUIRÓFANO";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #f1f1f1;
+            font-size: 11px;
+          }
+          &[data-target="infusion-section"]::after {
+            content: "INFUSIÓN";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #f1f1f1;
+            font-size: 11px;
+          }
+          &[data-target="assistant-section"]::after {
+            content: "ASISTENTE";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #f1f1f1;
+            font-size: 11px;
+          }
+        }
+        .button-pill {
+          width: 120px;
+        }
+      }
+    }
+    .solutions-hero {
+      .top {
+        .left-side {
+          width: 90%;
+
+          h1 {
+            font-size: 32px !important;
+            text-align: center !important;
+          }
+          span {
+            font-size: 40px !important;
+          }
+        }
+      }
+      .bottom {
+        padding: 24px !important;
+        .text-container {
+          h2 {
+            font-size: 24px;
+          }
+        }
+        .card-container {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 24px !important;
+          .card {
+            height: 200px !important;
+            p {
+              font-size: 16px !important;
+            }
+          }
+        }
+      }
+    }
+
+    #qx-section {
+      .img-container {
+        .right-side {
+          padding: 12px !important;
+        }
+      }
+    }
+
+    #infusion-section > :global(.step-info-container) {
+      display: none !important;
+    }
+    #infusion-section > .mobile-only {
+      display: block !important;
+    }
+
+    .product-big-features {
+      .product-descrtiption {
+        display: flex !important;
+        flex-direction: column !important;
+        .img-container {
+          width: 100%;
+          aspect-ratio: 4/3;
+          order: 2;
+        }
+      }
+    }
+    :global(.step-info-container) {
+      order: 1 !important;
+      width: 100% !important;
+      padding: 10% !important;
+      min-height: 600px !important;
+    }
+
+    .text-banner-container {
+      h1 {
+        font-size: 32px !important;
+      }
+      .bottom-text {
+        font-size: 16px !important;
+        line-height: 24px !important;
+      }
+    }
+    .product-feature {
+      .content {
+        display: unset !important;
+        grid-template-columns: unset !important;
+
+        .left-side {
+          width: 100%;
+          display: flex !important;
+          flex-direction: column !important;
+          overflow: hidden;
+
+          .mobile {
+            display: block !important;
+          }
+        }
+        .right-side {
+          display: none;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .floating-solutions-nav-container {
+      .solutions-nav {
+        .solutions-scroll-link {
+          width: 80px;
+          &[data-target="qx-section"]::after {
+            content: "QX";
+          }
+          &[data-target="infusion-section"]::after {
+            content: "INF";
+          }
+          &[data-target="assistant-section"]::after {
+            content: "AST";
+          }
+        }
+        .button-pill {
+          width: 80px;
+        }
+      }
+    }
+    .solutions-hero {
+      .top {
+        .right-side {
+          width: 80%;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+        .left-side {
+          h1 {
+            font-size: 28px !important;
+            text-align: center !important;
+          }
+          span {
+            font-size: 32px !important;
+          }
+          h3 {
+            font-size: 20px !important;
+          }
+        }
+        .scroll-to-btn {
+          display: none !important;
+        }
+      }
+      .bottom {
+        .text-container {
+          h2 {
+            font-size: 16px;
+          }
+        }
+        .card-container {
+          .card {
+            height: 250px !important;
+          }
+        }
+      }
+    }
   }
 </style>
