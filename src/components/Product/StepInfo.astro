@@ -4,30 +4,52 @@ import AnimatedItem from "../AnimatedItem.astro";
 interface Props {
   title?: string;
   description?: string;
+  itemsTitles?: string[];
   items?: string[];
+  invert?: boolean;
+  marginLeft?: string;
+  marginRight?: string;
+  maxWidth?: string;
 }
 
-const { title = "", description = "", items = [] } = Astro.props;
+const {
+  title = "",
+  description = "",
+  itemsTitles = [],
+  items = [],
+  invert = false,
+  marginLeft = "15%",
+  marginRight = "0",
+  maxWidth = "70%",
+} = Astro.props;
 ---
 
-<div class="step-info-container">
-  <AnimatedItem animation="translateX(20px)">
+<div
+  class={`step-info-container${invert ? " invert" : ""}`}
+  style={`margin-left: ${marginLeft}; margin-right: ${marginRight}; max-width: ${maxWidth};`}
+>
+  <slot />
+  <AnimatedItem animation={invert ? "translateX(-20px)" : "translateX(20px)"}>
     <h2>{title}</h2>
   </AnimatedItem>
-  <AnimatedItem animation="translateX(20px)" delay="0.2s">
-    <p>
-      {description}
-    </p>
+  <AnimatedItem animation={invert ? "translateX(-20px)" : "translateX(20px)"} delay="0.2s">
+    <p>{description}</p>
   </AnimatedItem>
   <AnimatedItem animation="translateY(0px)" delay="0.3s">
     <ul class="items">
       <div class="line"></div>
       {
-        items.map((item, index) => (
-          <AnimatedItem delay={`${0.1 * index + 0.3}s`} animation="translateX(10px)" duration="0.2s">
-            <li>{item}</li>
-          </AnimatedItem>
-        ))
+        items.map((item, index) => {
+          const title = itemsTitles[index];
+          return (
+            <AnimatedItem delay={`${0.1 * index + 0.3}s`} animation={invert ? "translateX(-10px)" : "translateX(10px)"} duration="0.2s">
+              <li>
+                {title && <span class="item-title">{title} </span>}
+                {item}
+              </li>
+            </AnimatedItem>
+          );
+        })
       }
     </ul>
   </AnimatedItem>
@@ -42,28 +64,33 @@ const { title = "", description = "", items = [] } = Astro.props;
     justify-content: center;
     align-content: center;
     color: #f1f1f1;
-    max-width: 70%;
     min-width: 300px;
-    margin-left: 15%;
-    gap: min(5%, 24px);
+    gap: min(5vh, 24px);
     overflow: hidden;
+    text-align: left;
 
     h2 {
       margin: 0;
       font-size: 40px;
       font-weight: 700;
     }
+
     p {
       margin: 0;
       font-size: 20px;
       text-wrap: pretty;
-      line-height: 28px;
+      line-height: 32px;
     }
+
     ul {
       margin: 0;
       padding: 0;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
       .line {
         position: absolute;
         left: 0;
@@ -80,18 +107,49 @@ const { title = "", description = "", items = [] } = Astro.props;
         list-style: none;
         margin: 0;
         padding: 0;
-        opacity: 0.5;
-        line-height: 32px;
+        opacity: 0.7;
+        line-height: 28px;
         margin-left: 24px;
+        text-align: left;
+        .item-title {
+          font-weight: 900;
+          font-size: 20px;
+          margin-top: 16px;
+          display: block;
+          color: #ec5a3d;
+        }
       }
     }
   }
 
+  // Cuando invertimos
+  .step-info-container.invert {
+    align-items: flex-end;
+    margin-left: 0;
+    margin-right: 15%;
+    text-align: right;
+
+    ul {
+      .line {
+        left: auto;
+        right: 0;
+      }
+
+      li {
+        margin-left: 0;
+        margin-right: 24px;
+        text-align: right;
+      }
+    }
+  }
+
+  // Media queries
   @media only screen and (max-width: 1400px) {
     .step-info-container {
-      margin-left: 12%;
+      margin-left: 12% !important;
+      margin-right: 12% !important;
+
       max-width: 80%;
-      min-width: 300px;
       gap: 12px;
 
       h2 {
@@ -101,55 +159,62 @@ const { title = "", description = "", items = [] } = Astro.props;
         font-size: 16px;
         line-height: 20px;
       }
-      ul {
-        li {
-          font-size: 14px;
-          line-height: 20px;
-        }
+      ul li {
+        font-size: 14px;
+        line-height: 20px;
       }
     }
+
+    .step-info-container.invert {
+      margin-left: 12% !important;
+
+      margin-right: 12% !important;
+    }
   }
-  @media only screen and (max-width: 1024px) {
+
+  @media only screen and (max-width: 1024px) and (min-width: 769px) {
     .step-info-container {
-      margin-left: 8%;
-      max-width: 80%;
-      min-width: 200px;
+      margin-left: 8% !important;
+      margin-right: 8% !important;
 
       h2 {
         font-size: 24px;
       }
+
       p {
         font-size: 14px;
       }
-      ul {
-        li {
-          font-size: 14px;
-          line-height: 20px;
-        }
-      }
+    }
+    .step-info-container.invert {
+      margin-left: 8% !important;
+      margin-right: 8% !important;
     }
   }
 
   @media only screen and (max-width: 768px) {
     .step-info-container {
       padding: 10%;
-      margin: 0;
-      aspect-ratio: 4/3;
-      align-content: center;
+      margin: 0 !important;
       min-width: 100%;
       min-height: 400px;
+      aspect-ratio: 4/3;
+
       h2 {
         font-size: 28px;
       }
+
       p {
         font-size: 14px;
       }
-      ul {
-        li {
-          font-size: 14px;
-          line-height: 20px;
-        }
+
+      ul li {
+        font-size: 14px;
+        line-height: 20px;
       }
+    }
+
+    .step-info-container.invert {
+      align-items: flex-end;
     }
   }
 

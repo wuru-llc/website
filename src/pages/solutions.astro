@@ -1,0 +1,1329 @@
+---
+import { Image } from "astro:assets";
+import BallLoop from "../../src/assets/images/ball-looped.png";
+import Footer from "../components/Footer/Footer.astro";
+import FloatingHeader from "../components/Header/FloatingHeader.astro";
+import Header from "../components/Header/Header.astro";
+import Layout from "../layouts/Base.astro";
+
+import BrainIcon from "../assets/images/brain.svg";
+import TimeIcon from "../assets/images/time.svg";
+import VitalIcon from "../assets/images/vital.svg";
+import ImageParallax from "../components/ImageParallax.astro";
+
+import image1 from "../assets/images/send.png";
+
+import image2 from "../assets/images/infusion1.png";
+import image2b from "../assets/images/infusion2.png";
+
+import image3a from "../assets/images/assist01.png";
+import image3b from "../assets/images/assist02.png";
+import image3c from "../assets/images/assist03.png";
+
+import chat from "../assets/images/chat.svg";
+import surgeon from "../assets/images/surgeon.svg";
+import infusion from "../assets/images/infusion.svg";
+
+import StepInfo from "../components/Product/StepInfo.astro";
+import AnimatedItem from "../components/AnimatedItem.astro";
+import ScrollDown from "../components/Hero/ScrollDown.astro";
+
+const solutionInfo = [
+  {
+    title: "Wúru para Quirófanos",
+    description:
+      "Optimice la programación, el flujo de pacientes y la utilización de recursos en entornos quirúrgicos con nuestra solución especializada.",
+    items: [
+      "Programación inteligente que reduce tiempos de espera y maximiza la utilización de quirófanos",
+      "Coordinación en tiempo real entre equipos quirúrgicos, anestesia y personal de apoyo",
+      "Análisis predictivo para anticipar necesidades de recursos y prevenir cuellos de botella",
+    ],
+  },
+  {
+    title: "Wúru para Centros de Infusión",
+    description:
+      "Mejore la eficiencia y la experiencia del paciente en centros de infusión con nuestra solución adaptada a sus necesidades específicas.",
+    items: [
+      "Gestión optimizada de citas que reduce tiempos de espera y mejora la utilización de sillones",
+      "Seguimiento automatizado de medicamentos y suministros para prevenir escasez",
+      "Monitoreo en tiempo real de pacientes para mejorar la seguridad y la calidad de atención",
+      "Prevención de errores",
+    ],
+  },
+  {
+    title: "Agente de WhatsApp",
+    description: "Simplifique la comunicación y automatice tareas rutinarias con nuestro asistente virtual integrado con WhatsApp, disponible 24/7.",
+    itemsTitles: ["Reserva de espacios", "Solicitud de informes", "Confirmaciones automáticas", "Asistente inteligente"],
+    items: [
+      "Los cirujanos pueden consultar disponibilidad y reservar quirófanos directamente desde WhatsApp con confirmación instantánea.",
+      "Acceso rápido a reportes operativos, estadísticas y documentación clínica mediante comandos sencillos.",
+      "Envío de recordatorios, confirmaciones y notificaciones de cambios en la programación quirúrgica.",
+      "Respuestas contextuales basadas en IA que mejoran con cada interacción, proporcionando información precisa y relevante.",
+    ],
+  },
+];
+---
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll(".solutions-scroll-link");
+    const sections = document.querySelectorAll("section");
+    const buttonPill = document.querySelector(".button-pill");
+
+    let isScrollingFromClick = false;
+    let observer;
+
+    function movePillTo(link) {
+      const newLeft = link.offsetLeft;
+      buttonPill.style.left = `${newLeft}px`;
+
+      if (!buttonPill.classList.contains("visible")) {
+        buttonPill.classList.add("visible");
+      }
+    }
+
+    function setupObserver() {
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.8,
+      };
+
+      observer = new IntersectionObserver((entries) => {
+        if (isScrollingFromClick) return;
+
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+
+            if (id === "solutions-hero") {
+              buttonPill.classList.remove("visible");
+            } else {
+              const activeLink = document.querySelector(`.solutions-scroll-link[data-target="${id}"]`);
+              if (activeLink) {
+                movePillTo(activeLink);
+              }
+            }
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => observer.observe(section));
+    }
+
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        isScrollingFromClick = true;
+        movePillTo(link);
+
+        // Navega y centra la sección en pantalla
+        const targetId = link.getAttribute("data-target");
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+
+        setTimeout(() => {
+          isScrollingFromClick = false;
+        }, 700);
+      });
+    });
+
+    setupObserver();
+  });
+
+  // Infinite list effect
+  const initInfiniteList = () => {
+    const listContainer = document.getElementById("infinite-list");
+    if (!listContainer) return;
+
+    let cardCount = 0;
+
+    const createCard = () => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const isCompact = window.innerWidth <= 1200;
+
+      // Estilos inline necesarios para elementos dinámicos
+      card.style.cssText = `
+        background: #44444450;
+        border: 1px solid #555;
+        border-radius: 16px;
+        padding: ${isCompact ? "12px" : "16px"};
+        height: ${isCompact ? "40px" : "50px"};
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+        margin-bottom: 12px;
+        opacity: 0;
+        transform: translateY(100px);
+        transition: all 0.4s ease;
+        position: absolute;
+        bottom: -100px;
+      `;
+
+      // Create data layout: multiple bars + dot
+      const barsContainer = document.createElement("div");
+      barsContainer.style.cssText = `
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      `;
+
+      // Create 2-3 bars stacked vertically
+      const numBars = Math.floor(Math.random() * 2) + 2; // 2 or 3 bars
+      for (let i = 0; i < numBars; i++) {
+        const bar = document.createElement("div");
+        bar.style.cssText = `
+          height: 4px;
+          background: #ec5a3d;
+          border-radius: 2px;
+          width: ${Math.floor(Math.random() * 60) + 40}px;
+          opacity: ${0.4 + i * 0.3}; // Different opacity for each bar
+        `;
+        barsContainer.appendChild(bar);
+      }
+
+      const dot = document.createElement("div");
+      dot.style.cssText = `
+        width: 16px;
+        height: 16px;
+        background: #ff6b35;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 6px;
+        color: white;
+        font-weight: bold;
+        transition: all 0.8s ease-in-out;
+      `;
+
+      // Animate dot color transitions and checkmark
+      setTimeout(() => {
+        dot.style.background = "#00bcd4"; // cyan
+      }, 2500);
+
+      setTimeout(() => {
+        dot.style.background = "#4ade80"; // green
+      }, 7000);
+
+      setTimeout(() => {
+        dot.innerHTML = "✓";
+        dot.style.fontSize = "10px";
+        dot.style.background = "#2d5a3d";
+        dot.style.color = "#4ade80";
+      }, 8500);
+
+      card.appendChild(barsContainer);
+      card.appendChild(dot);
+
+      listContainer.appendChild(card);
+
+      // Get container height to know when to remove cards
+      const containerHeight = listContainer.clientHeight;
+
+      // Animate existing cards up and check for removal
+      const existingCards = listContainer.querySelectorAll(".card");
+      existingCards.forEach((existingCard) => {
+        if (existingCard !== card) {
+          const currentBottom = parseInt(existingCard.style.bottom || "0");
+          const newBottom = currentBottom + (isCompact ? 52 : 62); // Compact: 40px + 12px gap, Normal: 50px + 12px gap
+          existingCard.style.bottom = `${newBottom}px`;
+
+          // Remove card if it's moved completely out of view
+          if (newBottom > containerHeight + 100) {
+            setTimeout(() => {
+              if (existingCard.parentNode) {
+                existingCard.remove();
+              }
+            }, 400); // Wait for animation to complete
+          }
+        }
+      });
+
+      // Animate new card in from below
+      setTimeout(() => {
+        card.style.bottom = "0px";
+        card.style.opacity = "1";
+        card.style.transform = "translateY(0)";
+      }, 100);
+
+      cardCount++;
+    };
+
+    // Start infinite card generation when section comes into view
+    const startInfiniteList = () => {
+      let cardInterval;
+
+      // Start with accelerated speed for first 3 seconds
+      cardInterval = setInterval(() => {
+        createCard();
+      }, 200); // Accelerated: new card every 200ms (6x speed)
+
+      // After 3 seconds, switch to normal speed
+      setTimeout(() => {
+        clearInterval(cardInterval);
+
+        cardInterval = setInterval(() => {
+          createCard();
+        }, 1200); // Normal: new card every 1.2 seconds
+      }, 3000);
+    };
+
+    // Observer to start when section is visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            startInfiniteList();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(document.getElementById("qx-section"));
+  };
+
+  document.addEventListener("DOMContentLoaded", initInfiniteList);
+</script>
+
+<Layout title="Wúru | Productos">
+  <Header />
+  <FloatingHeader />
+
+  <div class="floating-solutions-nav-container">
+    <span class="solutions-nav">
+      <a href="#qx-section" class="solutions-scroll-link" data-target="qx-section">QUIRÓFANOS</a>
+      <a href="#infusion-section" class="solutions-scroll-link" data-target="infusion-section">CENTROS DE INFUSIÓN</a>
+      <a href="#assistant-section" class="solutions-scroll-link" data-target="assistant-section">ASISTENTE VIRTUAL</a>
+
+      <div class="button-pill">
+        <span class="back-color"></span>
+      </div>
+    </span>
+  </div>
+  <section class="solutions-hero" id="solutions-hero">
+    <div class="top">
+      <div class="left-side">
+        <h1>Soluciones de <span class="IA">IA</span></h1>
+        <h1 style="animation-delay: 0.1s;">para el sector de la salud</h1>
+        <div class="line" style="margin-top: 32px;"></div>
+
+        <h3 style=" margin-top: 32px; animation-delay: 0.3s;">Transformando la atención médica</h3>
+        <h3 style="animation-delay: 0.4s;">con flujos de trabajo inteligentes y automatizados</h3>
+      </div>
+      <div class="right-side">
+        <Image src={BallLoop} alt="ball-loop" height={300} class="ball-loop" loading={"eager"} />
+      </div>
+      <span class="scroll-to-btn">
+        <ScrollDown scrollDownTo="#hero-bottom" />
+      </span>
+    </div>
+    <AnimatedItem animation="translateY(10px)" showPoint={0.7}>
+      <div class="bottom" id="hero-bottom">
+        <div class="text-container">
+          <h2>
+            Nuestra <strong class="highlight">plataforma</strong> impulsada por <strong class="highlight"
+              ><span style="color: #ec5a3d ;">IA </span>automatiza tareas repetitivas</strong
+            >,
+            <span style="color: #ec5a3d ;">optimiza flujos de trabajo y mejora la experiencia </span>tanto para profesionales de la salud como para
+            pacientes.
+          </h2>
+        </div>
+        <div class="card-container">
+          <AnimatedItem animation="translateY(20px)" showPoint={0.5} delay="0.5s">
+            <div class="card">
+              <Image src={BrainIcon} alt="brain" height={40} loading={"eager"} />
+              <span class="card-text">
+                <h3>Inteligencia Artificial Avanzada</h3>
+                <p>Algoritmos de aprendizaje automático que se adaptan a las necesidades específicas de cada centro médico.</p>
+              </span>
+            </div>
+          </AnimatedItem>
+          <AnimatedItem animation="translateY(20px)" showPoint={0.5} delay="0.25s">
+            <div class="card">
+              <Image src={TimeIcon} alt="brain" height={40} loading={"eager"} />
+              <span class="card-text">
+                <h3>Ahorro de Tiempo</h3>
+                <p>Reducción de hasta un 40% en tareas administrativas, permitiendo más tiempo para la atención al paciente.</p>
+              </span>
+            </div>
+          </AnimatedItem>
+          <AnimatedItem animation="translateY(20px)" showPoint={0.5} delay="0.7s">
+            <div class="card">
+              <Image src={VitalIcon} alt="brain" height={40} loading={"eager"} />
+              <span class="card-text">
+                <h3>Mejora de Resultados</h3>
+                <p>Optimización de procesos que resulta en mejores resultados clínicos y mayor satisfacción del paciente.</p>
+              </span>
+            </div>
+          </AnimatedItem>
+        </div>
+      </div>
+    </AnimatedItem>
+  </section>
+
+  <div class="product-big-features">
+    <div class="product-descrtiption" id="qx-section">
+      <div class="img-container">
+        <div class="left-side">
+          {
+            Array.from({ length: 150 }, (_, i) => {
+              const scale = 0.3 + Math.random() * 0.9; // 0.3 a 1.2
+              const yOffset = Math.random() * 100; // 0% a 100%
+              const xOffset = Math.random() * 100 + 25; // 0% a 100% +25%
+              const parallaxSpeed = 2.2 - scale * 1.5; // más chico = más rápido (2 a 0.4 aprox)
+              const blur = (1.2 - scale) * 5.56; // 0px a 5px (cuando scale=1.2 → blur=0, cuando scale=0.3 → blur=5)
+
+              return (
+                <span
+                  class="png-container"
+                  style={`
+                    position: absolute;
+                    top: ${yOffset}%;
+                    left: ${xOffset}%;
+                    transform: scale(${scale}) rotate(-25deg);
+                  `}
+                >
+                  <ImageParallax parallaxSpeed={parallaxSpeed} zIndex={1} horizontalParallax={true} layerBLur={blur}>
+                    <Image src={image1} alt={`Parallax image ${i + 1}`} height={48} width={57} loading="lazy" />
+                  </ImageParallax>
+                </span>
+              );
+            })
+          }
+        </div>
+        <div class="right-side">
+          <div class="infinite-list" id="infinite-list">
+            <!-- Cards will be dynamically added here -->
+          </div>
+        </div>
+      </div>
+      <StepInfo title={solutionInfo[0].title} description={solutionInfo[0].description} items={solutionInfo[0].items}>
+        <div class="icon-container">
+          <Image src={surgeon} alt="brain" height={24} loading={"eager"} />
+          Quirófanos
+        </div>
+      </StepInfo>
+    </div>
+
+    <div class="product-descrtiption" id="infusion-section">
+      <StepInfo invert={true} title={solutionInfo[1].title} description={solutionInfo[1].description} items={solutionInfo[1].items}>
+        <div class="icon-container">
+          <Image src={infusion} alt="brain" height={24} loading={"eager"} />
+          Centros de Infusión
+        </div>
+      </StepInfo>
+      <div class="mobile-only">
+        <StepInfo title={solutionInfo[1].title} description={solutionInfo[1].description} items={solutionInfo[1].items}>
+          <div class="icon-container">
+            <Image src={infusion} alt="brain" height={24} loading={"eager"} />
+            Centros de Infusión
+          </div>
+        </StepInfo>
+      </div>
+      <div class="img-container">
+        <ImageParallax parallaxSpeed={0.3} zIndex={1} layerBLur={1.4}>
+          <span style="transform: translateX(-10%)  scale(0.4);">
+            <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.25} zIndex={2} layerBLur={1.1}>
+          <span style="transform: translateX(35%)  scale(0.5);">
+            <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={0.4} zIndex={2} layerBLur={1.05}>
+          <span style="transform: translateX(-20%)  scale(0.6);">
+            <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.15} zIndex={3}>
+          <span style="transform: translateX(-35%)  scale(0.7);">
+            <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={0.2} zIndex={3}>
+          <span style="transform: translateX(5%) scale(0.8);">
+            <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.3} zIndex={4}>
+          <span style="transform: translateX(15%) scale(1.5);">
+            <Image src={image2} alt="Parallax image 2" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.35} horizontalParallax={true} zIndex={1} layerBLur={1.05}>
+          <span style="transform: translateY(-8%) scale(0.6) rotate(90deg)">
+            <Image src={image2b} alt="Parallax image 2b" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.2} horizontalParallax={true} zIndex={2} layerBLur={1.01}>
+          <span style="transform: translateY(5%)  scale(1) rotate(90deg)">
+            <Image src={image2b} alt="Parallax image 2b" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={0.25} horizontalParallax={true} zIndex={3}>
+          <span style="transform: translateY(10%) scale(1.2) rotate(90deg)">
+            <Image src={image2b} alt="Parallax image 2b" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={0.25} horizontalParallax={true} zIndex={3}>
+          <span style="transform: translateY(-1%) scale(1.2) rotate(90deg)">
+            <Image src={image2b} alt="Parallax image 2b" width={1200} loading={"lazy"} />
+          </span>
+        </ImageParallax>
+      </div>
+    </div>
+
+    <div class="product-descrtiption" id="assistant-section">
+      <div class="img-container">
+        <ImageParallax parallaxSpeed={0.05}>
+          <Image src={image3a} alt="Parallax image 3a" width={1200} loading={"lazy"} />
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.2}>
+          <Image src={image3b} alt="Parallax image 3b" width={1200} loading={"lazy"} />
+        </ImageParallax>
+        <ImageParallax parallaxSpeed={-0.3}>
+          <Image src={image3c} alt="Parallax image 3c" width={1200} loading={"lazy"} />
+        </ImageParallax>
+      </div>
+      <StepInfo title={solutionInfo[2].title} description={solutionInfo[2].description} items={solutionInfo[2].items}>
+        <div class="icon-container">
+          <Image src={chat} alt="brain" height={24} loading={"eager"} />
+          Asistente Virtual
+        </div>
+      </StepInfo>
+    </div>
+  </div>
+
+  <div class="text-banner-container">
+    <h1><span style="opacity: 0.5">Transformando los </span>flujos de trabajo<span style="opacity: 0.5"> en salud</span></h1>
+    <div class="line"></div>
+    <p class="bottom-text">
+      Contáctanos para una demostración personalizada y descubre cómo nuestras soluciones pueden mejorar la eficiencia y la calidad de atención en tu
+      institución.
+    </p>
+  </div></Layout
+>
+<Footer />
+
+<style lang="scss">
+  @keyframes text-in-slide {
+    0% {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
+  h1,
+  h2,
+  h3,
+  p,
+  ul,
+  li {
+    margin: 0;
+  }
+  html {
+    scroll-behavior: smooth;
+    position: relative;
+  }
+
+  body {
+    position: relative;
+  }
+
+  .line {
+    height: 0.5px;
+    width: 70%;
+    background-color: #ec5a3d;
+    border-radius: 0.5px;
+    opacity: 0.7;
+    animation-delay: 0.4s;
+    filter: drop-shadow(0 2px 5px rgba(255, 0, 0, 0.8));
+  }
+
+  .floating-solutions-nav-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 48px;
+    z-index: 99;
+    .solutions-nav {
+      position: relative;
+      height: 64px;
+      border-radius: 32px;
+      background-image: linear-gradient(45deg, #110e10a0, #1a1117a0, #21121da0, #281319a0, #301a14a0);
+      border: solid 0.25px #7d170363;
+      display: flex;
+      align-items: center;
+      color: #f1f1f1;
+      font-size: 14px;
+      font-weight: 400px;
+      letter-spacing: 1px;
+      box-shadow:
+        5px 5px 20px 0px #000000,
+        -5px -5px 20px 0px #400000;
+      backdrop-filter: blur(5px);
+
+      &:hover {
+        opacity: 1;
+        border: solid 0.25px #7d1703bf;
+      }
+
+      a {
+        text-decoration: none;
+        color: unset;
+      }
+      .solutions-scroll-link {
+        width: 250px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+      }
+      .button-pill {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        position: absolute;
+        width: 250px;
+        left: 0%;
+        padding: 4px;
+        z-index: 0;
+        transition: all 0.2s ease-out;
+        opacity: 0; // ← inicia invisible
+
+        &.visible {
+          opacity: 1;
+        }
+
+        .back-color {
+          height: 100%;
+          width: 100%;
+          background-color: rgba(241, 241, 241, 0.1098039216);
+          backdrop-filter: blur(2px);
+          border: 0.5px solid rgba(241, 241, 241, 0.3411764706);
+          border-radius: 32px;
+        }
+      }
+    }
+  }
+
+  .solutions-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 15vh;
+
+    .top {
+      max-height: 1000px;
+      min-height: 500px;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      position: relative;
+      .left-side {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        flex-direction: column;
+        text-align: right;
+        h1 {
+          font-size: 40px;
+          color: #f1f1f1;
+          font-weight: 900;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          animation: text-in-slide 0.2s ease-out forwards;
+          opacity: 0;
+          &:first-child {
+            font-size: 48px;
+          }
+
+          .IA {
+            font-size: 64px;
+            color: #ec5a3d;
+            filter: drop-shadow(0 2px 5px rgba(255, 0, 0, 0.5));
+          }
+        }
+        .line {
+          height: 0.5px;
+          width: 50%;
+          background-color: #ec5a3d8a;
+          border-radius: 0.5px;
+          margin-top: 16px;
+          opacity: 0.7;
+          filter: drop-shadow(0 2px 5px rgba(255, 0, 0, 0.5));
+        }
+        h3 {
+          margin: 0;
+          font-size: 24px;
+          width: 600px;
+          line-height: 32px;
+          color: #ec5a3d;
+          font-weight: 300;
+          animation: text-in-slide 0.2s ease-out forwards;
+          filter: drop-shadow(0 2px 5px rgba(255, 0, 0, 0.5));
+          opacity: 0;
+        }
+      }
+      .scroll-to-btn {
+        position: absolute;
+        bottom: 5vh;
+      }
+      .right-side {
+        img {
+          filter: contrast(1.05) brightness(1.1) saturate(1.05);
+        }
+      }
+    }
+    .bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      gap: 48px;
+      padding: 48px;
+
+      .text-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+
+        h2 {
+          font-size: 28px;
+          line-height: 1.5;
+          text-align: center;
+          font-weight: 400;
+          color: #f1f1f1ba;
+          .highlight {
+            color: #f1f1f1;
+          }
+        }
+      }
+      .card-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        width: 100%;
+
+        .card {
+          background-color: rgba(255, 95, 63, 0.052);
+          height: 200px;
+          padding: 24px;
+          width: 100%;
+          border-radius: 10px;
+          border: solid 0.5px rgba(109, 30, 12, 0.248);
+          background-image: linear-gradient(
+            to right top,
+            rgba(205, 0, 90, 0.1),
+            rgba(209, 27, 100, 0.1),
+            rgba(213, 43, 110, 0.1),
+            rgba(217, 55, 119, 0.1),
+            rgba(220, 66, 129, 0.1),
+            rgba(216, 65, 127, 0.1),
+            rgba(211, 64, 124, 0.1),
+            rgba(207, 63, 122, 0.1),
+            rgba(194, 51, 108, 0.1),
+            rgba(181, 37, 94, 0.1),
+            rgba(168, 22, 81, 0.1),
+            rgba(155, 0, 68, 0.1)
+          );
+          backdrop-filter: blur(2px);
+          box-shadow:
+            2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
+            6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
+            10.4px 8.7px 4.6px rgba(0, 0, 0, 0.038),
+            15.7px 13.1px 6.9px rgba(0, 0, 0, 0.044),
+            22.7px 18.9px 10px rgba(0, 0, 0, 0.05),
+            32.1px 26.8px 14.2px rgba(0, 0, 0, 0.056),
+            45.5px 37.9px 20.1px rgba(0, 0, 0, 0.062),
+            66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
+            101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
+            181px 151px 80px rgba(0, 0, 0, 0.1);
+
+          display: flex;
+          gap: 16px;
+          img {
+            opacity: 0.9;
+            filter: drop-shadow(0 2px 5px rgba(255, 0, 0, 0.5));
+          }
+          .card-text {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            h3 {
+              font-size: 20px;
+              font-weight: 600;
+              color: #f1f1f1;
+              margin-bottom: 4px;
+            }
+            p {
+              font-size: 14px;
+              color: #f1f1f1;
+              opacity: 0.8;
+              line-height: 1.5;
+              text-wrap: pretty;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .product-big-features {
+    margin: 48px;
+    .product-descrtiption {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #f1f1f11c;
+      backdrop-filter: blur(5px);
+      border: 0.5px solid #f1f1f157;
+      margin-top: 64px;
+      margin-bottom: 64px;
+      box-shadow:
+        2.8px 2.4px 1.2px rgba(0, 0, 0, 0.021),
+        6.2px 5.2px 2.7px rgba(0, 0, 0, 0.031),
+        10.4px 8.7px 4.6px rgba(0, 0, 0, 0.038),
+        15.7px 13.1px 6.9px rgba(0, 0, 0, 0.044),
+        22.7px 18.9px 10px rgba(0, 0, 0, 0.05),
+        32.1px 26.8px 14.2px rgba(0, 0, 0, 0.056),
+        45.5px 37.9px 20.1px rgba(0, 0, 0, 0.062),
+        66.1px 55.1px 29.2px rgba(0, 0, 0, 0.069),
+        101.8px 84.9px 45px rgba(0, 0, 0, 0.079),
+        181px 151px 80px rgba(0, 0, 0, 0.1);
+      .img-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #f1f1f1;
+        overflow: hidden;
+        position: relative;
+        height: 100%;
+        aspect-ratio: 1;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    #qx-section {
+      .img-container {
+        background-color: #4a3444;
+        background-image: radial-gradient(#ffffff2d 1px, transparent 1px);
+        background-size: 12px 12px;
+        :global(.parallax) {
+          position: absolute !important;
+          display: flex;
+          justify-content: center;
+        }
+        .png-container img {
+          width: unset;
+          height: unset;
+          object-fit: unset;
+        }
+        .left-side {
+          width: 50%;
+          height: 100%;
+          position: relative;
+          overflow: hidden;
+        }
+        .right-side {
+          width: 50%;
+          height: 100%;
+          background-color: #1c1c1c;
+          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+          padding: 24px;
+          overflow: hidden;
+        }
+        .infinite-list {
+          height: 100%;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          position: relative;
+        }
+        .card {
+          background: #444;
+          border: 1px solid #555;
+          border-radius: 16px;
+          padding: 16px;
+          height: 50px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-shrink: 0;
+          margin-bottom: 12px;
+          opacity: 0;
+          transform: translateY(100px);
+          transition: all 0.6s ease;
+          position: absolute;
+          bottom: -100px;
+
+          &.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+            bottom: 0;
+          }
+
+          .data-bar {
+            height: 4px;
+            background: #ec5a3d;
+            border-radius: 2px;
+          }
+
+          .data-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+          }
+
+          .data-line {
+            width: 2px;
+            background: #666;
+            border-radius: 1px;
+          }
+        }
+      }
+    }
+    #infusion-section {
+      .img-container {
+        background-color: #4a3444;
+        opacity: 1;
+        background-size: 32px 32px;
+        background-image: url("../assets/images/drop.png");
+        position: relative;
+
+        :global(.parallax) {
+          position: absolute !important;
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+    #assistant-section {
+      .img-container {
+        background-color: #344a43;
+        opacity: 1;
+        background:
+          radial-gradient(circle, transparent 20%, #344a43 20%, #344a43 80%, transparent 80%, transparent),
+          radial-gradient(circle, transparent 20%, #344a43 20%, #344a43 80%, transparent 80%, transparent) 15px 15px,
+          linear-gradient(#627968 1.2000000000000002px, transparent 1.2000000000000002px) 0 -0.6000000000000001px,
+          linear-gradient(90deg, #627968 1.2000000000000002px, #344a43 1.2000000000000002px) -0.6000000000000001px 0;
+        background-size:
+          30px 30px,
+          30px 30px,
+          15px 15px,
+          15px 15px;
+
+        position: relative;
+        :global(.parallax) {
+          position: absolute !important;
+          display: flex;
+          justify-content: center;
+        }
+        :global(.parallax:nth-child(1)) img {
+          width: 100%;
+          transform: translateY(20vh);
+        }
+        :global(.parallax:nth-child(2)) img {
+          width: 50%;
+          transform: translateY(10vh);
+        }
+        :global(.parallax:nth-child(3)) img {
+          width: 70%;
+          transform: translateY(20vh);
+        }
+      }
+    }
+  }
+  .text-banner-container {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #f1f1f1;
+    gap: 24px;
+    h1 {
+      text-align: center;
+      text-wrap: pretty;
+      font-size: 54px;
+      width: 80%;
+    }
+    .bottom-text {
+      font-size: 32px;
+      text-align: center;
+      text-wrap: pretty;
+      width: 60%;
+      line-height: 40px;
+      color: #ec5a3d;
+      font-weight: 300;
+      animation: text-in-slide 0.2s ease-out forwards;
+      filter: drop-shadow(0 2px 5px rgba(255, 0, 0, 0.5));
+      justify-content: center;
+    }
+  }
+  :global(.icon-container) {
+    padding: 0px 16px;
+    background-color: #ec5a3d7b;
+    height: 32px;
+    border-radius: 16px;
+    border: solid 0.5px #ec5a3d;
+    color: #f6c1b7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+
+  @keyframes parallax {
+    from {
+      opacity: 0;
+      transform: translateY(400px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(-100px);
+    }
+  }
+
+  @media only screen and (max-width: 1200px) {
+    #qx-section {
+      .img-container {
+        .card {
+          height: 40px !important;
+          padding: 12px !important;
+        }
+        .left-side {
+          .png-container img {
+            transform: scale(0.6);
+          }
+        }
+      }
+    }
+    #assistant-section {
+      .img-container {
+        :global(.parallax:nth-child(2)) img {
+          width: 70% !important;
+        }
+        :global(.parallax:nth-child(3)) img {
+          width: 90% !important;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    .solutions-hero {
+      padding-top: 5vh;
+      .top {
+        height: 80vh;
+        flex-direction: column-reverse;
+        .left-side {
+          align-items: center;
+          justify-content: center;
+          h3 {
+            text-align: center;
+            width: 100%;
+          }
+        }
+        .scroll-to-btn {
+          bottom: 0px !important;
+        }
+      }
+      .card-container {
+        .card {
+          flex-direction: column;
+          height: 300px !important;
+        }
+      }
+    }
+    .product-big-features {
+      margin: 24px;
+      .product-descrtiption {
+        .img-container {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .text-banner-container {
+      .bottom-text {
+        font-size: 20px !important;
+        width: 80% !important;
+      }
+    }
+    :global(.step-info-container) {
+      max-width: 90% !important;
+      padding: 16px !important;
+    }
+    :global(.step-info-container h2) {
+      font-size: 28px !important;
+    }
+    :global(.step-info-container p) {
+      font-size: 14px !important;
+    }
+    :global(.icon-container) {
+      padding: 0 !important;
+      background-color: transparent !important;
+      border: none !important;
+    }
+  }
+
+  #infusion-section .mobile-only {
+    width: 100%;
+    display: none !important;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .floating-solutions-nav-container {
+      .solutions-nav {
+        font-size: 12px;
+        .solutions-scroll-link {
+          width: 200px;
+        }
+        .button-pill {
+          width: 200px;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .floating-solutions-nav-container {
+      .solutions-nav {
+        font-size: 11px;
+        .solutions-scroll-link {
+          width: 120px;
+          position: relative;
+          color: transparent;
+          &[data-target="qx-section"]::after {
+            content: "QUIRÓFANO";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #f1f1f1;
+            font-size: 11px;
+          }
+          &[data-target="infusion-section"]::after {
+            content: "INFUSIÓN";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #f1f1f1;
+            font-size: 11px;
+          }
+          &[data-target="assistant-section"]::after {
+            content: "ASISTENTE";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #f1f1f1;
+            font-size: 11px;
+          }
+        }
+        .button-pill {
+          width: 120px;
+        }
+      }
+    }
+    .solutions-hero {
+      .top {
+        .left-side {
+          width: 90%;
+
+          h1 {
+            font-size: 32px !important;
+            text-align: center !important;
+          }
+          span {
+            font-size: 40px !important;
+          }
+        }
+      }
+      .bottom {
+        padding: 24px !important;
+        .text-container {
+          h2 {
+            font-size: 24px;
+          }
+        }
+        .card-container {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 24px !important;
+          .card {
+            height: 200px !important;
+            p {
+              font-size: 16px !important;
+            }
+          }
+        }
+      }
+    }
+
+    #qx-section {
+      .img-container {
+        .right-side {
+          padding: 12px !important;
+        }
+      }
+    }
+
+    #infusion-section > :global(.step-info-container) {
+      display: none !important;
+    }
+    #infusion-section > .mobile-only {
+      display: block !important;
+    }
+
+    .product-big-features {
+      .product-descrtiption {
+        display: flex !important;
+        flex-direction: column !important;
+        .img-container {
+          width: 100%;
+          aspect-ratio: 4/3;
+          order: 2;
+        }
+      }
+    }
+    :global(.step-info-container) {
+      order: 1 !important;
+      width: 100% !important;
+      padding: 10% !important;
+      min-height: 600px !important;
+    }
+
+    .text-banner-container {
+      h1 {
+        font-size: 32px !important;
+      }
+      .bottom-text {
+        font-size: 16px !important;
+        line-height: 24px !important;
+      }
+    }
+    .product-feature {
+      .content {
+        display: unset !important;
+        grid-template-columns: unset !important;
+
+        .left-side {
+          width: 100%;
+          display: flex !important;
+          flex-direction: column !important;
+          overflow: hidden;
+
+          .mobile {
+            display: block !important;
+          }
+        }
+        .right-side {
+          display: none;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .floating-solutions-nav-container {
+      .solutions-nav {
+        .solutions-scroll-link {
+          width: 80px;
+          &[data-target="qx-section"]::after {
+            content: "QX";
+          }
+          &[data-target="infusion-section"]::after {
+            content: "INF";
+          }
+          &[data-target="assistant-section"]::after {
+            content: "AST";
+          }
+        }
+        .button-pill {
+          width: 80px;
+        }
+      }
+    }
+    .solutions-hero {
+      .top {
+        .right-side {
+          width: 80%;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+        .left-side {
+          h1 {
+            font-size: 28px !important;
+            text-align: center !important;
+          }
+          span {
+            font-size: 32px !important;
+          }
+          h3 {
+            font-size: 20px !important;
+          }
+        }
+        .scroll-to-btn {
+          display: none !important;
+        }
+      }
+      .bottom {
+        .text-container {
+          h2 {
+            font-size: 16px;
+          }
+        }
+        .card-container {
+          .card {
+            height: 250px !important;
+          }
+        }
+      }
+    }
+  }
+</style>

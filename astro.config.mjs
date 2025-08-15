@@ -8,5 +8,5 @@ export default defineConfig({
   site: "https://www.wuru.ai",
   base: "",
   output: "server",
-  adapter: vercel()
+  adapter: vercel(),
 });
